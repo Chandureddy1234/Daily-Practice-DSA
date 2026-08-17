@@ -1,0 +1,209 @@
+#Hacker Rank
+
+Check Tutorial tab to know how to to solve.
+
+Here is a sample line of code that can be executed in Python:
+
+print("Hello, World!")
+You can just as easily store a string as a variable and then print it to stdout:
+
+my_string = "Hello, World!"
+print(my_string)
+The above code will print Hello, World! on your screen. Try it yourself in the editor below!
+
+Input Format
+
+You do not need to read any input in this challenge.
+
+Output Format
+
+Print Hello, World! to stdout.
+
+Sample Output 0
+
+Hello, World!
+
+solution:
+if __name__ == '__main__':
+    print("Hello, World!")
+
+
+2. Task
+Given an integer, , perform the following conditional actions:
+
+If  is odd, print Weird
+If  is even and in the inclusive range of  to , print Not Weird
+If  is even and in the inclusive range of  to , print Weird
+If  is even and greater than , print Not Weird
+Input Format
+
+A single line containing a positive integer, .
+
+Constraints
+
+Output Format
+
+Print Weird if the number is weird. Otherwise, print Not Weird.
+
+Sample Input 0
+
+3
+Sample Output 0
+
+Weird
+Explanation 0
+
+
+ is odd and odd numbers are weird, so print Weird.
+
+Sample Input 1
+
+24
+Sample Output 1
+
+Not Weird
+
+solution:
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+
+
+if __name__ == '__main__':
+    n = int(input().strip())
+    if n%2!=0:
+        print("Weird")
+    if n%2==0 and 2<= n <=5:
+        print("Not Weird")
+    if n%2==0 and 6<=n<=20:
+        print("Weird")
+    if n%2==0 and n>20:
+        print("Not Weird")
+
+3. Task
+The provided code stub reads an integer, , from STDIN. For all non-negative integers , print .
+
+Example
+
+The list of non-negative integers that are less than  is . Print the square of each number on a separate line.
+
+0
+1
+4
+Input Format
+
+The first and only line contains the integer, .
+
+Constraints
+
+
+Output Format
+
+Print  lines, one corresponding to each .
+
+Sample Input 0
+
+5
+Sample Output 0
+
+0
+1
+4
+9
+16
+
+solution:
+
+if __name__ == '__main__':
+    n = int(input())
+    for i in range(n):
+        print(i*i)
+
+4. An extra day is added to the calendar almost every four years as February 29, and the day is called a leap day. It corrects the calendar for the fact that our planet takes approximately 365.25 days to orbit the sun. A leap year contains a leap day.
+
+In the Gregorian calendar, three conditions are used to identify leap years:
+
+The year can be evenly divided by 4, is a leap year, unless:
+The year can be evenly divided by 100, it is NOT a leap year, unless:
+The year is also evenly divisible by 400. Then it is a leap year.
+This means that in the Gregorian calendar, the years 2000 and 2400 are leap years, while 1800, 1900, 2100, 2200, 2300 and 2500 are NOT leap years. Source
+
+Task
+
+Given a year, determine whether it is a leap year. If it is a leap year, return the Boolean True, otherwise return False.
+
+Note that the code stub provided reads from STDIN and passes arguments to the is_leap function. It is only necessary to complete the is_leap function.
+
+Input Format
+
+Read , the year to test.
+
+Constraints
+
+
+Output Format
+
+The function must return a Boolean value (True/False). Output is handled by the provided code stub.
+
+Sample Input 0
+
+1990
+Sample Output 0
+
+False
+Explanation 0
+
+1990 is not a multiple of 4 hence it's not a leap year.
+
+solution:
+def is_leap(year):
+    leap = False
+    
+    # Write your logic here
+    if year%4==0 and (year%400==0 or year%100!=0):
+        leap = True
+    
+    return leap
+
+year = int(input())
+print(is_leap(year))
+
+5. The included code stub will read an integer, , from STDIN.
+
+Without using any string methods, try to print the following:
+
+
+Note that "" represents the consecutive values in between.
+
+Example
+
+Print the string .
+
+Input Format
+
+The first line contains an integer .
+
+Constraints
+
+
+Output Format
+
+Print the list of integers from  through  as a string, without spaces.
+
+Sample Input 0
+
+3
+Sample Output 0
+
+123
+
+solution:
+if __name__ == '__main__':
+    n = int(input())
+    for i in range(n):
+        print(i+1,end="")
