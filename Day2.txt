@@ -1,0 +1,373 @@
+# HackerRank
+
+1. Task
+The provided code stub reads two integers,  and , from STDIN.
+Add logic to print two lines. The first line should contain the result of integer division,  // . The second line should contain the result of float division,  / .
+No rounding or formatting is necessary.
+Example
+The result of the integer division .
+The result of the float division is .
+Print:
+0
+0.6
+Input Format
+The first line contains the first integer, .
+The second line contains the second integer, .
+Output Format
+Print the two lines as described above.
+Sample Input 0
+4
+3
+Sample Output 0
+1
+1.33333333333
+
+solution:
+if __name__ == '__main__':
+    a = int(input())
+    b = int(input())
+    print(a//b)
+    print(a/b)
+
+2. Task
+The provided code stub reads an integer, , from STDIN. For all non-negative integers , print .
+Example
+The list of non-negative integers that are less than  is . Print the square of each number on a separate line.
+0
+1
+4
+Input Format
+The first and only line contains the integer, .
+Constraints
+Output Format
+Print  lines, one corresponding to each .
+Sample Input 0
+5
+Sample Output 
+0
+0
+1
+4
+9
+16
+
+solution:
+if __name__ == '__main__':
+    n = int(input())
+    for i in range(n):
+        print(i*i)
+
+3. Let's learn about list comprehensions! You are given three integers  and  representing the dimensions of a cuboid along with an integer . Print a list of all possible coordinates given by  on a 3D grid where the sum of  is not equal to . Here, . Please use list comprehensions rather than multiple loops, as a learning exercise.
+
+Example
+
+
+
+
+All permutations of  are:
+.
+
+Print an array of the elements that do not sum to .
+
+
+Input Format
+
+Four integers  and , each on a separate line.
+
+Constraints
+
+Print the list in lexicographic increasing order.
+
+Sample Input 0
+
+1
+1
+1
+2
+Sample Output 0
+
+[[0, 0, 0], [0, 0, 1], [0, 1, 0], [1, 0, 0], [1, 1, 1]]
+Explanation 0
+
+Each variable  and  will have values of  or . All permutations of lists in the form .
+Remove all arrays that sum to  to leave only the valid permutations.
+
+Sample Input 1
+
+2
+2
+2
+2
+Sample Output 1
+
+[[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 2], [0, 2, 1], [0, 2, 2], [1, 0, 0], [1, 0, 2], [1, 1, 1], [1, 1, 2], [1, 2, 0], [1, 2, 1],
+
+solution:
+if __name__ == '__main__':
+    x = int(input())
+    y = int(input())
+    z = int(input())
+    n = int(input())
+    result = [[i,j,k] for i in range(x+1) for j in range(y+1) for k in range(z+1) if (i+j+k)!=n]
+    print(result)
+
+4.Given the participants' score sheet for your University Sports Day, you are required to find the runner-up score. You are given  scores. Store them in a list and find the score of the runner-up.
+
+Input Format
+
+The first line contains . The second line contains an array   of  integers each separated by a space.
+
+Constraints
+
+Output Format
+
+Print the runner-up score.
+
+Sample Input 0
+
+5
+2 3 6 6 5
+Sample Output 0
+
+5
+Explanation 0
+
+Given list is . The maximum score is , second maximum is . Hence, we print  as the runner-up score.
+
+solution:
+if __name__ == '__main__':
+    n = int(input())
+    arr = map(int, input().split())
+    unique = set(arr)
+    sorted_score = sorted(unique)
+    print(sorted_score[-2])
+
+5. Given the names and grades for each student in a class of  students, store them in a nested list and print the name(s) of any student(s) having the second lowest grade.
+
+Note: If there are multiple students with the second lowest grade, order their names alphabetically and print each name on a new line.
+
+Example
+
+The ordered list of scores is , so the second lowest score is . There are two students with that score: . Ordered alphabetically, the names are printed as:
+
+alpha
+beta
+Input Format
+
+The first line contains an integer, , the number of students.
+The  subsequent lines describe each student over  lines.
+- The first line contains a student's name.
+- The second line contains their grade.
+
+Constraints
+
+There will always be one or more students having the second lowest grade.
+Output Format
+
+Print the name(s) of any student(s) having the second lowest grade in. If there are multiple students, order their names alphabetically and print each one on a new line.
+
+Sample Input 0
+
+5
+Harry
+37.21
+Berry
+37.21
+Tina
+37.2
+Akriti
+41
+Harsh
+39
+Sample Output 0
+
+Berry
+Harry
+Explanation 0
+
+There are  students in this class whose names and grades are assembled to build the following list:
+
+python students = [['Harry', 37.21], ['Berry', 37.21], ['Tina', 37.2], ['Akriti', 41], ['Harsh', 39]]
+
+The lowest grade of  belongs to Tina. The second lowest grade of  belongs to both Harry and Berry, so we order their names alphabetically and print each name on a new line.
+
+solution :
+if __name__ == '__main__':
+    students = []
+    for _ in range(int(input())):
+        name = input()
+        score = float(input())
+        students.append([name, score])
+    
+    # Extract all scores and find the unique second lowest score
+    
+    unique_scores = sorted(list(set([student[1] for student in students])))
+    second_lowest_score = unique_scores[1]
+    
+    # Filter students with the second lowest score and sort their names
+
+    runner_ups = sorted([student[0] for student in students if student[1] == second_lowest_score])
+    
+    # Print each name on a new line
+    for name in runner_ups:
+        print(name)
+
+
+Geeks for Geeks:
+
+1. Taking Input
+Solved
+Difficulty: EasyAccuracy: 55.81%Submissions: 262K+Points: 2
+You need to perform three separate tasks based on the given input:
+
+String Input and Print: Read a string s (which may contain spaces) and print it as it is.
+Integer Input and Print: Read an integer n and print it without any change.
+Float Input and floor Print: Read a floating-point number as input, take its floor value, and print as an integer.
+Examples:
+
+Input: s = "Hello", n = 20, f = 5.5
+Output: 
+Hello
+20
+5
+Explanation: 
+The string Hello is printed as it is.
+The integer 20 is printed without any change.
+For floating-point number 5.5, its floor value 5 is printed.
+solution:
+import math
+
+# s to store string
+# n to store integer
+# f to store float
+# ff  # To Store floor of float variable f
+
+# code here
+s = input()
+n = int(input())
+ff = int(float((input())))
+print(s)
+print(n)
+print(ff)
+
+2. Arithmetic Operators
+Solved
+Difficulty: BasicAccuracy: 61.86%Submissions: 24K+Points: 1
+Given two integer variables x and y, perform the following operations:
+
+p: Addition of x and y
+q: Subtraction of y from x
+r: Multiplication of x and y
+s: Floating-point division of x by y
+t: Integer division of x by y
+u: Modulo (remainder when x is divided by y)
+Examples:
+
+Input: x = 1, y = 2
+Output: 3 -1 2 0.500 0 1
+Explanation: The given operations are performed:
+Addition of x and y = 3
+Subtraction of y from x = -1
+Multiplication of x and y = 2
+Floating-point division of x by y = 0.500
+Integer division of x by y = 0
+Modulo of x and y = 1
+Hence, the output is 3 -1 2 0.500 0 1.
+Input: x = 3 ,y = 4 
+Output: 7 -1 12 0.750 0 3
+Explanation: The given operations are performed.
+Constraints:
+
+-100 ≤ x, y ≤ 100
+
+solution:
+x = int(input())
+y = int(input())
+
+# code here
+p = x + y
+q = x - y
+r = x * y
+s = x / y
+t = x // y
+u = x % y
+print(p, q, r, f"{s:.3f}", t, u)
+
+3. Logical Operators
+Solved
+Difficulty: BasicAccuracy: 57.91%Submissions: 42K+Points: 1
+Logical operators and, or, not are used in condition checking. Like a and b checks if both a and b are True. First a is checked then b is checked. a or b checks if either of a or b is True. If one is True; it doesn't check for the other. not a complements the boolean value of a.
+Note: 0 and empty string are False and all other values are True.
+In this question you basically need to do
+a and b
+a or b
+not a
+
+Examples:
+
+Input: a = 0, b = 2
+Output: 0 2 True
+Explanation: 0 and 2 gives 0. 0 or 2 gives 2. not 0 give True as 0 is False.
+Input: a = 3, b = 4 
+Output: 4 3 False
+Explanation: 3 and 4 gives 4 as 3 is True and 4 is also True, so all conditions are passed. 3 or 4 gives 3 as or only checks if either of the condition is true and here 3 is True itself so it doesn't proceed forward. not 3 gives False as 3 was True.
+
+solution:
+a=int(input())
+b=int(input())
+#code here
+p = a and b
+#Do a or b below
+q = a or b
+#Do not a below
+r = not(a)
+#The code below prints the output. Don't change it!
+print(p,q,r)
+
+4. Bitwise Operators
+Difficulty: BasicAccuracy: 58.5%Submissions: 144K+Points: 1
+Given three positive integers a, b and c. Perform some bitwise operations on them as given below:
+1. d = a ^ a
+2. e = c ^ b
+3. f = a & b
+4. g = ~ e
+Note: ^ is for xor.
+Then print d e f g space seperately. Move the cursor to the next line after printing.
+
+Examples:
+
+Input: a = 1, b = 2, c = 3
+Output: 0 1 0 -2
+Explanation: We print d e f g after performing the given operations.
+Input: a = 4 , b = 5 , c = 6
+Output: 0 3 4 -4
+Explanation: We print d e f g after performing the given operations.
+
+solution:
+a = int(input())
+b = int(input())
+c = int(input())
+
+# code here
+d = a ^ a
+e = c ^ b
+f = a & b
+g = ~ e
+print(d, e, f, g)
+
+5. Type Conversion
+Difficulty: EasyAccuracy: 61.45%Submissions: 113K+Points: 2
+Given a double value d, typecast it to an integer value and print it.
+
+Example:
+
+Input: d = 10.23
+Output: 10
+Explanation: The integer value of 10.23 is 10
+Input: d = 19.1
+Output: 19
+
+solution:
+d = float(input())
+#code here
+print(int(d))
