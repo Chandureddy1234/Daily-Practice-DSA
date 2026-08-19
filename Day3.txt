@@ -1,0 +1,461 @@
+# Hacker Rank
+1. You are given the firstname and lastname of a person on two different lines. Your task is to read them and print the following:
+
+Hello firstname lastname! You just delved into python.
+
+Function Description
+
+Complete the print_full_name function in the editor below.
+
+print_full_name has the following parameters:
+
+string first: the first name
+string last: the last name
+Prints
+
+string: 'Hello  ! You just delved into python' where  and  are replaced with  and .
+Input Format
+
+The first line contains the first name, and the second line contains the last name.
+
+Constraints
+
+The length of the first and last names are each ≤ .
+
+Sample Input 0
+
+Ross
+Taylor
+Sample Output 0
+
+Hello Ross Taylor! You just delved into python.
+Explanation 0
+
+The input read by the program is stored as a string data type. A string is a collection of characters.
+
+solution:
+#
+# Complete the 'print_full_name' function below.
+#
+# The function is expected to return a STRING.
+# The function accepts following parameters:
+#  1. STRING first
+#  2. STRING last
+#
+
+def print_full_name(first, last):
+    # Write your code here
+    print(f"Hello {first} {last}! You just delved into python.")
+
+if __name__ == '__main__':
+    first_name = input()
+    last_name = input()
+    print_full_name(first_name, last_name)
+
+2. Task
+Read a given string, change the character at a given index and then print the modified string.
+Function Description
+
+Complete the mutate_string function in the editor below.
+
+mutate_string has the following parameters:
+
+string string: the string to change
+int position: the index to insert the character at
+string character: the character to insert
+Returns
+
+string: the altered string
+Input Format
+
+The first line contains a string, .
+The next line contains an integer , the index location and a string , separated by a space.
+
+Sample Input
+
+STDIN           Function
+-----           --------
+abracadabra     s = 'abracadabra'
+5 k             position = 5, character = 'k'
+Sample Output
+
+abrackdabra
+solution:
+def mutate_string(string, position, character):
+    str_list = list(string)
+    str_list[position] = character
+    string = ''.join(str_list)
+    return string
+
+if __name__ == '__main__':
+    s = input()
+    i, c = input().split()
+    s_new = mutate_string(s, int(i), c)
+    print(s_new)
+
+
+3. In this challenge, the user enters a string and a substring. You have to print the number of times that the substring occurs in the given string. String traversal will take place from left to right, not from right to left.
+
+NOTE: String letters are case-sensitive.
+
+Input Format
+
+The first line of input contains the original string. The next line contains the substring.
+
+Constraints
+
+
+Each character in the string is an ascii character.
+
+Output Format
+
+Output the integer number indicating the total number of occurrences of the substring in the original string.
+
+Sample Input
+
+ABCDCDC
+CDC
+Sample Output
+
+2
+Concept
+
+There are a couple of new concepts:
+In Python, the length of a string is found by the function len(s), where  is the string.
+To traverse through the length of a string, use a for loop:
+
+for i in range(0, len(s)):
+    print (s[i])
+A range function is used to loop over some length:
+
+range (0, 5)
+Here, the range loops over  to .  is excluded.
+
+Constraints
+
+solution:
+def count_substring(string, sub_string):
+    string = string.strip()
+    sub_string = sub_string.strip()
+
+    count = 0
+    for i in range(len(string)):
+        if string[i:].startswith(sub_string):
+            count += 1
+        
+    return count
+
+if __name__ == '__main__':
+    string = input().strip()
+    sub_string = input().strip()
+    
+    count = count_substring(string, sub_string)
+    print(count)
+
+4. Python has built-in string validation methods for basic data. It can check if a string is composed of alphabetical characters, alphanumeric characters, digits, etc.
+
+str.isalnum()
+This method checks if all the characters of a string are alphanumeric (a-z, A-Z and 0-9).
+
+>>> print 'ab123'.isalnum()
+True
+>>> print 'ab123#'.isalnum()
+False
+str.isalpha()
+This method checks if all the characters of a string are alphabetical (a-z and A-Z).
+
+>>> print 'abcD'.isalpha()
+True
+>>> print 'abcd1'.isalpha()
+False
+str.isdigit()
+This method checks if all the characters of a string are digits (0-9).
+
+>>> print '1234'.isdigit()
+True
+>>> print '123edsd'.isdigit()
+False
+str.islower()
+This method checks if all the characters of a string are lowercase characters (a-z).
+
+>>> print 'abcd123#'.islower()
+True
+>>> print 'Abcd123#'.islower()
+False
+str.isupper()
+This method checks if all the characters of a string are uppercase characters (A-Z).
+
+>>> print 'ABCD123#'.isupper()
+True
+>>> print 'Abcd123#'.isupper()
+False
+Task
+
+You are given a string .
+Your task is to find out if the string  contains: alphanumeric characters, alphabetical characters, digits, lowercase and uppercase characters.
+
+Input Format
+
+A single line containing a string .
+
+Constraints
+
+
+Output Format
+
+In the first line, print True if  has any alphanumeric characters. Otherwise, print False.
+In the second line, print True if  has any alphabetical characters. Otherwise, print False.
+In the third line, print True if  has any digits. Otherwise, print False.
+In the fourth line, print True if  has any lowercase characters. Otherwise, print False.
+In the fifth line, print True if  has any uppercase characters. Otherwise, print False.
+
+Sample Input
+
+qA2
+Sample Output
+
+True
+True
+True
+True
+True
+
+solution:
+if __name__ == '__main__':
+    s = input()
+    print(any(c.isalnum() for c in s))  # any alphanumeric character?
+    print(any(c.isalpha() for c in s))  # any alphabetical character?
+    print(any(c.isdigit() for c in s))  # any digit?
+    print(any(c.islower() for c in s))  # any lowercase letter?
+    print(any(c.isupper() for c in s))  # any uppercase letter?
+    
+
+5. n Python, a string of text can be aligned left, right and center.
+
+.ljust(width)
+
+This method returns a left aligned string of length width.
+
+>>> width = 20
+>>> print 'HackerRank'.ljust(width,'-')
+HackerRank----------  
+.center(width)
+
+This method returns a centered string of length width.
+
+>>> width = 20
+>>> print 'HackerRank'.center(width,'-')
+-----HackerRank-----
+.rjust(width)
+
+This method returns a right aligned string of length width.
+
+>>> width = 20
+>>> print 'HackerRank'.rjust(width,'-')
+----------HackerRank
+Task
+
+You are given a partial code that is used for generating the HackerRank Logo of variable thickness.
+Your task is to replace the blank (______) with rjust, ljust or center.
+
+Input Format
+
+A single line containing the thickness value for the logo.
+
+Constraints
+
+The thickness must be an odd number.
+
+Output Format
+
+Output the desired logo.
+
+Sample Input
+
+5
+Sample Output
+
+    H    
+   HHH   
+  HHHHH  
+ HHHHHHH 
+HHHHHHHHH
+  HHHHH               HHHHH             
+  HHHHH               HHHHH             
+  HHHHH               HHHHH             
+  HHHHH               HHHHH             
+  HHHHH               HHHHH             
+  HHHHH               HHHHH             
+  HHHHHHHHHHHHHHHHHHHHHHHHH   
+  HHHHHHHHHHHHHHHHHHHHHHHHH   
+  HHHHHHHHHHHHHHHHHHHHHHHHH   
+  HHHHH               HHHHH             
+  HHHHH               HHHHH             
+  HHHHH               HHHHH             
+  HHHHH               HHHHH             
+  HHHHH               HHHHH             
+  HHHHH               HHHHH             
+                    HHHHHHHHH 
+                     HHHHHHH  
+                      HHHHH   
+                       HHH    
+                        H 
+
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+thickness = int(input())  # must be odd
+c = 'H'
+
+# Top cone
+for i in range(thickness):
+    print((c*i).rjust(thickness-1) + c + (c*i).ljust(thickness-1))
+
+# Top pillars + middle belt + bottom pillars (combined idea, but written clearly)
+for i in range(thickness + 1):
+    print((c*thickness).center(thickness*2) + (c*thickness).center(thickness*6))
+
+for _ in range((thickness + 1)//2):
+    print((c*thickness*5).center(thickness*6))
+
+for i in range(thickness + 1):
+    print((c*thickness).center(thickness*2) + (c*thickness).center(thickness*6))
+
+# Bottom cone
+for i in range(thickness):
+    print(((c*(thickness-i-1)).rjust(thickness) + c + (c*(thickness-i-1)).ljust(thickness)).rjust(thickness*6))
+
+Geeks for geeks:
+1. TypeCast And Double It
+Solved
+Difficulty: BasicAccuracy: 62.79%Submissions: 92K+Points: 1
+Given an input num as a string. You need to typecast into an integer and double it. 
+
+Examples:
+
+Input: num = "5"
+Output: 10
+Explanation: Typecast "5" to int and then double it 5 * 2 = 10
+Input: num = "12"
+Output: 24
+Explanation: Typecast "12" to int and then double it 12 * 2 = 24
+Constraints:
+0 <= num <= 105
+
+solution:
+num = input()
+#code here
+num1 = int(num)
+print(num1*2)
+
+2. Swap Two Numbers
+Solved
+Difficulty: BasicAccuracy: 66.55%Submissions: 202K+Points: 1
+Given two numbers a and b, you need to swap their values so a holds the value of b and b holds the value of a. Just write the code to swap values of a and b at the specified place.
+
+Examples :
+
+Input: a = 1 b = 2
+Output: 2 1
+Explanation: Initially a = 1 and b = 2, now a = 2 and b = 1.
+Input: a = 6 b = 7  
+Output: 7 6 
+Explanation: Initially a = 6 and b = 7, now a = 7 and b = 6.
+
+solution:
+class Solution:
+
+    def swap(self, a, b):
+        #code here
+        a,b = b,a
+        print(a, b)
+
+3. The Else Statement
+Solved
+Difficulty: BasicAccuracy: 57.31%Submissions: 103K+Points: 1
+Take an interger input a, and then use the if statement to print "Big" (without quotes) if the given number is greater than 100, and use the else statement to print "Small" (without quotes) when the number is smaller than or equal to 100.
+
+Note: After printing the output, you should move the cursor to the new line.
+
+Examples:
+
+Input: a = 10
+Output: Small
+Explanation: 10 is smaller than 100, so our else statement works and we print Small.
+Input: a = 101
+Output: Big
+Explanation: 101 is greater than 100, so our if statement works and we print Big.
+
+solution:
+
+a = int(input())
+
+# code here
+if a>100:
+    print("Big",end="\n")
+else:
+    print("Small",end="\n")
+
+4. The FizzBuzz Program
+Solved
+Difficulty: EasyAccuracy: 38.6%Submissions: 291K+Points: 2Average Time: 10m
+Given a number n, print your answer according to the following conditions:
+
+If the number is divisible by 3, you print Fizz
+If the number is divisible by 5, you print Buzz
+If the number is divisible by both 3 and 5, you print FizzBuzz
+In any other case, you print the number itself
+Examples:
+
+Input: n = 3
+Output: Fizz
+Explanation: Here, the number is divisible by 3, so Fizz is printed.
+Input: n = 5
+Output: Buzz
+Explanation: Here the number is divisible by 5, so Buzz is printed.
+Input: number = 15
+Output: FizzBuzz
+Explanation: Here, the number 15 is divisible by both 3 and 5, so FizzBuzz is printed.
+Input: number = 7
+Output: 7
+Explanation: 7 is not divisible by 3 or 5.
+Constraints:
+
+1 <= n <= 100
+
+solution:
+
+n = int(input())
+
+# code here
+if n%3==0 and n%5==0:
+    print("FizzBuzz")
+elif n%3==0:
+    print("Fizz")
+elif n%5==0:
+    print("Buzz")
+else:
+    print(n)
+
+5. Even Odd Game
+Solved
+Difficulty: EasyAccuracy: 66.91%Submissions: 82K+Points: 2
+Given a number n, number of apples in a bag. You and your friend are picking one apple turnwise from the bag. It is given that the first attempt is always by you. The person picking the last apple will be the winner. 
+
+If you will win: print "You" (without quotes)
+If your friend will win: print "Friend" (without quotes)
+Examples:
+
+Input: n = 9
+Output: You
+Input: n = 4
+Output: Friend
+Constraints:
+1 ≤ n ≤ 100
+
+solution:
+n = int(input())
+
+# code here
+if n%2==0:
+    print("Friend")
+else:
+    print("You")
