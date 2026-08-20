@@ -1,0 +1,406 @@
+HackerRank
+1. You are asked to ensure that the first and last names of people begin with a capital letter in their passports. For example, alison heck should be capitalised correctly as Alison Heck.
+
+
+Given a full name, your task is to capitalize the name appropriately.
+
+Input Format
+
+A single line of input containing the full name, .
+
+Constraints
+
+The string consists of alphanumeric characters and spaces.
+Note: in a word only the first character is capitalized. Example 12abc when capitalized remains 12abc.
+
+Output Format
+
+Print the capitalized string, .
+
+Sample Input
+
+chris alan
+Sample Output
+
+Chris Alan
+
+solution:
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the solve function below.
+def solve(s):
+    words = s.split(" ")
+    return " ".join(word.capitalize() for word in words)
+    
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s = input()
+
+    result = solve(s)
+
+    fptr.write(result + '\n')
+
+    fptr.close()
+
+2. The provided code stub will read in a dictionary containing key/value pairs of name:[marks] for a list of students. Print the average of the marks array for the student name provided, showing 2 places after the decimal.
+
+Example
+
+
+
+
+The query_name is 'beta'. beta's average score is .
+
+Input Format
+
+The first line contains the integer , the number of students' records. The next  lines contain the names and marks obtained by a student, each value separated by a space. The final line contains query_name, the name of a student to query.
+
+Constraints
+
+Output Format
+
+Print one line: The average of the marks obtained by the particular student correct to 2 decimal places.
+
+Sample Input 0
+
+3
+Krishna 67 68 69
+Arjun 70 98 63
+Malika 52 56 60
+Malika
+Sample Output 0
+
+56.00
+Explanation 0
+
+Marks for Malika are  whose average is 
+
+Sample Input 1
+
+2
+Harsh 25 26.5 28
+Anurag 26 28 30
+Harsh
+Sample Output 1
+
+26.50
+
+solution:
+if __name__ == '__main__':
+    n = int(input())
+    
+    student_marks = {}
+    for _ in range(n):
+        name, *line = input().split()
+        scores = list(map(float, line))
+        student_marks[name] = scores
+    
+    query_name = input()
+    
+    marks = student_marks[query_name]
+    avg = sum(marks)/len(marks)
+    
+    print(f"{avg:.2f}")
+
+3. Consider a list (list = []). You can perform the following commands:
+
+insert i e: Insert integer  at position .
+print: Print the list.
+remove e: Delete the first occurrence of integer .
+append e: Insert integer  at the end of the list.
+sort: Sort the list.
+pop: Pop the last element from the list.
+reverse: Reverse the list.
+Initialize your list and read in the value of  followed by  lines of commands where each command will be of the  types listed above. Iterate through each command in order and perform the corresponding operation on your list.
+
+Example
+
+
+
+
+
+
+: Append  to the list, .
+: Append  to the list, .
+: Insert  at index , .
+: Print the array.
+Output:
+[1, 3, 2]
+Input Format
+
+The first line contains an integer, , denoting the number of commands.
+Each line  of the  subsequent lines contains one of the commands described above.
+
+Constraints
+
+The elements added to the list must be integers.
+Output Format
+
+For each command of type print, print the list on a new line.
+
+Sample Input 0
+
+12
+insert 0 5
+insert 1 10
+insert 0 6
+print
+remove 6
+append 9
+append 1
+sort
+print
+pop
+reverse
+print
+Sample Output 0
+
+[6, 5, 10]
+[1, 5, 9, 10]
+[9, 5, 1]
+
+solution:
+
+if __name__ == '__main__':
+    N = int(input())
+    lst = []
+    
+    for _ in range(N):
+        parts = input().split()
+        cmd = parts[0]
+        
+        if cmd == 'insert':
+            i = int(parts[1])
+            e = int(parts[2])
+            lst.insert(i,e)
+        elif cmd == 'print':
+            print(lst)
+        elif cmd == 'remove':
+            e = int(parts[1])
+            lst.remove(e)
+        elif cmd == 'append':
+            e = int(parts[1])
+            lst.append(e)
+        elif cmd =='sort':
+            lst.sort()
+        elif cmd =='pop':
+            lst.pop()
+        elif cmd =='reverse':
+            lst.reverse()
+
+4. ask
+Given an integer, , and  space-separated integers as input, create a tuple, , of those  integers. Then compute and print the result of .
+
+Note: hash() is one of the functions in the __builtins__ module, so it need not be imported.
+
+Input Format
+
+The first line contains an integer, , denoting the number of elements in the tuple.
+The second line contains  space-separated integers describing the elements in tuple .
+
+Output Format
+
+Print the result of .
+
+Sample Input 0
+
+2
+1 2
+Sample Output 0
+
+3713081631934410656
+
+solution:
+if __name__ == '__main__':
+    n = int(input())
+    nums = []
+    for x in input().split():
+        nums.append(int(x))
+    t = tuple(nums)
+    print(hash(t))
+
+5. Yu are given a string  and width .
+Your task is to wrap the string into a paragraph of width .
+
+Function Description
+
+Complete the wrap function in the editor below.
+
+wrap has the following parameters:
+
+string string: a long string
+int max_width: the width to wrap to
+Returns
+
+string: a single string with newline characters ('\n') where the breaks should be
+Input Format
+
+The first line contains a string, .
+The second line contains the width, .
+
+Constraints
+
+Sample Input 0
+
+ABCDEFGHIJKLIMNOQRSTUVWXYZ
+4
+Sample Output 0
+
+ABCD
+EFGH
+IJKL
+IMNO
+QRST
+UVWX
+YZ
+
+solution:
+import textwrap
+
+
+def wrap(string, max_width):
+    return textwrap.fill(string, max_width)
+
+if __name__ == '__main__':
+    string, max_width = input(), int(input())
+    result = wrap(string, max_width)
+    print(result)
+
+Geeks for Geeks:
+1. Given three numbers a, b and c. Find the greatest number among them.
+
+Examples:
+
+Input: a = 10, b = 3, c = 2
+Output: 10
+Explanation: 10 is greatest among the three 
+Input: a = -4, b = -3, c = -2
+Output: -2
+Explanation: -2 is greatest among the three
+Constraints:
+-109≤ a, b, c ≤109
+
+solution:
+
+a = int(input())
+b = int(input())
+c = int(input())
+
+# code here
+if a>b and a>c:
+    print(a)
+elif b>a and b>c:
+    print(b)
+else:
+    print(c)
+
+2. You are given an Integer n. Return true if It is a Leap Year otherwise return false.
+
+Examples:
+
+Input: n = 4
+Output: true
+Explanation: 4 is not divisible by 100 and is divisible by 4 so its a leap year
+Input: n = 2021
+Output: false
+Explanation: 2021 is not divisible by 100 and is also not divisible by 4 so its not a leap year
+Constraints:
+1<= n < 104
+
+solution:
+class Solution:
+    def checkYear (self, n):
+        # code here
+        if (n % 400 == 0) or (n % 4 == 0 and n % 100 != 0):
+            return True
+        return False
+
+
+3. Given two numbers a and b. You need to perform basic mathematical operations on them. You will be provided an integer named as optr.
+
+If the operator equals to 1 add a and b, then print the result.
+If the operator equals to 2 subtract b from a, then print the result.
+If the operator equals to 3 multiply a and b, then print the result.
+If the operator equals to any other number, print "Invalid Input"(without quotes).
+Note: Do not add a new line at the end.
+
+Examples:
+
+Input: a = 1, b = 2, optr = 3
+Output: 2
+Explanation: 1 * 2 = 2
+Input: a = 2, b = 2, optr = 2
+Output: 0
+Explanation: 2 - 2 = 0
+
+solution:
+class Solution:
+    def calculate(self, a: int, b: int, optr: int) -> None:
+        # code here
+        if optr==1:
+            print(a+b, end="")
+        elif optr==2:
+            print(a-b, end="")
+        elif optr==3:
+            print(a*b, end="")
+        else:
+            print("Invalid Input", end="")
+
+4. Given a positive integer, n. Find the factorial of n.
+
+Examples :
+
+Input: n = 5
+Output: 120
+Explanation: 1 x 2 x 3 x 4 x 5 = 120
+Input: n = 4
+Output: 24
+Explanation: 1 x 2 x 3 x 4 = 24
+
+solution:
+class Solution:
+    def factorial(self, n: int) -> int:
+        # code here
+        fact = 1
+        for i in range(1,n+1):
+            fact = fact * i
+            
+        return fact
+
+
+5. Given an integer n,  write a program to print the square wall of size n using a single loop and string multiplication. 
+
+Examples:
+
+Input: n = 5
+Output:
+* * * * *
+* * * * *
+* * * * *
+* * * * *
+* * * * *
+Explanation: Its perfect square wall. 
+Input: n = 4
+Output:
+* * * * 
+* * * * 
+* * * * 
+* * * * 
+Explanation: Its perfect square wall. 
+
+solution:
+n = int(input())
+
+# code here
+row = ("* " * n).rstrip()
+
+# Print the row 'n' times using a single loop
+for _ in range(n):
+    print(row)
