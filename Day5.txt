@@ -1,0 +1,492 @@
+HackerRank
+1.You are given a string and your task is to swap cases. In other words, convert all lowercase letters to uppercase letters and vice versa.
+
+For Example:
+
+Www.HackerRank.com → wWW.hACKERrANK.COM
+Pythonist 2 → pYTHONIST 2  
+Function Description
+
+Complete the swap_case function in the editor below.
+
+swap_case has the following parameters:
+
+string s: the string to modify
+Returns
+
+string: the modified string
+Input Format
+
+A single line containing a string .
+
+Constraints
+
+
+Sample Input 0
+
+HackerRank.com presents "Pythonist 2".
+Sample Output 0
+
+hACKERrANK.COM PRESENTS "pYTHONIST 2".
+
+solution:
+def swap_case(s):
+    return s.swapcase()
+
+if __name__ == '__main__':
+    s = input()
+    result = swap_case(s)
+    print(result)
+
+2. In Python, a string can be split on a delimiter.
+
+Example:
+
+>>> a = "this is a string"
+>>> a = a.split(" ") # a is converted to a list of strings. 
+>>> print a
+['this', 'is', 'a', 'string']
+Joining a string is simple:
+
+>>> a = "-".join(a)
+>>> print a
+this-is-a-string 
+Task
+You are given a string. Split the string on a " " (space) delimiter and join using a - hyphen.
+
+Function Description
+
+Complete the split_and_join function in the editor below.
+
+split_and_join has the following parameters:
+
+string line: a string of space-separated words
+Returns
+
+string: the resulting string
+Input Format
+The one line contains a string consisting of space separated words.
+
+Sample Input
+
+this is a string   
+Sample Output
+
+this-is-a-string
+solution:
+
+
+def split_and_join(line):
+    # write your code here
+    l = line.split(" ")
+    l = '-'.join(l)
+    return l
+
+if __name__ == '__main__':
+    line = input()
+    result = split_and_join(line)
+    print(result)
+
+3. Given an integer, , print the following values for each integer  from  to :
+
+Decimal
+Octal
+Hexadecimal (capitalized)
+Binary
+Function Description
+
+Complete the print_formatted function in the editor below.
+
+print_formatted has the following parameters:
+
+int number: the maximum value to print
+Prints
+
+The four values must be printed on a single line in the order specified above for each  from  to . Each value should be space-padded to match the width of the binary value of  and the values should be separated by a single space.
+
+Input Format
+
+A single integer denoting .
+
+Constraints
+
+Sample Input
+
+17
+Sample Output
+
+    1     1     1     1
+    2     2     2    10
+    3     3     3    11
+    4     4     4   100
+    5     5     5   101
+    6     6     6   110
+    7     7     7   111
+    8    10     8  1000
+    9    11     9  1001
+   10    12     A  1010
+   11    13     B  1011
+   12    14     C  1100
+   13    15     D  1101
+   14    16     E  1110
+   15    17     F  1111
+   16    20    10 10000
+   17    21    11 10001
+solution:
+def print_formatted(number):
+    # your code goes here
+    width = len(bin(number)[2:])
+    for i in range(1,number+1):
+        print(f"{i:{width}d} {i:{width}o} {i:{width}X} {i:{width}b}")
+    
+if __name__ == '__main__':
+    n = int(input())
+    print_formatted(n)
+
+4. You are given an integer, . Your task is to print an alphabet rangoli of size . (Rangoli is a form of Indian folk art based on creation of patterns.)
+
+Different sizes of alphabet rangoli are shown below:
+
+#size 3
+
+----c----
+--c-b-c--
+c-b-a-b-c
+--c-b-c--
+----c----
+
+#size 5
+
+--------e--------
+------e-d-e------
+----e-d-c-d-e----
+--e-d-c-b-c-d-e--
+e-d-c-b-a-b-c-d-e
+--e-d-c-b-c-d-e--
+----e-d-c-d-e----
+------e-d-e------
+--------e--------
+
+#size 10
+
+------------------j------------------
+----------------j-i-j----------------
+--------------j-i-h-i-j--------------
+------------j-i-h-g-h-i-j------------
+----------j-i-h-g-f-g-h-i-j----------
+--------j-i-h-g-f-e-f-g-h-i-j--------
+------j-i-h-g-f-e-d-e-f-g-h-i-j------
+----j-i-h-g-f-e-d-c-d-e-f-g-h-i-j----
+--j-i-h-g-f-e-d-c-b-c-d-e-f-g-h-i-j--
+j-i-h-g-f-e-d-c-b-a-b-c-d-e-f-g-h-i-j
+--j-i-h-g-f-e-d-c-b-c-d-e-f-g-h-i-j--
+----j-i-h-g-f-e-d-c-d-e-f-g-h-i-j----
+------j-i-h-g-f-e-d-e-f-g-h-i-j------
+--------j-i-h-g-f-e-f-g-h-i-j--------
+----------j-i-h-g-f-g-h-i-j----------
+------------j-i-h-g-h-i-j------------
+--------------j-i-h-i-j--------------
+----------------j-i-j----------------
+------------------j------------------
+The center of the rangoli has the first alphabet letter a, and the boundary has the  alphabet letter (in alphabetical order).
+
+Function Description
+
+Complete the rangoli function in the editor below.
+
+rangoli has the following parameters:
+
+int size: the size of the rangoli
+Returns
+
+string: a single string made up of each of the lines of the rangoli separated by a newline character (\n)
+Input Format
+
+Only one line of input containing , the size of the rangoli.
+
+Constraints
+
+
+Sample Input
+
+5
+Sample Output
+
+--------e--------
+------e-d-e------
+----e-d-c-d-e----
+--e-d-c-b-c-d-e--
+e-d-c-b-a-b-c-d-e
+--e-d-c-b-c-d-e--
+----e-d-c-d-e----
+------e-d-e------
+--------e--------
+
+solution:
+def print_rangoli(size):
+    # your code goes here
+    import string
+    alpha = string.ascii_lowercase
+    
+    # Create list to store all lines
+    lines = []
+    
+    # Generate lines from top to middle
+    for i in range(size):
+        # Create the decreasing and increasing sequence
+        s = '-'.join(alpha[i:size])
+        # Create full line pattern
+        line = (s[::-1] + s[1:]).center(4*size-3, '-')
+        lines.append(line)
+    
+    # Print complete pattern (top + bottom)
+    print('\n'.join(lines[:0:-1] + lines))
+
+if __name__ == '__main__':
+    n = int(input())
+    print_rangoli(n)
+
+5. ou are asked to ensure that the first and last names of people begin with a capital letter in their passports. For example, alison heck should be capitalised correctly as Alison Heck.
+
+
+Given a full name, your task is to capitalize the name appropriately.
+
+Input Format
+
+A single line of input containing the full name, .
+
+Constraints
+
+The string consists of alphanumeric characters and spaces.
+Note: in a word only the first character is capitalized. Example 12abc when capitalized remains 12abc.
+
+Output Format
+
+Print the capitalized string, .
+
+Sample Input
+
+chris alan
+Sample Output
+
+Chris Alan
+
+solution:
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the solve function below.
+def solve(s):
+    words = s.split(" ")
+    return " ".join(word.capitalize() for word in words)
+    
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s = input()
+
+    result = solve(s)
+
+    fptr.write(result + '\n')
+
+    fptr.close()
+
+Geeks for Geeks
+1. Right Angle Triangle Pattern
+Solved
+Difficulty: EasyAccuracy: 59.46%Submissions: 242K+Points: 2
+Given an integer n. Write a program to print the Right angle triangle wall. The length of perpendicular and base is s. 
+Note: Print exactly single " " after "*". Print a new line after printing the triangle.
+
+Example:
+
+Input: n = 4
+Output:
+* 
+* * 
+* * * 
+* * * * 
+Explanation: Length of perpendicular and base of triangle is 4 .
+Input: n = 3
+Output:
+* 
+* * 
+* * * 
+Explanation: Length of perpendicular and base of triangle is 3 .
+Constraints:
+1 ≤ n ≤ 20
+
+solution:
+n = int(input())
+
+# code here
+for i in range(1,n+1):
+    print("* " * i)
+
+2. Given an integer n. Write a program to print the inverted "Right angle triangle" wall. The length of the perpendicular and base is n.
+
+Examples:
+
+Input: n = 5
+Output:
+*****
+****
+*** 
+**
+*
+Explanation: Length of perpendicular and base of triangle is 5.
+Input: n = 3
+Output:
+*** 
+** 
+*
+Explanation: Length of perpendicular and base of triangle is 3.
+Constraints:
+1 <= n <= 20
+solution:
+n = int(input())
+
+# code here
+for i in range(n,0,-1):
+    print('*' * i)
+
+3. Right Angle Triangle 2
+Difficulty: EasyAccuracy: 50.16%Submissions: 77K+Points: 2
+Given an integer n. Write a program to print the Right angle triangle. The length of the perpendicular and base is n.  
+
+Examples :
+
+Input: n = 9
+Output:
+*
+* *
+*   *
+*     *
+*       *
+*         *
+*           *
+*             *
+* * * * * * * * * 
+Explanation: Length of perpendicular and base of triangle is 9.
+Input: n = 4
+Output:
+*
+* *
+*   *
+* * * *
+Explanation: Length of perpendicular and base of triangle is 4.
+Constraints:
+1 ≤ n ≤ 12
+
+solution:
+class Solution:
+    def printPattern(self, n):
+        #Code here
+        for i in range(1, n + 1):
+            if i == 1:
+                print("*")
+            elif i == n:
+                print("* " * n)
+            else:
+                print("*" + " " * (2 * i - 3) + "*")
+3. All Divisors of a Number
+Solved
+Difficulty: EasyAccuracy: 46.73%Submissions: 185K+Points: 2Average Time: 10m
+Given an integer n, return all the divisors of n in the ascending order.
+ 
+Examples:
+
+Input : n = 20
+Output: 1 2 4 5 10 20
+Explanation: 20 is completely divisible by 1, 2, 4, 5, 10 and 20.
+Input: n = 21191
+Output: 1 21191
+Explanation: As 21191 is a prime number, it has only 2 factors(1 and the number itself).
+Constraints:
+1 ≤ n ≤ 109
+
+solution:
+class Solution:
+    def getDivisors(self, n):
+        # code here
+        small_divisors = []
+        large_divisors = []
+
+        i = 1
+        while i * i <= n:
+            if n % i == 0:
+                small_divisors.append(i)
+                if i != n // i:
+                    large_divisors.append(n // i)
+            i += 1
+
+        # Combine: small divisors (already ascending) + large divisors (reversed)
+        return small_divisors + large_divisors[::-1]
+
+4. Prime Number
+Solved
+Difficulty: EasyAccuracy: 22.2%Submissions: 648K+Points: 2
+Given a number n, determine whether it is a prime number or not.
+Note: A prime number is a number greater than 1 that has no positive divisors other than 1 and itself.
+
+Examples :
+
+Input: n = 7
+Output: true
+Explanation: 7 has exactly two divisors: 1 and 7, making it a prime number.
+Input: n = 25
+Output: false
+Explanation: 25 has more than two divisors: 1, 5, and 25, so it is not a prime number.
+Input: n = 1
+Output: false
+Explanation: 1 has only one divisor (1 itself), which is not sufficient for it to be considered prime.
+Constraints:
+1 ≤ n ≤ 109
+solution:
+class Solution:
+    def isPrime(self, n):
+        # code here
+        # Numbers less than 2 are not prime
+        if n < 2:
+            return False
+        
+        # Check divisibility from 2 to sqrt(n)
+        i = 2
+        while i * i <= n:
+            if n % i == 0:
+                return False
+            i += 1
+        
+        return True
+
+5. Next Prime Number
+Solved
+Difficulty: MediumAccuracy: 52.46%Submissions: 46K+Points: 4
+Given an integer n. Write a program to find the first prime number greater than n.
+
+Examples:
+
+Input: n = 15
+Output: 17
+Explanation: 17 is next prime number.
+Input: n = 7
+Output: 11
+Explanation: 11 is the prime number next to 7.
+Constraints:
+1 <= n <= 500
+
+solution:
+def nextPrime(n):
+    
+    # code here to find next prime number
+    # return next prime number
+    n += 1
+    while True:
+        if n > 1 and all(n % i != 0 for i in range(2, int(n**0.5) + 1)):
+            return n
+        n += 1
