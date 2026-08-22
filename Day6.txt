@@ -1,0 +1,360 @@
+HackerRAnk
+1. itertools.product()
+
+This tool computes the cartesian product of input iterables.
+It is equivalent to nested for-loops.
+For example, product(A, B) returns the same as ((x,y) for x in A for y in B).
+
+Sample Code
+
+>>> from itertools import product
+>>>
+>>> print list(product([1,2,3],repeat = 2))
+[(1, 1), (1, 2), (1, 3), (2, 1), (2, 2), (2, 3), (3, 1), (3, 2), (3, 3)]
+>>>
+>>> print list(product([1,2,3],[3,4]))
+[(1, 3), (1, 4), (2, 3), (2, 4), (3, 3), (3, 4)]
+>>>
+>>> A = [[1,2,3],[3,4,5]]
+>>> print list(product(*A))
+[(1, 3), (1, 4), (1, 5), (2, 3), (2, 4), (2, 5), (3, 3), (3, 4), (3, 5)]
+>>>
+>>> B = [[1,2,3],[3,4,5],[7,8]]
+>>> print list(product(*B))
+[(1, 3, 7), (1, 3, 8), (1, 4, 7), (1, 4, 8), (1, 5, 7), (1, 5, 8), (2, 3, 7), (2, 3, 8), (2, 4, 7), (2, 4, 8), (2, 5, 7), (2, 5, 8), (3, 3, 7), (3, 3, 8), (3, 4, 7), (3, 4, 8), (3, 5, 7), (3, 5, 8)]
+Task
+
+You are given a two lists  and . Your task is to compute their cartesian product X.
+
+Example
+
+A = [1, 2]
+B = [3, 4]
+
+AxB = [(1, 3), (1, 4), (2, 3), (2, 4)]
+Note:  and  are sorted lists, and the cartesian product's tuples should be output in sorted order.
+
+Input Format
+
+The first line contains the space separated elements of list .
+The second line contains the space separated elements of list .
+
+Both lists have no duplicate integer elements.
+
+Constraints
+
+
+
+Output Format
+
+Output the space separated tuples of the cartesian product.
+
+Sample Input
+
+ 1 2
+ 3 4
+Sample Output
+
+ (1, 3) (1, 4) (2, 3) (2, 4)
+solution:
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+from itertools import product
+
+A = list(map(int, input().split()))
+B = list(map(int, input().split()))
+
+print(*product(A, B))
+
+2. This tool returns successive  length permutations of elements in an iterable.
+
+If  is not specified or is None, then  defaults to the length of the iterable, and all possible full length permutations are generated.
+
+Permutations are printed in a lexicographic sorted order. So, if the input iterable is sorted, the permutation tuples will be produced in a sorted order.
+
+Sample Code
+
+>>> from itertools import permutations
+>>> print permutations(['1','2','3'])
+<itertools.permutations object at 0x02A45210>
+>>> 
+>>> print list(permutations(['1','2','3']))
+[('1', '2', '3'), ('1', '3', '2'), ('2', '1', '3'), ('2', '3', '1'), ('3', '1', '2'), ('3', '2', '1')]
+>>> 
+>>> print list(permutations(['1','2','3'],2))
+[('1', '2'), ('1', '3'), ('2', '1'), ('2', '3'), ('3', '1'), ('3', '2')]
+>>>
+>>> print list(permutations('abc',3))
+[('a', 'b', 'c'), ('a', 'c', 'b'), ('b', 'a', 'c'), ('b', 'c', 'a'), ('c', 'a', 'b'), ('c', 'b', 'a')]
+Task
+
+You are given a string .
+Your task is to print all possible permutations of size  of the string in lexicographic sorted order.
+
+Input Format
+
+A single line containing the space separated string  and the integer value .
+
+Constraints
+
+
+The string contains only UPPERCASE characters.
+
+Output Format
+
+Print the permutations of the string  on separate lines.
+
+Sample Input
+
+HACK 2
+Sample Output
+
+AC
+AH
+AK
+CA
+CH
+CK
+HA
+HC
+HK
+KA
+KC
+KH
+Explanation
+
+All possible size  permutations of the string "HACK" are printed in lexicographic sorted order.
+solution:
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+from itertools import permutations
+s, k = input().split()
+k = int(k)
+for p in permutations(sorted(s), k):
+    print(''.join(p))
+
+3. Task
+Given an integer, , and  space-separated integers as input, create a tuple, , of those  integers. Then compute and print the result of .
+
+Note: hash() is one of the functions in the __builtins__ module, so it need not be imported.
+
+Input Format
+
+The first line contains an integer, , denoting the number of elements in the tuple.
+The second line contains  space-separated integers describing the elements in tuple .
+
+Output Format
+
+Print the result of .
+
+Sample Input 0
+
+2
+1 2
+Sample Output 0
+
+3713081631934410656
+solution:
+if __name__ == '__main__':
+    n = int(input())
+    print(hash(tuple(map(int, input().split()))))
+
+
+4. Errors detected during execution are called exceptions.
+
+Examples:
+
+ZeroDivisionError
+This error is raised when the second argument of a division or modulo operation is zero.
+
+>>> a = '1'
+>>> b = '0'
+>>> print int(a) / int(b)
+>>> ZeroDivisionError: integer division or modulo by zero
+ValueError
+This error is raised when a built-in operation or function receives an argument that has the right type but an inappropriate value.
+
+>>> a = '1'
+>>> b = '#'
+>>> print int(a) / int(b)
+>>> ValueError: invalid literal for int() with base 10: '#'
+To learn more about different built-in exceptions click here.
+
+Handling Exceptions
+The statements try and except can be used to handle selected exceptions. A try statement may have more than one except clause to specify handlers for different exceptions.
+
+#Code
+try:
+    print 1/0
+except ZeroDivisionError as e:
+    print "Error Code:",e
+Output
+
+Error Code: integer division or modulo by zero
+
+Task
+
+You are given two values  and .
+Perform integer division and print .
+
+Input Format
+
+The first line contains , the number of test cases.
+The next  lines each contain the space separated values of  and .
+
+Constraints
+
+Output Format
+
+Print the value of .
+In the case of ZeroDivisionError or ValueError, print the error code.
+
+Sample Input
+
+3
+1 0
+2 $
+3 1
+Sample Output
+
+Error Code: integer division or modulo by zero
+Error Code: invalid literal for int() with base 10: '$'
+3
+
+solution:
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+k = int(input())
+
+for _ in range(k):
+    a,b = input().split()
+    try:
+        print(int(a)//int(b))
+    except (ZeroDivisionError,ValueError) as e:
+        print("Error Code:",e)
+
+Geeks for Geeks
+1. Nth Fibonacci Number
+Solved
+Difficulty: EasyAccuracy: 22.3%Submissions: 420K+Points: 2
+Find the n-th Fibonacci number for a given non-negative integer n.
+The Fibonacci sequence is defined as:
+
+F(0) = 0
+F(1) = 1
+F(n) = F(n - 1) + F(n - 2) for n ≥ 2
+Examples :
+
+Input: n = 5
+Output: 5
+Explanation: The 5th Fibonacci number is 5.
+Input: n = 0
+Output: 0 
+Explanation: The 0th Fibonacci number is 0.
+Input: n = 1
+Output: 1
+Explanation: The 1st Fibonacci number is 1.
+Constraints:
+0 ≤ n ≤ 30
+solution:
+class Solution:
+    def nthFibonacci(self, n: int) -> int:
+        # code here
+        if n == 0:
+            return 0
+        if n == 1:
+            return 1
+        return self.nthFibonacci(n-1) + self.nthFibonacci(n-2)
+
+2. GCD of two numbers
+Solved
+Difficulty: BasicAccuracy: 51.03%Submissions: 236K+Points: 1
+Given two positive integers a and b, find GCD of a and b.
+
+Note: Don't use the inbuilt gcd function
+
+Examples:
+
+Input: a = 20, b = 28
+Output: 4
+Explanation: GCD of 20 and 28 is 4
+Input: a = 60, b = 36
+Output: 12
+Explanation: GCD of 60 and 36 is 12
+Constraints:
+1 ≤ a, b ≤ 109
+solution:
+class Solution:
+    def gcd(self, a, b):
+        # code here
+        while b!=0:
+            a,b = b, a%b
+        return a
+
+3. LCM of two numbers
+Solved
+Difficulty: EasyAccuracy: 64.08%Submissions: 25K+Points: 2
+You are given two positive integers a and b Your task is to compute and return the Least Common Multiple (LCM) of the two numbers.
+The LCM of two integers is the smallest positive integer that is divisible by both a and b.
+
+Examples:
+
+Input: a = 12, b = 18
+Output: 36
+Explanation: LCM of 12 and 18 is 36
+Input: a = 5, b = 11
+Output: 55
+Explanation: LCM of 5 and 11 is 55
+Constraints:
+1 ≤ a, b ≤ 104
+solution:
+class Solution:
+       
+    def lcm(self, a, b):
+        # code here
+        def gcd(x,y):
+            while y:
+                x,y = y, x%y
+            return x
+        return (a*b) // gcd(a,b)
+4.List Traversal
+Solved
+Difficulty: BasicAccuracy: 53.65%Submissions: 49K+Points: 1
+You are given a list that contains integers. You need to print the elements of the list with a space between them.
+Note: Add a new line at the end.
+
+Examples:
+
+Input: arr[] = [54, 43, 2, 1, 5]
+Output: 54 43 2 1 5
+Explanation: Just traverse and print the numbers.
+Input: arr[] = [324, 5, 2, 2]
+Output: 324 5 2 2
+Explanation: Just traverse and print the numbers.
+solution:
+def listTraversal(arr):
+    #code here
+    string = ""
+    for i in arr:
+        string += str(i) + " "
+        
+    print(string)
+
+5. Size of an Array
+Solved
+Difficulty: BasicAccuracy: 62.65%Submissions: 27K+Points: 1
+Given an array arr[], find the size of the array.
+
+Examples :
+
+Input: arr[] = [1, 2, 3]
+Output: 3
+Explanation: The size of the array is 3.
+Input: arr[] = [1, 2, 3, 5, 4]
+Output: 5
+Explanation: The size of the array is 5.
+Constraints:
+1 ≤ |arr| ≤ 10
+1 ≤ elements of arr ≤ 10
+solution:
+class Solution:
+    def getSize(self,arr):
+        # code here
+        return len(arr)
