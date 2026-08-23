@@ -1,0 +1,521 @@
+Hacker Rank
+1. A counter is a container that stores elements as dictionary keys, and their counts are stored as dictionary values.
+
+Sample Code
+
+>>> from collections import Counter
+>>> 
+>>> myList = [1,1,2,3,4,5,3,2,3,4,2,1,2,3]
+>>> print Counter(myList)
+Counter({2: 4, 3: 4, 1: 3, 4: 2, 5: 1})
+>>>
+>>> print Counter(myList).items()
+[(1, 3), (2, 4), (3, 4), (4, 2), (5, 1)]
+>>> 
+>>> print Counter(myList).keys()
+[1, 2, 3, 4, 5]
+>>> 
+>>> print Counter(myList).values()
+[3, 4, 4, 2, 1]
+Task
+
+ is a shoe shop owner. His shop has  number of shoes.
+He has a list containing the size of each shoe he has in his shop.
+There are  number of customers who are willing to pay  amount of money only if they get the shoe of their desired size.
+
+Your task is to compute how much money  earned.
+
+Input Format
+
+The first line contains , the number of shoes.
+The second line contains the space separated list of all the shoe sizes in the shop.
+The third line contains , the number of customers.
+The next  lines contain the space separated values of the  desired by the customer and , the price of the shoe.
+
+Constraints
+
+
+
+
+
+Output Format
+
+Print the amount of money earned by .
+
+Sample Input
+
+10
+2 3 4 5 6 8 7 6 5 18
+6
+6 55
+6 45
+6 55
+4 40
+18 60
+10 50
+Sample Output
+
+200
+Explanation
+
+Customer 1: Purchased size 6 shoe for $55.
+Customer 2: Purchased size 6 shoe for $45.
+Customer 3: Size 6 no longer available, so no purchase.
+Customer 4: Purchased size 4 shoe for $40.
+Customer 5: Purchased size 18 shoe for $60.
+Customer 6: Size 10 not available, so no purchase.
+
+Total money earned =  
+
+
+solution:
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+from collections import Counter
+X = int(input())
+shoe_sizes = list(map(int, input().split()))
+N = int(input())
+
+available_shoes = Counter(shoe_sizes)
+total_earning = 0
+for _  in range(N):
+    size, price = map(int, input().split())
+    if available_shoes[size] > 0:
+        total_earning += price
+        available_shoes[size] -= 1
+        
+    
+print(total_earning)
+
+2. The calendar module allows you to output calendars and provides additional useful functions for them.
+
+class calendar.TextCalendar([firstweekday])
+
+This class can be used to generate plain text calendars.
+
+Sample Code
+
+>>> import calendar
+>>> 
+>>> print calendar.TextCalendar(firstweekday=6).formatyear(2015)
+                                  2015
+
+      January                   February                   March
+Su Mo Tu We Th Fr Sa      Su Mo Tu We Th Fr Sa      Su Mo Tu We Th Fr Sa
+             1  2  3       1  2  3  4  5  6  7       1  2  3  4  5  6  7
+ 4  5  6  7  8  9 10       8  9 10 11 12 13 14       8  9 10 11 12 13 14
+11 12 13 14 15 16 17      15 16 17 18 19 20 21      15 16 17 18 19 20 21
+18 19 20 21 22 23 24      22 23 24 25 26 27 28      22 23 24 25 26 27 28
+25 26 27 28 29 30 31                                29 30 31
+
+       April                      May                       June
+Su Mo Tu We Th Fr Sa      Su Mo Tu We Th Fr Sa      Su Mo Tu We Th Fr Sa
+          1  2  3  4                      1  2          1  2  3  4  5  6
+ 5  6  7  8  9 10 11       3  4  5  6  7  8  9       7  8  9 10 11 12 13
+12 13 14 15 16 17 18      10 11 12 13 14 15 16      14 15 16 17 18 19 20
+19 20 21 22 23 24 25      17 18 19 20 21 22 23      21 22 23 24 25 26 27
+26 27 28 29 30            24 25 26 27 28 29 30      28 29 30
+                          31
+
+        July                     August                  September
+Su Mo Tu We Th Fr Sa      Su Mo Tu We Th Fr Sa      Su Mo Tu We Th Fr Sa
+          1  2  3  4                         1             1  2  3  4  5
+ 5  6  7  8  9 10 11       2  3  4  5  6  7  8       6  7  8  9 10 11 12
+12 13 14 15 16 17 18       9 10 11 12 13 14 15      13 14 15 16 17 18 19
+19 20 21 22 23 24 25      16 17 18 19 20 21 22      20 21 22 23 24 25 26
+26 27 28 29 30 31         23 24 25 26 27 28 29      27 28 29 30
+                          30 31
+
+      October                   November                  December
+Su Mo Tu We Th Fr Sa      Su Mo Tu We Th Fr Sa      Su Mo Tu We Th Fr Sa
+             1  2  3       1  2  3  4  5  6  7             1  2  3  4  5
+ 4  5  6  7  8  9 10       8  9 10 11 12 13 14       6  7  8  9 10 11 12
+11 12 13 14 15 16 17      15 16 17 18 19 20 21      13 14 15 16 17 18 19
+18 19 20 21 22 23 24      22 23 24 25 26 27 28      20 21 22 23 24 25 26
+25 26 27 28 29 30 31      29 30                     27 28 29 30 31
+To learn more about different calendar functions, click here.
+
+Task
+
+You are given a date. Your task is to find what the day is on that date.
+
+Input Format
+
+A single line of input containing the space separated month, day and year, respectively, in    format.
+
+Constraints
+
+Output Format
+
+Output the correct day in capital letters.
+
+Sample Input
+
+08 05 2015
+Sample Output
+
+WEDNESDAY
+Explanation
+
+The day on August th  was WEDNESDAY.
+solution:
+
+import calendar
+month,day,year =  map(int, input().split())
+index = calendar.weekday(year,month,day)
+print(calendar.day_name[index].upper())
+
+3. If we want to add a single element to an existing set, we can use the .add() operation.
+It adds the element to the set and returns 'None'.
+
+Example
+
+>>> s = set('HackerRank')
+>>> s.add('H')
+>>> print s
+set(['a', 'c', 'e', 'H', 'k', 'n', 'r', 'R'])
+>>> print s.add('HackerRank')
+None
+>>> print s
+set(['a', 'c', 'e', 'HackerRank', 'H', 'k', 'n', 'r', 'R'])
+
+Task
+
+Apply your knowledge of the .add() operation to help your friend Rupal.
+
+Rupal has a huge collection of country stamps. She decided to count the total number of distinct country stamps in her collection. She asked for your help. You pick the stamps one by one from a stack of  country stamps.
+
+Find the total number of distinct country stamps.
+
+Input Format
+
+The first line contains an integer , the total number of country stamps.
+The next  lines contains the name of the country where the stamp is from.
+
+Constraints
+
+
+Output Format
+
+Output the total number of distinct country stamps on a single line.
+
+Sample Input
+
+7
+UK
+China
+USA
+France
+New Zealand
+UK
+France 
+Sample Output
+
+5
+Explanation
+
+UK and France repeat twice. Hence, the total number of distinct country stamps is  (five).
+solution:
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+N = int(input())
+list = []
+for i in range(N):
+    list.append(input())
+    
+s = set(list)
+print(len(s))
+
+4. Objective
+Today, we're learning about a new data type: sets.
+
+Concept
+
+If the inputs are given on one line separated by a character (the delimiter), use split() to get the separate values in the form of a list. The delimiter is space (ascii 32) by default. To specify that comma is the delimiter, use string.split(','). For this challenge, and in general on HackerRank, space will be the delimiter.
+
+Usage:
+
+>> a = raw_input()
+5 4 3 2
+>> lis = a.split()
+>> print (lis)
+['5', '4', '3', '2']
+If the list values are all integer types, use the map() method to convert all the strings to integers.
+
+>> newlis = list(map(int, lis))
+>> print (newlis)
+[5, 4, 3, 2]
+Sets are an unordered collection of unique values. A single set contains values of any immutable data type.
+
+CREATING SETS
+
+>> myset = {1, 2} # Directly assigning values to a set
+>> myset = set()  # Initializing a set
+>> myset = set(['a', 'b']) # Creating a set from a list
+>> myset
+{'a', 'b'}
+
+
+MODIFYING SETS
+
+Using the add() function:
+
+>> myset.add('c')
+>> myset
+{'a', 'c', 'b'}
+>> myset.add('a') # As 'a' already exists in the set, nothing happens
+>> myset.add((5, 4))
+>> myset
+{'a', 'c', 'b', (5, 4)}
+
+Using the update() function:
+
+>> myset.update([1, 2, 3, 4]) # update() only works for iterable objects
+>> myset
+{'a', 1, 'c', 'b', 4, 2, (5, 4), 3}
+>> myset.update({1, 7, 8})
+>> myset
+{'a', 1, 'c', 'b', 4, 7, 8, 2, (5, 4), 3}
+>> myset.update({1, 6}, [5, 13])
+>> myset
+{'a', 1, 'c', 'b', 4, 5, 6, 7, 8, 2, (5, 4), 13, 3}
+
+REMOVING ITEMS
+
+Both the discard() and remove() functions take a single value as an argument and removes that value from the set. If that value is not present, discard() does nothing, but remove() will raise a KeyError exception.
+
+>> myset.discard(10)
+>> myset
+{'a', 1, 'c', 'b', 4, 5, 7, 8, 2, 12, (5, 4), 13, 11, 3}
+>> myset.remove(13)
+>> myset
+{'a', 1, 'c', 'b', 4, 5, 7, 8, 2, 12, (5, 4), 11, 3}
+
+
+COMMON SET OPERATIONS Using union(), intersection() and difference() functions.
+
+>> a = {2, 4, 5, 9}
+>> b = {2, 4, 11, 12}
+>> a.union(b) # Values which exist in a or b
+{2, 4, 5, 9, 11, 12}
+>> a.intersection(b) # Values which exist in a and b
+{2, 4}
+>> a.difference(b) # Values which exist in a but not in b
+{9, 5}
+
+The union() and intersection() functions are symmetric methods:
+
+>> a.union(b) == b.union(a)
+True
+>> a.intersection(b) == b.intersection(a)
+True
+>> a.difference(b) == b.difference(a)
+False
+These other built-in data structures in Python are also useful.
+
+Task
+Given  sets of integers,  and , print their symmetric difference in ascending order. The term symmetric difference indicates those values that exist in either  or  but do not exist in both.
+
+Input Format
+
+The first line of input contains an integer, .
+The second line contains  space-separated integers.
+The third line contains an integer, .
+The fourth line contains  space-separated integers.
+
+Output Format
+
+Output the symmetric difference integers in ascending order, one per line.
+
+Sample Input
+
+STDIN       Function
+-----       --------
+4           set a size M = 4
+2 4 5 9     a = {2, 4, 5, 9}
+4           set b size N = 4
+2 4 11 12   b = {2, 4, 11, 12}
+Sample Output
+
+5
+9
+11
+12
+solution:
+M = int(input())
+set1 = set(map(int, input().split()))
+N = int(input())
+set2 = set(map(int, input().split()))
+
+print(*sorted(set1 ^ set2), sep='\n')
+
+5. The .union() operator returns the union of a set and the set of elements in an iterable.
+Sometimes, the | operator is used in place of .union() operator, but it operates only on the set of elements in set.
+Set is immutable to the .union() operation (or | operation).
+
+Example
+
+>>> s = set("Hacker")
+>>> print s.union("Rank")
+set(['a', 'R', 'c', 'r', 'e', 'H', 'k', 'n'])
+
+>>> print s.union(set(['R', 'a', 'n', 'k']))
+set(['a', 'R', 'c', 'r', 'e', 'H', 'k', 'n'])
+
+>>> print s.union(['R', 'a', 'n', 'k'])
+set(['a', 'R', 'c', 'r', 'e', 'H', 'k', 'n'])
+
+>>> print s.union(enumerate(['R', 'a', 'n', 'k']))
+set(['a', 'c', 'r', 'e', (1, 'a'), (2, 'n'), 'H', 'k', (3, 'k'), (0, 'R')])
+
+>>> print s.union({"Rank":1})
+set(['a', 'c', 'r', 'e', 'H', 'k', 'Rank'])
+
+>>> s | set("Rank")
+set(['a', 'R', 'c', 'r', 'e', 'H', 'k', 'n'])
+Task
+
+The students of District College have subscriptions to English and French newspapers. Some students have subscribed only to English, some have subscribed to only French and some have subscribed to both newspapers.
+
+You are given two sets of student roll numbers. One set has subscribed to the English newspaper, and the other set is subscribed to the French newspaper. The same student could be in both sets. Your task is to find the total number of students who have subscribed to at least one newspaper.
+
+Input Format
+
+The first line contains an integer, , the number of students who have subscribed to the English newspaper.
+The second line contains  space separated roll numbers of those students.
+The third line contains , the number of students who have subscribed to the French newspaper.
+The fourth line contains  space separated roll numbers of those students.
+
+Constraints
+
+
+Output Format
+
+Output the total number of students who have at least one subscription.
+
+Sample Input
+
+9
+1 2 3 4 5 6 7 8 9
+9
+10 1 2 3 11 21 55 6 8
+Sample Output
+
+13
+Explanation
+
+Roll numbers of students who have at least one subscription:
+ and . Roll numbers:  and  are in both sets so they are only counted once.
+Hence, the total is  students.
+
+  solution:
+M = int(input())
+set1 = set(map(int, input().split()))
+N = int(input())
+set2 = set(map(int, input().split()))
+union = set1.union(set2)
+print(len(union))
+
+Geeks for Geeks:
+1. Sum The List
+Solved
+Difficulty: EasyAccuracy: 66.48%Submissions: 16K+Points: 2Average Time: 5m
+Given a list arr that contains integers, return the sum of the list.
+
+Examples:
+
+Input: arr = [54, 43, 2, 1, 5]
+Output: 105
+Explanation: Just sum it 54 + 43 + 2 + 1 + 5 = 105.
+Input: arr = [324, 5, 2, 2]
+Output: 333
+Explanation: Just sum it 324 + 5 + 2 + 2 = 333. 
+Constraints:
+1 ≤ |arr| ≤ 10
+1 ≤ arr[i] ≤ 103
+solution:
+def listSum(arr):
+    #code here
+    return sum(arr)
+
+2. Decrement List Values
+Solved
+Difficulty: EasyAccuracy: 59.05%Submissions: 26K+Points: 2
+You are given a list that contains integers. You need to decrement each element of the list by 1 and return the list.
+
+Examples:
+
+Input: arr = [54, 43, 2, 1, 5]
+Output: 53 42 1 0 4
+Explanation: Just decrement the numbers by 1.
+Input: arr = [324, 5, 2, 2]
+Output: 323 4 1 1
+Explanation: Just decrement the numbers by 1.
+
+solution:
+def decrementList(arr):
+    #code here
+    arr1 = []
+    for num in arr:
+        arr1.append(num - 1)
+        
+    return arr1          # or return [x-1 for x in arr]
+
+3. Append To List
+Solved
+Difficulty: BasicAccuracy: 65.26%Submissions: 15K+Points: 1
+You are given three inputs a, b, c. You need to create a list and append a, b, c to the list and then return that list.
+
+Examples:
+
+Input: a = 1, b = 2, c = 3
+Output: 1 2 3
+Explanation: Just create a list and append 1 2 3 to it. Then return [1,2,3] list.
+Input: a = 4, b = 5, c = 6
+Output: 4 5 6
+Explanation: Just create a list and append 4 5 6 to it. Then return [4,5,6] list.
+solution:
+f appendToList(a,b,c):
+    #code here
+    return [a,b,c]
+
+4. Less Than
+Solved
+Difficulty: EasyAccuracy: 65.63%Submissions: 19K+Points: 2
+You are given a number k and a list arr[] that contains integers. You need to return list of numbers that are less than k.
+Examples:
+
+Input: arr[] = [54, 43, 2, 1, 5], k = 6
+Output: 2 1 5
+Explanation: 2 1 5 are less than 6.
+Input: arr[] = [5, 6, 7, 2, 4, 8, 9, 1], k = 5
+Output: 2 4 1
+Explanation: 2 4 1 are less than 5.
+
+solution:
+class Solution:
+
+    def lessThan(self, arr, k):
+        #code here
+        return [num for num in arr if num < k]
+
+5. Given an array arr[], return the floor value of the mean of its elements.
+
+Examples:
+
+
+Input: arr[] = [1, 3, 4, 2, 6, 5, 8, 7]
+Output: 4
+Explanation: Sum of the elements is 1 + 3 + 4 + 2 + 6 + 5 + 8 + 7 = 36, Mean = 36/8 = 4.5, floor(4.5) = 4.
+
+Input: arr[] = [4, 4, 4, 4, 4]
+Output: 4
+Explanation: Sum of the elements is 4 + 4 + 4 + 4 + 4 = 20, Mean = 20/5 = 4
+Constraints:
+1 ≤ arr.size() ≤ 106
+1 ≤ arr[i] ≤ 106
+solution:
+class Solution:
+    def findMean(self, arr):
+        # code here 
+        mean = sum(arr)//len(arr)
+        
+        return mean
