@@ -1,0 +1,474 @@
+Hackerrank
+1. difference()
+
+The tool .difference() returns a set with all the elements from the set that are not in an iterable.
+Sometimes the - operator is used in place of the .difference() tool, but it only operates on the set of elements in set.
+Set is immutable to the .difference() operation (or the - operation).
+
+>>> s = set("Hacker")
+>>> print s.difference("Rank")
+set(['c', 'r', 'e', 'H'])
+
+>>> print s.difference(set(['R', 'a', 'n', 'k']))
+set(['c', 'r', 'e', 'H'])
+
+>>> print s.difference(['R', 'a', 'n', 'k'])
+set(['c', 'r', 'e', 'H'])
+
+>>> print s.difference(enumerate(['R', 'a', 'n', 'k']))
+set(['a', 'c', 'r', 'e', 'H', 'k'])
+
+>>> print s.difference({"Rank":1})
+set(['a', 'c', 'e', 'H', 'k', 'r'])
+
+>>> s - set("Rank")
+set(['H', 'c', 'r', 'e'])
+Task
+
+Students of District College have a subscription to English and French newspapers. Some students have subscribed to only the English newspaper, some have subscribed to only the French newspaper, and some have subscribed to both newspapers.
+
+You are given two sets of student roll numbers. One set has subscribed to the English newspaper, and one set has subscribed to the French newspaper. Your task is to find the total number of students who have subscribed to only English newspapers.
+
+Input Format
+
+The first line contains the number of students who have subscribed to the English newspaper.
+The second line contains the space separated list of student roll numbers who have subscribed to the English newspaper.
+The third line contains the number of students who have subscribed to the French newspaper.
+The fourth line contains the space separated list of student roll numbers who have subscribed to the French newspaper.
+
+Constraints
+
+
+Output Format
+
+Output the total number of students who are subscribed to the English newspaper only.
+
+Sample Input
+
+9
+1 2 3 4 5 6 7 8 9
+9
+10 1 2 3 11 21 55 6 8
+Sample Output
+
+4
+Explanation
+
+The roll numbers of students who only have English newspaper subscriptions are:
+ and .
+Hence, the total is  students.
+
+solution:
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+e = int(input())
+english = set(map(int,input().split()))
+f = int(input())
+french = set(map(int, input().split()))
+diff = english - french
+print(len(diff))
+
+2. .intersection()
+
+The .intersection() operator returns the intersection of a set and the set of elements in an iterable.
+Sometimes, the & operator is used in place of the .intersection() operator, but it only operates on the set of elements in set.
+The set is immutable to the .intersection() operation (or & operation).
+
+>>> s = set("Hacker")
+>>> print s.intersection("Rank")
+set(['a', 'k'])
+
+>>> print s.intersection(set(['R', 'a', 'n', 'k']))
+set(['a', 'k'])
+
+>>> print s.intersection(['R', 'a', 'n', 'k'])
+set(['a', 'k'])
+
+>>> print s.intersection(enumerate(['R', 'a', 'n', 'k']))
+set([])
+
+>>> print s.intersection({"Rank":1})
+set([])
+
+>>> s & set("Rank")
+set(['a', 'k'])
+Task
+
+The students of District College have subscriptions to English and French newspapers. Some students have subscribed only to English, some have subscribed only to French, and some have subscribed to both newspapers.
+
+You are given two sets of student roll numbers. One set has subscribed to the English newspaper, one set has subscribed to the French newspaper. Your task is to find the total number of students who have subscribed to both newspapers.
+
+Input Format
+
+The first line contains , the number of students who have subscribed to the English newspaper.
+The second line contains  space separated roll numbers of those students.
+The third line contains , the number of students who have subscribed to the French newspaper.
+The fourth line contains  space separated roll numbers of those students.
+
+Constraints
+
+
+Output Format
+
+Output the total number of students who have subscriptions to both English and French newspapers.
+
+Sample Input
+
+9
+1 2 3 4 5 6 7 8 9
+9
+10 1 2 3 11 21 55 6 8
+Sample Output
+
+5
+Explanation
+
+The roll numbers of students who have both subscriptions:
+ and .
+Hence, the total is  students.
+
+solution:
+
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+n = int(input())
+english = set(map(int,input().split()))
+
+f = int(input())
+french = set(map(int,input().split()))
+print(len(english & french))
+
+3. .symmetric_difference()
+
+The .symmetric_difference() operator returns a set with all the elements that are in the set and the iterable but not both.
+Sometimes, a ^ operator is used in place of the .symmetric_difference() tool, but it only operates on the set of elements in set.
+The set is immutable to the .symmetric_difference() operation (or ^ operation).
+
+>>> s = set("Hacker")
+>>> print s.symmetric_difference("Rank")
+set(['c', 'e', 'H', 'n', 'R', 'r'])
+
+>>> print s.symmetric_difference(set(['R', 'a', 'n', 'k']))
+set(['c', 'e', 'H', 'n', 'R', 'r'])
+
+>>> print s.symmetric_difference(['R', 'a', 'n', 'k'])
+set(['c', 'e', 'H', 'n', 'R', 'r'])
+
+>>> print s.symmetric_difference(enumerate(['R', 'a', 'n', 'k']))
+set(['a', 'c', 'e', 'H', (0, 'R'), 'r', (2, 'n'), 'k', (1, 'a'), (3, 'k')])
+
+>>> print s.symmetric_difference({"Rank":1})
+set(['a', 'c', 'e', 'H', 'k', 'Rank', 'r'])
+
+>>> s ^ set("Rank")
+set(['c', 'e', 'H', 'n', 'R', 'r'])
+Task
+
+Students of District College have subscriptions to English and French newspapers. Some students have subscribed to English only, some have subscribed to French only, and some have subscribed to both newspapers.
+
+You are given two sets of student roll numbers. One set has subscribed to the English newspaper, and one set has subscribed to the French newspaper. Your task is to find the total number of students who have subscribed to either the English or the French newspaper but not both.
+
+Input Format
+
+The first line contains the number of students who have subscribed to the English newspaper.
+The second line contains the space separated list of student roll numbers who have subscribed to the English newspaper.
+The third line contains the number of students who have subscribed to the French newspaper.
+The fourth line contains the space separated list of student roll numbers who have subscribed to the French newspaper.
+
+Constraints
+
+
+Output Format
+
+Output total number of students who have subscriptions to the English or the French newspaper but not both.
+
+Sample Input
+
+9
+1 2 3 4 5 6 7 8 9
+9
+10 1 2 3 11 21 55 6 8
+Sample Output
+
+8
+Explanation
+
+The roll numbers of students who have subscriptions to English or French newspapers but not both are:
+ and .
+Hence, the total is  students.
+
+solution:
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+e = int(input())
+english = set(map(int, input().split())) 
+
+f = int(input())
+french = set(map(int, input().split())) 
+
+print(len(english ^ french))
+
+4. .remove(x)
+
+This operation removes element  from the set.
+If element  does not exist, it raises a KeyError.
+The .remove(x) operation returns None.
+
+Example
+
+>>> s = set([1, 2, 3, 4, 5, 6, 7, 8, 9])
+>>> s.remove(5)
+>>> print s
+set([1, 2, 3, 4, 6, 7, 8, 9])
+>>> print s.remove(4)
+None
+>>> print s
+set([1, 2, 3, 6, 7, 8, 9])
+>>> s.remove(0)
+KeyError: 0
+.discard(x)
+
+This operation also removes element  from the set.
+If element  does not exist, it does not raise a KeyError.
+The .discard(x) operation returns None.
+
+Example
+
+>>> s = set([1, 2, 3, 4, 5, 6, 7, 8, 9])
+>>> s.discard(5)
+>>> print s
+set([1, 2, 3, 4, 6, 7, 8, 9])
+>>> print s.discard(4)
+None
+>>> print s
+set([1, 2, 3, 6, 7, 8, 9])
+>>> s.discard(0)
+>>> print s
+set([1, 2, 3, 6, 7, 8, 9])
+.pop()
+
+This operation removes and return an arbitrary element from the set.
+If there are no elements to remove, it raises a KeyError.
+
+Example
+
+>>> s = set([1])
+>>> print s.pop()
+1
+>>> print s
+set([])
+>>> print s.pop()
+KeyError: pop from an empty set
+Task
+
+You have a non-empty set , and you have to execute  commands given in  lines.
+
+The commands will be pop, remove and discard.
+
+Input Format
+
+The first line contains integer , the number of elements in the set .
+The second line contains  space separated elements of set . All of the elements are non-negative integers, less than or equal to 9.
+The third line contains integer , the number of commands.
+The next  lines contains either pop, remove and/or discard commands followed by their associated value.
+
+Constraints
+
+
+
+Output Format
+
+Print the sum of the elements of set  on a single line.
+
+Sample Input
+
+9
+1 2 3 4 5 6 7 8 9
+10
+pop
+remove 9
+discard 9
+discard 8
+remove 7
+pop 
+discard 6
+remove 5
+pop 
+discard 5
+Sample Output
+
+4
+Explanation
+
+After completing these  operations on the set, we get set. Hence, the sum is .
+
+Note: Convert the elements of set s to integers while you are assigning them. To ensure the proper input of the set, we have added the first two lines of code to the editor.
+
+sollution:
+n = int(input())
+s = set(map(int, input().split()))
+N = int(input())
+
+for i in range(N):
+    line = input().split()
+    cmd = line[0]
+    
+    if cmd == "pop":
+        s.pop()
+    elif cmd == "remove":
+        x = int(line[1])
+        s.remove(x)
+    elif cmd == "discard":
+        x = int(line[1])
+        s.discard(x)
+
+print(sum(s))
+
+5. You are given a string  consisting only of digits 0-9, commas ,, and dots .
+
+Your task is to complete the regex_pattern defined below, which will be used to re.split() all of the , and . symbols in .
+
+It’s guaranteed that every comma and every dot in  is preceeded and followed by a digit.
+
+Sample Input 0
+
+100,000,000.000
+Sample Output 0
+
+100
+000
+000
+000
+
+solution:
+regex_pattern = r"[,.]"
+
+import re
+print("\n".join(re.split(regex_pattern, input())))
+
+Geeks for geeks:
+1. Check Palindrome
+Solved
+Difficulty: BasicAccuracy: 49.73%Submissions: 59K+Points: 1
+Given a string s, you need to check if it is palindrome or not. A palidrome is a string that reads the same from front and back.
+
+Note: Ignore the case in this question.
+
+Examples:
+
+Input: s = "Hello"
+Output: false
+Explanation: Hello is not equal to olleH so it's not a palindrome.
+Input: s = "TenEt"
+Output: true
+Explanation: TenEt == tEneT as we are ignoring the case.
+
+solution:
+def isPalindrome(s):
+    #code here
+    rev = s[::-1].lower()
+    if s.lower() == rev:
+        return True
+    else:
+        return False
+
+2. Reverse a String
+Solved
+Difficulty: BasicAccuracy: 69.49%Submissions: 613K+Points: 1Average Time: 15m
+You are given a string s, and your task is to reverse the string.
+
+Examples:
+
+Input: s = "Geeks"
+Output: "skeeG"
+Input: s = "for"
+Output: "rof"
+Input: s = "a"
+Output: "a"
+
+solution:
+class Solution:
+    def reverseString(self, s: str) -> str:
+        # code here
+        return s[::-1]
+
+3. Convert String to Lower Case
+Solved
+Difficulty: BasicAccuracy: 75.27%Submissions: 123K+Points: 1
+Given a string s. The task is to convert string characters to lowercase.
+
+Examples:
+
+Input: s = "ABCddE"
+Output: "abcdde"
+Explanation: A, B, C and E are converted to a, b, c and e thus all uppercase characters of the string converted to lowercase letter.
+Input: s = "LMNOppQQ"
+Output: "lmnoppqq"
+Explanation: L, M, N, O, and Q are converted to l, m, n, o and q thus all uppercase characters of the string converted to lowercase letter.
+
+solution:
+class Solution:
+    def toLower (self, s: str) -> str:
+        # code here 
+        return s.lower()
+
+4. String Functions I - Python
+Solved
+Difficulty: EasyAccuracy: 66.73%Submissions: 40K+Points: 2Average Time: 10m
+Python has a lot of string methods that can be used to manipulate the strings like converting to lowercase, capitalizing, trimming the spaces and so on.
+
+In this question, we'll take a look at inbuilt string methods like title(), swapcase(), find(), strip().
+You'll be given a string str and x, you'll perform various operations on them.
+
+Example:
+
+Input:
+str = hello 
+x = llo
+Output:
+hello 
+2 
+Hello 
+HELLO
+Your Task:
+This is a function problem. Do not take any input. just Complete the functions trim(), exists(), titleIt(), casesSwap().
+
+solution:
+def trim(str):
+    return str.strip()
+
+
+def exists(str, x):
+    return str.find(x)
+
+
+def titleIt(str):
+    return str.title()
+
+
+def casesSwap(str):
+    return str.swapcase()
+
+5. Append Smaller at Both Ends
+Solved
+Difficulty: EasyAccuracy: 59.65%Submissions: 28K+Points: 2Average Time: 10m
+Given two strings a and b of different lengths. Construct a new string by placing the shorter string at both the beginning and the end, and the longer string in the middle. Return the newly formed string.
+
+Examples:
+
+Input: a = Hi, b = There
+Output: HiThereHi
+Explanation: After joining short+long+short strings, we have new string as "HiThereHi".
+Input: a = bug, b = worksOnMyMachine
+Output: bugworksOnMyMachinebug
+Explanation: After joining short+long+short strings, we have new string as "bugworksOnMyMachinebug."
+Constraints:
+
+1 ≤ a.size(), b.size() ≤ 105
+
+solution:
+class Solution:
+    def combineStrings(self, a: str, b: str) -> str:
+        # code here
+        small = min(a, b, key=len)
+        large = max(a, b, key=len)
+        return small + large + small
+            
+        
