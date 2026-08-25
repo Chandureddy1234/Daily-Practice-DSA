@@ -1,0 +1,409 @@
+HackerRank
+1. In this task, we would like for you to appreciate the usefulness of the groupby() function of itertools . To read more about this function, Check this out .
+
+You are given a string . Suppose a character '' occurs consecutively  times in the string. Replace these consecutive occurrences of the character '' with  in the string.
+
+For a better understanding of the problem, check the explanation.
+
+Input Format
+
+A single line of input consisting of the string .
+
+Output Format
+
+A single line of output consisting of the modified string.
+
+Constraints
+
+All the characters of  denote integers between  and .
+
+
+Sample Input
+
+1222311
+Sample Output
+
+(1, 1) (3, 2) (1, 3) (2, 1)
+Explanation
+
+First, the character  occurs only once. It is replaced by . Then the character  occurs three times, and it is replaced by  and so on.
+
+Also, note the single space within each compression and between the compressions.
+
+solution:
+from itertools import groupby
+
+s = input()
+result = []
+for char, group in groupby(s):
+    count = len(list(group))
+    result.append(f"({count}, {char})")
+    
+print(" ".join(result))
+
+2. Let's learn some new Python concepts! You have to generate a list of the first  fibonacci numbers,  being the first number. Then, apply the map function and a lambda expression to cube each fibonacci number and print the list.
+
+Concept
+
+The map() function applies a function to every member of an iterable and returns the result. It takes two parameters: first, the function that is to be applied and secondly, the iterables.
+Let's say you are given a list of names, and you have to print a list that contains the length of each name.
+
+>> print (list(map(len, ['Tina', 'Raj', 'Tom'])))  
+[4, 3, 3]  
+Lambda is a single expression anonymous function often used as an inline function. In simple words, it is a function that has only one line in its body. It proves very handy in functional and GUI programming.
+
+>> sum = lambda a, b, c: a + b + c
+>> sum(1, 2, 3)
+6
+Note:
+
+Lambda functions cannot use the return statement and can only have a single expression. Unlike def, which creates a function and assigns it a name, lambda creates a function and returns the function itself. Lambda can be used inside lists and dictionaries.
+
+Input Format
+
+One line of input: an integer .
+
+Constraints
+
+
+Output Format
+
+A list on a single line containing the cubes of the first  fibonacci numbers.
+
+Sample Input
+
+5
+Sample Output
+
+[0, 1, 1, 8, 27]
+Explanation
+
+The first  fibonacci numbers are , and their cubes are .
+
+solution:
+cube = lambda x: x ** 3    # complete the lambda function 
+
+def fibonacci(n):
+    # return a list of fibonacci numbers
+    if n==0:
+        return []
+    if n==1:
+        return [0]
+    l = [0,1]
+    for i in range(2,n):
+        l.append(l[i-1]+l[i-2])
+        
+    return l
+
+if __name__ == '__main__':
+    n = int(input())
+    print(list(map(cube, fibonacci(n))))
+
+3. One of the built-in functions of Python is divmod, which takes two arguments  and  and returns a tuple containing the quotient of  first and then the remainder .
+
+For example:
+
+>>> print divmod(177,10)
+(17, 7)
+Here, the integer division is 177/10 => 17 and the modulo operator is 177%10 => 7.
+
+Task
+Read in two integers,  and , and print three lines.
+The first line is the integer division  (While using Python2 remember to import division from __future__).
+The second line is the result of the modulo operator: .
+The third line prints the divmod of  and .
+
+Input Format
+The first line contains the first integer, , and the second line contains the second integer, .
+
+Output Format
+Print the result as described above.
+
+Sample Input
+
+177
+10
+Sample Output
+
+17
+7
+(17, 7)
+solution:
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+a = int(input())
+b = int(input())
+quo = a//b
+rem = a%b
+print(quo)
+print(rem)
+print(f"({quo}, {rem})")
+
+4. So far, we have only heard of Python's powers. Now, we will witness them!
+
+Powers or exponents in Python can be calculated using the built-in power function. Call the power function  as shown below:
+
+>>> pow(a,b) 
+or
+
+>>> a**b
+It's also possible to calculate .
+
+>>> pow(a,b,m)  
+This is very helpful in computations where you have to print the resultant % mod.
+
+Note: Here,  and  can be floats or negatives, but, if a third argument is present,  cannot be negative.
+
+Note: Python has a math module that has its own pow(). It takes two arguments and returns a float. It is uncommon to use math.pow().
+
+Task
+You are given three integers: , , and . Print two lines.
+On the first line, print the result of pow(a,b). On the second line, print the result of pow(a,b,m).
+
+Input Format
+The first line contains , the second line contains , and the third line contains .
+
+Constraints
+
+
+
+Sample Input
+
+3
+4
+5
+Sample Output
+
+81
+1
+
+solution:
+a = int(input())
+b = int(input())
+m = int(input())
+
+print(pow(a,b))
+print(pow(a,b,m))
+
+5.  is a right triangle,  at .
+Therefore, .
+
+Point  is the midpoint of hypotenuse .
+
+You are given the lengths  and .
+Your task is to find  (angle , as shown in the figure) in degrees.
+
+Input Format
+
+The first line contains the length of side .
+The second line contains the length of side .
+
+Constraints
+
+
+Lengths  and  are natural numbers.
+Output Format
+
+Output  in degrees.
+
+Note: Round the angle to the nearest integer.
+
+Examples:
+If angle is 56.5000001°, then output 57°.
+If angle is 56.5000000°, then output 57°.
+If angle is 56.4999999°, then output 56°.
+
+
+Sample Input
+
+10
+10
+Sample Output
+
+45°
+solution:
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import math
+
+AB = int(input())
+BC = int(input())
+
+angle = math.degrees(math.atan2(AB, BC))
+degree_symbol = chr(176)  # ASCII code for degree symbol
+print(f"{round(angle)}{degree_symbol}")
+
+
+Geeks for Geeks
+1. This is the last practice question of Python Set. You are familiar with working on the set in Python. Now, let's move on to work on two sets using some inbuilt functions which are used widely. They are:
+union(): Used to find union() between two sets. It performs this using '|' operator.
+intersection(): Used to find intersection() between two sets. It performs this using '&' operator.
+difference(): Difference of A and B (A - B) is a set of elements that are only in A but not in B. Similarly for B - A holds the same.
+
+Now, Given some elements in two sets a and b, the task is to find the elements common in two sets, elements in both the sets, elements that are only in set a, not in b.
+
+Example:
+
+Input:
+a = {1, 2, 3, 4, 5}
+b = {6, 7, 8, 2, 3}
+Output:
+1 2 3 4 5 6 7 8
+2 3
+1 4 5
+Your Task:
+Your task is to complete the function all_in_set(), common_in_set() and diff() to perform union, intersection and difference between two sets and return the elements in the set after each operation.
+
+Constraints:
+1 <= S[i] <= 104
+solution:
+def common_in_set(a, b):
+    # Your code here
+    return a & b
+
+# Function to find difference in sets
+# Should return the difference in sets
+def diff(a, b):
+    # Your code here
+    return a - b
+
+
+# Function to find union of sets
+# Should return the union of sets
+def all_in_set(a, b):
+    # Your code here
+    return a | b
+
+2. Set Operations
+Solved
+Difficulty: BasicAccuracy: 57.93%Submissions: 33K+Points: 1
+Given an array arr[] of size n and an integer x. Implement the following functions:
+
+setInsert(): Insert all elements of arr into a set and return the set.
+setDisplay(): Print all elements of the set separated by spaces, followed by a newline.
+setErase(): If x is present in the set, remove it and print "erased x"; otherwise, print "not found". In both cases, print a newline after the message.
+
+Examples :
+
+Input: arr[] = [9, 8, 7, 4, 4, 2, 1, 1, 9, 8], x = 1
+Output: 
+1 2 4 7 8 9
+erased 1
+2 4 7 8 9
+Constraints:
+1 ≤ n ≤ 103
+1 ≤ arr[i] ≤ 106
+
+solution:
+def setInsert(arr, n):
+    return set(arr)
+
+def setDisplay(s):
+    print(*sorted(s))
+
+def setErase(s, x):
+    if x in s:
+        s.discard(x)
+        print(f"erased {x}")
+    else:
+        print("not found")
+
+3. Initialization:
+
+dict = {}
+Setting values:
+
+dict['a'] = 1 
+dict['b'] = 2
+Fetching values:
+
+dict['a'] gives 1 as output 
+dict['b'] gives 2 as output
+Moving on to the question to implement a dictionary. Given a list of strings containing names of students and another list containing marks of corresponding students. The task is to create a dictionary to store marks of students with their names (name will be unique).
+
+Example:
+
+Input: 
+N = 5 
+names = [john, ala, ilia, sudan, mercy] 
+marks = [100, 200, 150, 80, 300]
+Output:
+ala 200 
+ilia 150 
+john 100 
+mercy 300 
+sudan 80
+Your Task:
+The task is to complete the function create_dict() which takes arr as input and creates a dictionary then returns it.
+
+Constraints:
+1 <= N <= 104
+1 <= marks <= 104
+
+solution:
+# Function to create dictionary
+# arr is list of tuple. tuple contain name and marks.
+
+
+def create_dict(arr):
+
+    dict = {}
+
+    # Your code here
+    # Hint: use loop to iterate through arr
+    # and assign key value to the dict
+    for i in arr:
+        dict[i[0]] = i[1]
+    
+    return dict
+
+4. Decimal to binary
+Solved
+Difficulty: EasyAccuracy: 55.75%Submissions: 58K+Points: 2
+Given a decimal integer n, convert it and return its binary equivalent as a string.
+
+Examples :
+
+Input: n = 12
+Output: 1100
+Explanation: The binary representation of 12 is "1100", since 12 = 1×23 + 1×22 + 0×21 + 0×20
+Input: n = 33
+Output: 100001
+Explanation: The binary representation of 33 is "100001", since 33 = 1×25 + 0×24 + 0×23 + 0×22 + 0×21 + 1×20
+Constraints:
+1 ≤ n ≤ 231 - 1
+
+solution:
+class Solution:
+    def decToBinary(self, n):
+        # code here
+        return f"{n:b}"
+
+5. Given two strings txt and pat, return the 0-based index of the first occurrence of the substring pat in txt. If pat is not found, return -1.
+Note: You are not allowed to use the inbuilt function.
+
+Examples :
+
+Input: txt = "GeeksForGeeks", pat = "Fr"
+Output: -1
+Explanation: "Fr" is not present in the string "GeeksForGeeks" as substring.
+Input: txt = "GeeksForGeeks", pat = "For"
+Output: 5
+Explanation: "For" is present as substring in "GeeksForGeeks" from index 5 (0 based indexing).
+Input: txt = "GeeksForGeeks", pat = "gr"
+Output: -1
+Explanation: "gr" is not present in the string "GeeksForGeeks" as substring.
+Constraints:
+1 ≤ txt.size(),pat.size() ≤ 1000
+
+solution:
+class Solution:
+    def firstOccurence(self,txt,pat):
+        #code here
+        n = len(txt)
+        m = len(pat)
+        
+        for i in range(n - m + 1):
+            if txt[i:i+m]  == pat:
+                return i
+                
+           
+        return -1    
