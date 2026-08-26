@@ -1,0 +1,388 @@
+HackerRank
+1. This expression returns True if any element of the iterable is true.
+If the iterable is empty, it will return False.
+
+Code
+
+>>> any([1>0,1==0,1<0])
+True
+>>> any([1<0,2<1,3<2])
+False
+all()
+This expression returns True if all of the elements of the iterable are true. If the iterable is empty, it will return True.
+
+Code
+
+>>> all(['a'<'b','b'<'c'])
+True
+>>> all(['a'<'b','c'<'b'])
+False
+Task
+
+You are given a space separated list of integers. If all the integers are positive, then you need to check if any integer is a palindromic integer.
+
+Input Format
+
+The first line contains an integer .  is the total number of integers in the list.
+The second line contains the space separated list of  integers.
+
+Constraints
+
+
+Output Format
+
+Print True if all the conditions of the problem statement are satisfied. Otherwise, print False.
+
+Sample Input
+
+5
+12 9 61 5 14 
+Sample Output
+
+True
+
+Explanation
+
+Condition 1: All the integers in the list are positive.
+Condition 2: 5 is a palindromic integer.
+
+Hence, the output is True.
+
+Can you solve this challenge in 3 lines of code or less?
+There is no penalty for solutions that are correct but have more than 3 lines.
+
+solution:
+n = int(input())
+nums = list(map(int, input().split()))
+print(all(x > 0 for x in nums) and any(str(x) == str(x)[::-1] for x in nums))
+
+2. Mr. Anant Asankhya is the manager at the INFINITE hotel. The hotel has an infinite amount of rooms.
+
+One fine day, a finite number of tourists come to stay at the hotel.
+The tourists consist of:
+→ A Captain.
+→ An unknown group of families consisting of  members per group where  ≠ .
+
+The Captain was given a separate room, and the rest were given one room per group.
+
+Mr. Anant has an unordered list of randomly arranged room entries. The list consists of the room numbers for all of the tourists. The room numbers will appear  times per group except for the Captain's room.
+
+Mr. Anant needs you to help him find the Captain's room number.
+The total number of tourists or the total number of groups of families is not known to you.
+You only know the value of  and the room number list.
+
+Input Format
+
+The first line consists of an integer, , the size of each group.
+The second line contains the unordered elements of the room number list.
+
+
+Constraints
+
+
+Output Format
+
+Output the Captain's room number.
+
+Sample Input
+
+5
+1 2 3 6 5 4 4 2 5 3 6 1 6 5 3 2 4 1 2 5 1 4 3 6 8 4 3 1 5 6 2 
+Sample Output
+
+8
+Explanation
+
+The list of room numbers contains  elements. Since  is , there must be  groups of families. In the given list, all of the numbers repeat  times except for room number .
+Hence,  is the Captain's room number.
+
+solution:
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+from collections import Counter
+k = int(input())
+rooms = map(int, input().split())
+room_count = Counter(rooms)
+
+for room, count in room_count.items():
+    if count == 1:
+        print(room)
+
+3. In this challenge, the task is to debug the existing code to successfully execute all provided test files.
+
+Consider that vowels in the alphabet are a, e, i, o, u and y.
+
+Function score_words takes a list of lowercase words as an argument and returns a score as follows:
+
+The score of a single word is  if the word contains an even number of vowels. Otherwise, the score of this word is . The score for the whole list of words is the sum of scores of all words in the list.
+
+Debug the given function score_words such that it returns a correct score.
+
+Your function will be tested on several cases by the locked template code.
+
+Input Format
+
+The input is read by the provided locked code template. In the first line, there is a single integer  denoting the number of words. In the second line, there are  space-separated lowercase words.
+
+Constraints
+
+Each word has at most  letters and all letters are English lowercase letters
+Output Format
+
+The output is produced by the provided and locked code template. It calls function score_words with the list of words read from the input as the argument and prints the returned score to the output.
+
+Sample Input 0
+
+2
+hacker book
+Sample Output 0
+
+4
+Explanation 0
+
+There are two words in the input: hacker and book. The score of the word hacker is  because it contains an even number of vowels, i.e.  vowels, and the score of book is  for the same reason. Thus the total score is .
+
+Sample Input 1
+
+3
+programming is awesome
+Sample Output 1
+
+4
+Explanation 1
+
+There are  words in the input: programming, is and awesome. The score of programming is  since it contains  vowels, an odd number of vowels. The score of is is also  because it has an odd number of vowels. The score of awesome is  since it contains  vowels, an even number of vowels. Thus, the total score is .
+
+solution:
+def is_vowel(letter):
+    return letter in 'aeiouy'
+
+def score_words(words):
+    score = 0
+    for word in words:
+        vowels = sum(1 for letter in word if is_vowel(letter))
+        score += 2 if vowels % 2 == 0 else 1
+    return score
+    
+
+n = int(input())
+words = input().split()
+print(score_words(words))
+
+4. The itertools module standardizes a core set of fast, memory efficient tools that are useful by themselves or in combination. Together, they form an iterator algebra making it possible to construct specialized tools succinctly and efficiently in pure Python.
+
+To read more about the functions in this module, check out their documentation here.
+
+You are given a list of  lowercase English letters. For a given integer , you can select any  indices (assume -based indexing) with a uniform probability from the list.
+
+Find the probability that at least one of the  indices selected will contain the letter: ''.
+
+Input Format
+
+The input consists of three lines. The first line contains the integer , denoting the length of the list. The next line consists of  space-separated lowercase English letters, denoting the elements of the list.
+
+The third and the last line of input contains the integer , denoting the number of indices to be selected.
+
+Output Format
+
+Output a single line consisting of the probability that at least one of the  indices selected contains the letter:''.
+
+Note: The answer must be correct up to 3 decimal places.
+
+Constraints
+
+
+
+All the letters in the list are lowercase English letters.
+
+Sample Input
+
+4 
+a a c d
+2
+Sample Output
+
+0.8333
+Explanation
+
+All possible unordered tuples of length  comprising of indices from  to  are:
+
+
+Out of these  combinations,  of them contain either index  or index  which are the indices that contain the letter ''.
+
+Hence, the answer is .
+
+solution:
+from itertools import combinations
+
+n = int(input())
+letters = input().split()
+k = int(input())
+
+total = list(combinations(letters, k))
+with_a = [c for c in total if 'a' in c]
+print(f"{len(with_a)/len(total):.4f}")
+
+Geeks for Geeks:
+1. First Repeating Element
+Solved
+Difficulty: EasyAccuracy: 32.57%Submissions: 340K+Points: 2Average Time: 15m
+Given an array arr[], find the first repeating element index. The element should occur more than once and the index of its first occurrence should be the smallest.
+
+Note:- The position you return should be according to 1-based indexing. 
+
+Examples:
+
+Input: arr[] = [1, 5, 3, 4, 3, 5, 6]
+Output: 2
+Explanation: 5 appears twice and its first appearance is at index 2 which is less than 3 whose first the occurring index is 3.
+Input: arr[] = [1, 2, 3, 4]
+Output: -1
+Explanation: All elements appear only once so answer is -1.
+Constraints:
+
+1 ≤ arr.size() ≤ 106
+0 ≤ arr[i] ≤ 106
+
+solution:
+from collections import Counter
+class Solution:
+    def firstRepeated(self, arr):
+        # code here 
+        count = Counter(arr)
+        
+        for i, num in enumerate(arr):
+            if count[num] > 1:
+                return i + 1
+            
+        
+        return -1
+
+2. Second Largest
+Solved
+Difficulty: EasyAccuracy: 26.72%Submissions: 1.6MPoints: 2Average Time: 15m
+Given an array of positive integers arr[], return the second largest element from the array. If the second largest element doesn't exist then return -1.
+
+Note: The second largest element should not be equal to the largest element.
+
+Examples:
+
+Input: arr[] = [12, 35, 1, 10, 34, 1]
+Output: 34
+Explanation: The largest element of the array is 35 and the second largest element is 34.
+Input: arr[] = [10, 5, 10]
+Output: 5
+Explanation: The largest element of the array is 10 and the second largest element is 5.
+Input: arr[] = [10, 10, 10]
+Output: -1
+Explanation: The largest element of the array is 10 and the second largest element does not exist.
+Constraints:
+2 ≤ arr.size() ≤ 105
+1 ≤ arr[i] ≤ 105
+
+solution:
+class Solution:
+    def getSecondLargest(self, arr):
+        # code here
+        new = sorted(set(arr))
+        if len(new)<=1:
+            return -1
+        else:
+            return new[-2]
+
+3. Given an array arr, write a program segregating even and odd numbers. The program should put all even numbers first in sorted order, and then odd numbers in sorted order.
+
+Note:- You don't have to return the array, you have to modify it in-place.
+
+Example:
+
+Input: arr[] = [12, 34, 45, 9, 8, 90, 3]
+Output: [8, 12, 34, 90, 3, 9, 45]
+Explanation: Even numbers are 12, 34, 8 and 90. Rest are odd numbers.
+Input: arr[] = [0, 1, 2, 3, 4]
+Output: [0, 2, 4, 1, 3]
+Explanation: 0 2 4 are even and 1 3 are odd numbers.
+Input: arr[] = [10, 22, 4, 6]
+Output: [4, 6, 10, 22]
+Explanation: Here all elements are even, so no need of segregataion
+Constraints:
+1 ≤ arr.size() ≤ 106
+0 ≤ arr[i] <=105
+
+solution:
+class Solution:
+
+	def segregateEvenOdd(self,arr):
+		# code here
+		even = []
+		odd = []
+		for num in arr:
+		    if num%2 == 0:
+		        even.append(num)
+		    else:
+		        odd.append(num)
+		        
+        even.sort()
+        odd.sort()
+        arr[:] = even + odd
+
+4. Count Distinct in an Array
+Solved
+Difficulty: EasyAccuracy: 73.07%Submissions: 28K+Points: 2
+Given an integer array arr[], return the count of all the distinct elements in an array
+
+Examples:
+
+Input: arr[] = [2, 2, 3, 2]
+Output: 2
+Explanation: Distinct elements are {2, 3}
+Input: arr[] = [12, 1, 14, 3, 16]
+Output: 5
+Explanation: Distinct elements are {12, 1, 14, 3, 16}
+Input: arr[] = [1, 1, 1, 1]
+Output: 1
+Explanation: Only one distinct element {1}  
+Constraints:
+
+1 ≤ arr.size() ≤ 105
+-1000 ≤ arr[i] ≤ 1000
+
+solution:
+class Solution:
+    def countDistinct(self, arr):
+        # code here
+        arr = set(arr)
+        return len(arr)
+
+5. Union of Arrays with Duplicates
+Solved
+Difficulty: EasyAccuracy: 42.22%Submissions: 512K+Points: 2Average Time: 10m
+You are given two arrays a[] and b[], return the Union of both the arrays in any order.
+
+The Union of two arrays is a collection of all distinct elements present in either of the arrays. If an element appears more than once in one or both arrays, it should be included only once in the result.
+
+Note: Elements of a[] and b[] are not necessarily distinct.
+Note that, You can return the Union in any order but the driver code will print the result in sorted order only.
+
+Examples:
+
+Input: a[] = [1, 2, 3, 2, 1], b[] = [3, 2, 2, 3, 3, 2]
+Output: [1, 2, 3]
+Explanation: Union set of both the arrays will be 1, 2 and 3.
+Input: a[] = [1, 2, 3], b[] = [4, 5, 6] 
+Output: [1, 2, 3, 4, 5, 6]
+Explanation: Union set of both the arrays will be 1, 2, 3, 4, 5 and 6.
+Input: a[] = [1, 2, 1, 1, 2], b[] = [2, 2, 1, 2, 1] 
+Output: [1, 2]
+Explanation: Union set of both the arrays will be 1 and 2.
+Constraints:
+1 ≤ a.size(), b.size() ≤ 106
+0 ≤ a[i], b[i] ≤ 105
+
+solution:
+class Solution:    
+    def findUnion(self, a, b):
+        # code here
+        setA = set(a)
+        setB = set(b)
+        
+        return setA.union(setB)
