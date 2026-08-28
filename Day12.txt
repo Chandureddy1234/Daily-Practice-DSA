@@ -1,0 +1,319 @@
+Leetcode:
+1. Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+
+ 
+
+Example 1:
+
+Input: haystack = "sadbutsad", needle = "sad"
+Output: 0
+Explanation: "sad" occurs at index 0 and 6.
+The first occurrence is at index 0, so we return 0.
+Example 2:
+
+Input: haystack = "leetcode", needle = "leeto"
+Output: -1
+Explanation: "leeto" did not occur in "leetcode", so we return -1.
+ 
+
+Constraints:
+
+1 <= haystack.length, needle.length <= 104
+haystack and needle consist of only lowercase English characters.
+solution:
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+        if needle in haystack:
+            return haystack.index(needle)
+
+        return -1
+
+2. Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+An input string is valid if:
+
+Open brackets must be closed by the same type of brackets.
+Open brackets must be closed in the correct order.
+Every close bracket has a corresponding open bracket of the same type.
+ 
+
+Example 1:
+
+Input: s = "()"
+
+Output: true
+
+Example 2:
+
+Input: s = "()[]{}"
+
+Output: true
+
+Example 3:
+
+Input: s = "(]"
+
+Output: false
+
+Example 4:
+
+Input: s = "([])"
+
+Output: true
+
+Example 5:
+
+Input: s = "([)]"
+
+Output: false
+
+ 
+
+Constraints:
+
+1 <= s.length <= 104
+s consists of parentheses only '()[]{}'.
+
+solution:
+class Solution:
+    def isValid(self, s: str) -> bool:
+        stack = []
+        
+        for char in s:
+            if char == '(':
+                stack.append(')')
+            elif char == '{':
+                stack.append('}')
+            elif char == '[':
+                stack.append(']')
+            elif not stack or stack.pop() != char:
+                return False
+        
+        return not stack
+
+3. Given a string s consisting of words and spaces, return the length of the last word in the string.
+
+A word is a maximal substring consisting of non-space characters only.
+
+ 
+
+Example 1:
+
+Input: s = "Hello World"
+Output: 5
+Explanation: The last word is "World" with length 5.
+Example 2:
+
+Input: s = "   fly me   to   the moon  "
+Output: 4
+Explanation: The last word is "moon" with length 4.
+Example 3:
+
+Input: s = "luffy is still joyboy"
+Output: 6
+Explanation: The last word is "joyboy" with length 6.
+ 
+
+Constraints:
+
+1 <= s.length <= 104
+s consists of only English letters and spaces ' '.
+There will be at least one word in s.
+solution:
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        l = s.strip().split(" ")
+        return len(l[-1])
+
+
+4. You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer. The digits are ordered from most significant to least significant in left-to-right order. The large integer does not contain any leading 0's.
+
+Increment the large integer by one and return the resulting array of digits.
+
+ 
+
+Example 1:
+
+Input: digits = [1,2,3]
+Output: [1,2,4]
+Explanation: The array represents the integer 123.
+Incrementing by one gives 123 + 1 = 124.
+Thus, the result should be [1,2,4].
+Example 2:
+
+Input: digits = [4,3,2,1]
+Output: [4,3,2,2]
+Explanation: The array represents the integer 4321.
+Incrementing by one gives 4321 + 1 = 4322.
+Thus, the result should be [4,3,2,2].
+Example 3:
+
+Input: digits = [9]
+Output: [1,0]
+Explanation: The array represents the integer 9.
+Incrementing by one gives 9 + 1 = 10.
+Thus, the result should be [1,0].
+
+solution:
+class Solution:
+    def plusOne(self, digits: List[int]) -> List[int]:
+        num = 0
+        for digit in digits:
+            num = num * 10 + digit
+        
+        num += 1
+
+        return [int(d) for d in str(num)]
+
+5. 67. Add Binary
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Given two binary strings a and b, return their sum as a binary string.
+
+ 
+
+Example 1:
+
+Input: a = "11", b = "1"
+Output: "100"
+Example 2:
+
+Input: a = "1010", b = "1011"
+Output: "10101"
+ 
+
+Constraints:
+
+1 <= a.length, b.length <= 104
+a and b consist only of '0' or '1' characters.
+Each string does not contain leading zeros except for the zero itself.
+
+solution:
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        return bin(int(a,2) + int(b,2))[2:]
+
+Geeks for Geeks:
+1. Reverse Words
+Solved
+Difficulty: EasyAccuracy: 56.08%Submissions: 462K+Points: 2Average Time: 20m
+Given a string s, reverse the string without reversing its individual words. Words are separated by dots(.).
+
+Note: The string may contain leading or trailing dots(.) or multiple dots(.) between two words. The returned string should only have a single dot(.) separating the words, and no extra dots should be included.
+
+Examples :
+
+Input: s = "i.like.this.program.very.much"
+Output: "much.very.program.this.like.i"
+Explanation: The words in the input string are reversed while maintaining the dots as separators, resulting in "much.very.program.this.like.i".
+Input: s = "..geeks..for.geeks."
+Output: "geeks.for.geeks"
+Explanation: After removing extra dots and reversing the whole string, the input string becomes "geeks.for.geeks".
+Input: s = "..home....."
+Output: "home"
+Explanation: The input string contains only one word with extra dots around it. After removing the extra dots, the output is "home".
+Constraints:
+1 ≤ s.length() ≤ 106
+String s contains only lowercase English alphabets and dots.
+solution:
+class Solution:
+    def reverseWords(self, s):
+        # code here
+        rev = [l for l in s.split(".") if l]
+        rev.reverse()
+        return ".".join(rev)
+2. Binary to Decimal
+Solved
+Difficulty: BasicAccuracy: 51.5%Submissions: 109K+Points: 1
+Given a string b representing a binary number, return its decimal equivalent as an integer.
+
+Examples:
+
+Input : b = 111
+Output : 7
+Explanation : The decimal equivalent of the binary number 111 is 22 + 21 + 20 = 7.
+Input : b = 1010
+Output : 10
+Explanation : The decimal equivalent of the binary number 1010 is 23 + 21 = 10.
+Input: b = 100001
+Output: 33
+Explanation : The decimal equivalent of the binary number 100001 is 25 + 20 = 33.
+solution:
+class Solution:
+	def binaryToDecimal(self, b):
+		# code here
+		return int(b, 2)
+
+3. Palindrome String
+Solved
+Difficulty: EasyAccuracy: 51.21%Submissions: 520K+Points: 2
+Given a string s, return true if the string is a palindrome. Otherwise, return false.
+
+A string is considered a palindrome if it reads the same forwards and backwards.
+
+Examples :
+
+Input: s = "abba"
+Output: true
+Explanation: "abba" reads the same forwards and backwards, so it is a palindrome.
+Input: s = "abc" 
+Output: false
+Explanation: "abc" does not read the same forwards and backwards, so it is not a palindrome.
+Constraints:
+1 ≤ s.size() ≤ 106
+The string s contains only lowercase english letters (a-z).
+
+
+solution:
+class Solution:
+    def isPalindrome(self, s):
+        # code here
+        if s.lower() == s[::-1].lower():
+            return True
+            
+        return False
+
+4. Slice The String
+Solved
+Difficulty: BasicAccuracy: 66.66%Submissions: 26K+Points: 1
+Given a string s, slice it so that the output is a substring that contains all the characters except the first and last.
+
+Note: The length of the s will be greater than 2. 
+
+Examples:
+
+Input: s = "Hello"
+Output: ell
+Explanation: The first and last character are ignored.
+Input: s = "World"
+Output: orl
+Explanation: The first and last characters are ignored.
+solution:
+def sliceString(s):
+    # Code here
+    return s[1:-1]
+
+5. Print Alphabets
+Solved
+Difficulty: EasyAccuracy: 67.51%Submissions: 28K+Points: 2
+Given two char c1 and c2.  you need to print all the alphabet starting from c1 to c2 in a single line.
+Note: Print all characters with a single space after it and all in a single line. Don't add a new line after printing.
+
+Examples:
+
+Input: c1 = 'a', c2 = 'z'
+Output: "a b c d e f g h i j k l m n o p q r s t u v w x y z "
+Explanation: Printed alphabets from a to z.
+Input: c1 = "h", c2 = "u"
+Output: "h i j k l m n o p q r s t u "
+Explanation: Printed alphabets from h to u.
+solution:
+def alphabets(c1,c2):
+    result = ""
+    for i in range(ord(c1), ord(c2) + 1):
+        result += chr(i) + " "
+    print(result, end=" ")
+    
