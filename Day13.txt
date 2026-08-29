@@ -1,0 +1,373 @@
+Geeks for Geeks:
+1. Raise to Power of Its Own Reverse
+Solved
+Difficulty: MediumAccuracy: 20.22%Submissions: 383K+Points: 4
+Given a number n, find the value of n raised to the power of its own reverse. The result will always fit into a 32-bit signed integer.
+
+Examples:
+
+Input: n = 2
+Output: 4
+Explanation: The reverse of 2 is 2, and 22 = 4.
+Input: n = 10
+Output: 10
+Explanation: The reverse of 10 is 1 (leading zero is discarded), and 10 raised to the power 1 is 10.
+Constraints:
+1 ≤ n ≤ 10
+solution:
+class Solution:
+    def reverseExponentiation(self, n):
+        # code here
+        rev = int(str(n)[::-1])
+        return n ** rev
+
+2. First n Fibonacci using DP
+Solved
+Difficulty: EasyAccuracy: 51.0%Submissions: 75K+Points: 2Average Time: 20m
+You are given an integer n, return the fibonacci series till the nth(0-based indexing) term. Since the terms can become very large return the terms modulo 109+7.
+
+Examples:
+
+Input: n = 5
+Output: [0, 1, 1, 2, 3, 5]
+Input: n = 10
+Output: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
+Constraint:
+1 ≤ n ≤ 105
+solution:
+class Solution:
+    def fibonacciNumbers(self, n):
+       MOD = 10**9 + 7
+       fib = [0, 1]
+
+       for i in range(2, n + 1):
+           fib.append((fib[i-1] + fib[i-2]) % MOD)
+
+       return fib[:n + 1]
+
+3. 1 to n Without Loops
+Solved
+Difficulty: BasicAccuracy: 47.21%Submissions: 433K+Points: 1
+Given an positive integer n, print numbers from 1 to n without using loops.
+
+Implement the function printTillN() to print the numbers from 1 to n as space-separated integers.
+
+Examples
+
+Input: n = 5
+Output: 1 2 3 4 5
+Explanation: We have to print numbers from 1 to 5.
+Input: n = 10
+Output: 1 2 3 4 5 6 7 8 9 10
+Explanation: We have to print numbers from 1 to 10.
+Constraints:
+1 ≤ n ≤ 1000
+solution:
+class Solution:
+    def printTillN(self, n):
+    	#code here 
+    	if n==0:
+    	    return
+    	
+    	self.printTillN(n-1)
+    	
+    	print(n, end=" ")
+
+4. Half Diamond Star Pattern
+Solved
+Difficulty: BasicAccuracy: 50.25%Submissions: 57K+Points: 1Average Time: 10m
+Given an integer n, print the Half Diamond Star Pattern using * characters as shown in the examples.
+
+Examples:
+
+Input: 5
+Output:
+* 
+* * 
+* * * 
+* * * * 
+* * * * *
+* * * *
+* * *
+* *
+*
+Input: 3
+Output:
+* 
+* * 
+* * * 
+* *
+*
+Constraints:
+1 ≤ n ≤ 100
+solution:
+n = int(input())
+
+# code here
+for i in range(1,n+1):
+    print("* " * i)
+    
+for i in range(n-1,0,-1):
+    print("* " * i)
+
+
+5. Diamond Shape Pattern
+Difficulty: BasicAccuracy: 55.36%Submissions: 47K+Points: 1Average Time: 30m
+Given a number n, print a diamond-shaped star pattern with 2n rows, where the number of stars first increases and then decreases to form the diamond.
+
+Examples:
+
+Input: n = 5
+Output:
+
+Input: n = 3
+Output:
+  *
+ * *
+* * *
+* * *
+ * *
+  *
+Constraints:
+1 ≤ n ≤ 100
+solution:
+n = int(input())
+
+# code here
+for i in range(1, n+1):
+    print(" " * (n-i) +"* " *i)
+    
+for i in range(n,0,-1):
+    print(" " * (n-i) +"* " *i)
+
+Leetcode:
+1. Given two integers, num and t. A number x is achievable if it can become equal to num after applying the following operation at most t times:
+
+Increase or decrease x by 1, and simultaneously increase or decrease num by 1.
+Return the maximum possible value of x.
+
+ 
+
+Example 1:
+
+Input: num = 4, t = 1
+
+Output: 6
+
+Explanation:
+
+Apply the following operation once to make the maximum achievable number equal to num:
+
+Decrease the maximum achievable number by 1, and increase num by 1.
+Example 2:
+
+Input: num = 3, t = 2
+
+Output: 7
+
+Explanation:
+
+Apply the following operation twice to make the maximum achievable number equal to num:
+
+Decrease the maximum achievable number by 1, and increase num by 1.
+ 
+
+Constraints:
+
+1 <= num, t <= 50
+solution:
+class Solution:
+    def theMaximumAchievableX(self, num: int, t: int) -> int:
+        return num + t + t
+
+2. You are given positive integers n and m.
+
+Define two integers as follows:
+
+num1: The sum of all integers in the range [1, n] (both inclusive) that are not divisible by m.
+num2: The sum of all integers in the range [1, n] (both inclusive) that are divisible by m.
+Return the integer num1 - num2.
+
+ 
+
+Example 1:
+
+Input: n = 10, m = 3
+Output: 19
+Explanation: In the given example:
+- Integers in the range [1, 10] that are not divisible by 3 are [1,2,4,5,7,8,10], num1 is the sum of those integers = 37.
+- Integers in the range [1, 10] that are divisible by 3 are [3,6,9], num2 is the sum of those integers = 18.
+We return 37 - 18 = 19 as the answer.
+Example 2:
+
+Input: n = 5, m = 6
+Output: 15
+Explanation: In the given example:
+- Integers in the range [1, 5] that are not divisible by 6 are [1,2,3,4,5], num1 is the sum of those integers = 15.
+- Integers in the range [1, 5] that are divisible by 6 are [], num2 is the sum of those integers = 0.
+We return 15 - 0 = 15 as the answer.
+Example 3:
+
+Input: n = 5, m = 1
+Output: -15
+Explanation: In the given example:
+- Integers in the range [1, 5] that are not divisible by 1 are [], num1 is the sum of those integers = 0.
+- Integers in the range [1, 5] that are divisible by 1 are [1,2,3,4,5], num2 is the sum of those integers = 15.
+We return 0 - 15 = -15 as the answer.
+ 
+
+Constraints:
+
+1 <= n, m <= 1000
+solution:
+class Solution:
+    def differenceOfSums(self, n: int, m: int) -> int:
+        num1 = 0
+        num2 = 0
+        for num in range(1,n+1):
+            if num % m ==0:
+                num2 += num
+            else:
+                num1 += num
+
+        return num1 - num2
+
+3. 3925. Concatenate Array With Reverse
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Hint
+You are given an integer array nums of length n.
+
+Construct a new array ans of length 2 * n such that the first n elements are the same as nums, and the next n elements are the elements of nums in reverse order.
+
+Formally, for 0 <= i <= n - 1:
+
+ans[i] = nums[i]
+ans[i + n] = nums[n - i - 1]
+Return an integer array ans.
+
+ 
+
+Example 1:
+
+Input: nums = [1,2,3]
+
+Output: [1,2,3,3,2,1]
+
+Explanation:
+
+The first n elements of ans are the same as nums.
+
+For the next n = 3 elements, each element is taken from nums in reverse order:
+
+ans[3] = nums[2] = 3
+ans[4] = nums[1] = 2
+ans[5] = nums[0] = 1
+Thus, ans = [1, 2, 3, 3, 2, 1].
+
+Example 2:
+
+Input: nums = [1]
+
+Output: [1,1]
+
+Explanation:
+
+The array remains the same when reversed. Thus, ans = [1, 1].
+
+ 
+
+Constraints:
+
+1 <= nums.length <= 100
+1 <= nums[i] <= 100
+solution:
+class Solution:
+    def concatWithReverse(self, nums: list[int]) -> list[int]:
+        ans = [num for num in nums]
+        rev = nums[::-1]
+        for num in rev:
+            ans.append(num)
+
+        return ans
+4. 2469. Convert the Temperature
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Hint
+You are given a non-negative floating point number rounded to two decimal places celsius, that denotes the temperature in Celsius.
+
+You should convert Celsius into Kelvin and Fahrenheit and return it as an array ans = [kelvin, fahrenheit].
+
+Return the array ans. Answers within 10-5 of the actual answer will be accepted.
+
+Note that:
+
+Kelvin = Celsius + 273.15
+Fahrenheit = Celsius * 1.80 + 32.00
+ 
+
+Example 1:
+
+Input: celsius = 36.50
+Output: [309.65000,97.70000]
+Explanation: Temperature at 36.50 Celsius converted in Kelvin is 309.65 and converted in Fahrenheit is 97.70.
+Example 2:
+
+Input: celsius = 122.11
+Output: [395.26000,251.79800]
+Explanation: Temperature at 122.11 Celsius converted in Kelvin is 395.26 and converted in Fahrenheit is 251.798.
+ 
+
+Constraints:
+
+0 <= celsius <= 1000
+
+solution:
+class Solution:
+    def convertTemperature(self, celsius: float) -> List[float]:
+        kelvin = celsius + 273.15
+        Fahrenheit = celsius * 1.80 + 32.00
+
+        return [kelvin,Fahrenheit]
+
+
+5. Given an integer array nums of length n, you want to create an array ans of length 2n where ans[i] == nums[i] and ans[i + n] == nums[i] for 0 <= i < n (0-indexed).
+
+Specifically, ans is the concatenation of two nums arrays.
+
+Return the array ans.
+
+ 
+
+Example 1:
+
+Input: nums = [1,2,1]
+Output: [1,2,1,1,2,1]
+Explanation: The array ans is formed as follows:
+- ans = [nums[0],nums[1],nums[2],nums[0],nums[1],nums[2]]
+- ans = [1,2,1,1,2,1]
+Example 2:
+
+Input: nums = [1,3,2,1]
+Output: [1,3,2,1,1,3,2,1]
+Explanation: The array ans is formed as follows:
+- ans = [nums[0],nums[1],nums[2],nums[3],nums[0],nums[1],nums[2],nums[3]]
+- ans = [1,3,2,1,1,3,2,1]
+ 
+
+Constraints:
+
+n == nums.length
+1 <= n <= 1000
+1 <= nums[i] <= 1000
+solution:
+class Solution:
+    def getConcatenation(self, nums: List[int]) -> List[int]:
+        ans = nums + nums
+        return ans
