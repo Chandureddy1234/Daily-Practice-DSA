@@ -1,0 +1,514 @@
+Leetcode:
+1. There is a programming language with only four operations and one variable X:
+
+++X and X++ increments the value of the variable X by 1.
+--X and X-- decrements the value of the variable X by 1.
+Initially, the value of X is 0.
+
+Given an array of strings operations containing a list of operations, return the final value of X after performing all the operations.
+
+ 
+
+Example 1:
+
+Input: operations = ["--X","X++","X++"]
+Output: 1
+Explanation: The operations are performed as follows:
+Initially, X = 0.
+--X: X is decremented by 1, X =  0 - 1 = -1.
+X++: X is incremented by 1, X = -1 + 1 =  0.
+X++: X is incremented by 1, X =  0 + 1 =  1.
+Example 2:
+
+Input: operations = ["++X","++X","X++"]
+Output: 3
+Explanation: The operations are performed as follows:
+Initially, X = 0.
+++X: X is incremented by 1, X = 0 + 1 = 1.
+++X: X is incremented by 1, X = 1 + 1 = 2.
+X++: X is incremented by 1, X = 2 + 1 = 3.
+Example 3:
+
+Input: operations = ["X++","++X","--X","X--"]
+Output: 0
+Explanation: The operations are performed as follows:
+Initially, X = 0.
+X++: X is incremented by 1, X = 0 + 1 = 1.
+++X: X is incremented by 1, X = 1 + 1 = 2.
+--X: X is decremented by 1, X = 2 - 1 = 1.
+X--: X is decremented by 1, X = 1 - 1 = 0.
+ 
+
+Constraints:
+
+1 <= operations.length <= 100
+operations[i] will be either "++X", "X++", "--X", or "X--".
+solution:
+class Solution:
+    def finalValueAfterOperations(self, operations: List[str]) -> int:
+        x = 0
+        for string in operations:
+            if string =="++X" or string =="X++":
+                x+=1
+            else:
+                x-=1
+        
+        return x
+
+2. 2942. Find Words Containing Character
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Hint
+You are given a 0-indexed array of strings words and a character x.
+
+Return an array of indices representing the words that contain the character x.
+
+Note that the returned array may be in any order.
+
+ 
+
+Example 1:
+
+Input: words = ["leet","code"], x = "e"
+Output: [0,1]
+Explanation: "e" occurs in both words: "leet", and "code". Hence, we return indices 0 and 1.
+Example 2:
+
+Input: words = ["abc","bcd","aaaa","cbc"], x = "a"
+Output: [0,2]
+Explanation: "a" occurs in "abc", and "aaaa". Hence, we return indices 0 and 2.
+Example 3:
+
+Input: words = ["abc","bcd","aaaa","cbc"], x = "z"
+Output: []
+Explanation: "z" does not occur in any of the words. Hence, we return an empty array.
+ 
+
+Constraints:
+
+1 <= words.length <= 50
+1 <= words[i].length <= 50
+x is a lowercase English letter.
+words[i] consists only of lowercase English letters.
+solution:
+class Solution:
+    def findWordsContaining(self, words: List[str], x: str) -> List[int]:
+        indexs = []
+        for index,word in enumerate(words):
+            if x in word:
+                indexs.append(index)
+
+        return indexs
+
+3. 3701. Compute Alternating Sum
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Hint
+You are given an integer array nums.
+
+The alternating sum of nums is the value obtained by adding elements at even indices and subtracting elements at odd indices. That is, nums[0] - nums[1] + nums[2] - nums[3]...
+
+Return an integer denoting the alternating sum of nums.
+
+ 
+
+Example 1:
+
+Input: nums = [1,3,5,7]
+
+Output: -4
+
+Explanation:
+
+Elements at even indices are nums[0] = 1 and nums[2] = 5 because 0 and 2 are even numbers.
+Elements at odd indices are nums[1] = 3 and nums[3] = 7 because 1 and 3 are odd numbers.
+The alternating sum is nums[0] - nums[1] + nums[2] - nums[3] = 1 - 3 + 5 - 7 = -4.
+Example 2:
+
+Input: nums = [100]
+
+Output: 100
+
+Explanation:
+
+The only element at even indices is nums[0] = 100 because 0 is an even number.
+There are no elements on odd indices.
+The alternating sum is nums[0] = 100.
+ 
+
+Constraints:
+
+1 <= nums.length <= 100
+1 <= nums[i] <= 100
+solution:
+class Solution:
+    def alternatingSum(self, nums: List[int]) -> int:
+        even = 0
+        odd = 0
+        for index,num in enumerate(nums):
+            if index%2==0:
+                even+=num
+            else:
+                odd+=num
+        
+        return even - odd
+4. 1108. Defanging an IP Address
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Given a valid (IPv4) IP address, return a defanged version of that IP address.
+
+A defanged IP address replaces every period "." with "[.]".
+
+ 
+
+Example 1:
+
+Input: address = "1.1.1.1"
+Output: "1[.]1[.]1[.]1"
+Example 2:
+
+Input: address = "255.100.50.0"
+Output: "255[.]100[.]50[.]0"
+ 
+
+Constraints:
+
+The given address is a valid IPv4 address.
+ solution:
+class Solution:
+    def defangIPaddr(self, address: str) -> str:
+        
+        return address.replace(".","[.]")
+
+5. 1863. Sum of All Subset XOR Totals
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Hint
+The XOR total of an array is defined as the bitwise XOR of all its elements, or 0 if the array is empty.
+
+For example, the XOR total of the array [2,5,6] is 2 XOR 5 XOR 6 = 1.
+Given an array nums, return the sum of all XOR totals for every subset of nums. 
+
+Note: Subsets with the same elements should be counted multiple times.
+
+An array a is a subset of an array b if a can be obtained from b by deleting some (possibly zero) elements of b.
+
+ 
+
+Example 1:
+
+Input: nums = [1,3]
+Output: 6
+Explanation: The 4 subsets of [1,3] are:
+- The empty subset has an XOR total of 0.
+- [1] has an XOR total of 1.
+- [3] has an XOR total of 3.
+- [1,3] has an XOR total of 1 XOR 3 = 2.
+0 + 1 + 3 + 2 = 6
+Example 2:
+
+Input: nums = [5,1,6]
+Output: 28
+Explanation: The 8 subsets of [5,1,6] are:
+- The empty subset has an XOR total of 0.
+- [5] has an XOR total of 5.
+- [1] has an XOR total of 1.
+- [6] has an XOR total of 6.
+- [5,1] has an XOR total of 5 XOR 1 = 4.
+- [5,6] has an XOR total of 5 XOR 6 = 3.
+- [1,6] has an XOR total of 1 XOR 6 = 7.
+- [5,1,6] has an XOR total of 5 XOR 1 XOR 6 = 2.
+0 + 5 + 1 + 6 + 4 + 3 + 7 + 2 = 28
+Example 3:
+
+Input: nums = [3,4,5,6,7,8]
+Output: 480
+Explanation: The sum of all XOR totals for every subset is 480.
+ 
+
+Constraints:
+
+1 <= nums.length <= 12
+1 <= nums[i] <= 20
+solution:
+class Solution:
+    def subsetXORSum(self, nums: List[int]) -> int:
+        or_all = 0
+        for num in nums:
+            or_all |= num
+        
+        # Each bit appears in half of all subsets
+        # So multiply by 2^(n-1)
+        return or_all * (1 << (len(nums) - 1))
+
+
+HackerRAnk:
+1. collections.OrderedDict
+An OrderedDict is a dictionary that remembers the order of the keys that were inserted first. If a new entry overwrites an existing entry, the original insertion position is left unchanged.
+
+Example
+
+Code
+
+>>> from collections import OrderedDict
+>>> 
+>>> ordinary_dictionary = {}
+>>> ordinary_dictionary['a'] = 1
+>>> ordinary_dictionary['b'] = 2
+>>> ordinary_dictionary['c'] = 3
+>>> ordinary_dictionary['d'] = 4
+>>> ordinary_dictionary['e'] = 5
+>>> 
+>>> print ordinary_dictionary
+{'a': 1, 'c': 3, 'b': 2, 'e': 5, 'd': 4}
+>>> 
+>>> ordered_dictionary = OrderedDict()
+>>> ordered_dictionary['a'] = 1
+>>> ordered_dictionary['b'] = 2
+>>> ordered_dictionary['c'] = 3
+>>> ordered_dictionary['d'] = 4
+>>> ordered_dictionary['e'] = 5
+>>> 
+>>> print ordered_dictionary
+OrderedDict([('a', 1), ('b', 2), ('c', 3), ('d', 4), ('e', 5)])
+Task
+
+You are the manager of a supermarket.
+You have a list of  items together with their prices that consumers bought on a particular day.
+Your task is to print each item_name and net_price in order of its first occurrence.
+
+item_name = Name of the item.
+net_price = Quantity of the item sold multiplied by the price of each item.
+
+Input Format
+
+The first line contains the number of items, .
+The next  lines contains the item's name and price, separated by a space.
+
+Constraints
+
+
+Output Format
+
+Print the item_name and net_price in order of its first occurrence.
+
+Sample Input
+
+9
+BANANA FRIES 12
+POTATO CHIPS 30
+APPLE JUICE 10
+CANDY 5
+APPLE JUICE 10
+CANDY 5
+CANDY 5
+CANDY 5
+POTATO CHIPS 30
+Sample Output
+
+BANANA FRIES 12
+POTATO CHIPS 60
+APPLE JUICE 20
+CANDY 20
+Explanation
+
+BANANA FRIES: Quantity bought: , Price: 
+Net Price: 
+POTATO CHIPS: Quantity bought: , Price: 
+Net Price: 
+APPLE JUICE: Quantity bought: , Price: 
+Net Price: 
+CANDY: Quantity bought: , Price: 
+Net Price: 
+solution:
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+from collections import OrderedDict
+items = OrderedDict()
+N = int(input())
+
+for _ in range(N):
+    *name, price = input().split()
+    item_name = " ".join(name)
+    items[item_name] = items.get(item_name,0) + int(price)
+    
+for name, price in items.items():
+    print(f"{name} {price}")
+
+2. Integers in Python can be as big as the bytes in your machine's memory. There is no limit in size as there is:  (c++ int) or  (C++ long long int).
+
+As we know, the result of  grows really fast with increasing .
+
+Let's do some calculations on very large integers.
+
+Task
+Read four numbers, , , , and , and print the result of .
+
+Input Format
+Integers , , , and  are given on four separate lines, respectively.
+
+Constraints
+Output Format
+Print the result of  on one line.
+
+Sample Input
+
+9
+29
+7
+27
+Sample Output
+
+4710194409608608369201743232  
+Note: This result is bigger than . Hence, it won't fit in the long long int of C++ or a 64-bit integer.
+solution:
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+a = int(input())
+b = int(input())
+c = int(input())
+d = int(input())
+res = (a ** b) + (c ** d)
+
+print(res)
+
+3. You are given a positive integer . Print a numerical triangle of height  like the one below:
+
+1
+22
+333
+4444
+55555
+......
+Can you do it using only arithmetic operations, a single for loop and print statement?
+
+Use no more than two lines. The first line (the for statement) is already written for you. You have to complete the print statement.
+
+Note: Using anything related to strings will give a score of .
+
+Input Format
+A single line containing integer, .
+
+Constraints
+
+Output Format
+Print  lines as explained above.
+
+Sample Input
+
+5
+Sample Output
+
+1
+22
+333
+4444
+solution:
+for i in range(1,int(input())):
+    print(i * (10 ** i - 1) // 9)
+
+4. You are given a positive integer .
+Your task is to print a palindromic triangle of size .
+
+For example, a palindromic triangle of size  is:
+
+1
+121
+12321
+1234321
+123454321
+You can't take more than two lines. The first line (a for-statement) is already written for you.
+You have to complete the code using exactly one print statement.
+
+Note:
+Using anything related to strings will give a score of .
+Using more than one for-statement will give a score of .
+
+Input Format
+
+A single line of input containing the integer .
+
+Constraints
+
+Output Format
+
+Print the palindromic triangle of size  as explained above.
+
+Sample Input
+
+5
+Sample Output
+
+1
+121
+12321
+1234321
+123454321
+solution:
+
+solution:
+for i in range(1,int(input())+1):
+    print(((10 ** i-1)//9) ** 2)
+
+5. is completely determined by modulus  and phase angle .
+
+If we convert complex number  to its polar coordinate, we find:
+: Distance from  to origin, i.e., 
+: Counter clockwise angle measured from the positive -axis to the line segment that joins  to the origin.
+
+Python's cmath module provides access to the mathematical functions for complex numbers.
+
+
+This tool returns the phase of complex number  (also known as the argument of ).
+
+>>> phase(complex(-1.0, 0.0))
+3.1415926535897931
+
+This tool returns the modulus (absolute value) of complex number .
+
+>>> abs(complex(-1.0, 0.0))
+1.0
+Task
+You are given a complex . Your task is to convert it to polar coordinates.
+
+Input Format
+
+A single line containing the complex number . Note: complex() function can be used in python to convert the input as a complex number.
+
+Constraints
+
+Given number is a valid complex number
+
+Output Format
+
+Output two lines:
+The first line should contain the value of .
+The second line should contain the value of .
+
+Sample Input
+
+  1+2j
+Sample Output
+
+ 2.23606797749979 
+ 1.1071487177940904
+Note: The output should be correct up to 3 decimal places.
+solution:
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import cmath 
+z = complex(input())
+r = abs(z)
+phi = cmath.phase(z)
+
+print(r)
+print(phi)
