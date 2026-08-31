@@ -1,0 +1,502 @@
+Leetcode
+1. 2235. Add Two Integers
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Given two integers num1 and num2, return the sum of the two integers.
+Example 1:
+Input: num1 = 12, num2 = 5
+Output: 17
+Explanation: num1 is 12, num2 is 5, and their sum is 12 + 5 = 17, so 17 is returned.
+Example 2:
+Input: num1 = -10, num2 = 4
+Output: -6
+Explanation: num1 + num2 = -6, so -6 is returned.
+Constraints:
+-100 <= num1, num2 <= 100
+solution:
+class Solution:
+    def sum(self, num1: int, num2: int) -> int:
+        return num1 + num2
+
+2. 3945. Digit Frequency Score
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Hint
+You are given an integer n.
+The score of n is defined as the sum of d * freq(d) over all distinct digits d, where freq(d) denotes the number of times the digit d appears in n.
+Return an integer denoting the score of n.
+Example 1:
+Input: n = 122
+Output: 5
+Explanation:
+The digit 1 appears 1 time, contributing 1 * 1 = 1.
+The digit 2 appears 2 times, contributing 2 * 2 = 4.
+Thus, the score of n is 1 + 4 = 5.
+Example 2:
+Input: n = 101
+Output: 2
+Explanation:
+The digit 0 appears 1 time, contributing 0 * 1 = 0.
+The digit 1 appears 2 times, contributing 1 * 2 = 2.
+Thus, the score of n is 2.
+Constraints:
+1 <= n <= 109
+solution:
+class Solution:
+    def digitFrequencyScore(self, n: int) -> int:
+        total = 0
+        str_num = str(n)
+        for num in str_num:
+            total += int(num)
+        return total
+
+3.3783. Mirror Distance of an Integer
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Hint
+You are given an integer n.
+
+Define its mirror distance as: abs(n - reverse(n))​​​​​​​ where reverse(n) is the integer formed by reversing the digits of n.
+
+Return an integer denoting the mirror distance of n​​​​​​​.
+
+abs(x) denotes the absolute value of x.
+Example 1:
+Input: n = 25
+Output: 27
+Explanation
+reverse(25) = 52.
+Thus, the answer is abs(25 - 52) = 27.
+Example 2:
+Input: n = 10
+Output: 9
+Explanation:
+reverse(10) = 01 which is 1.
+Thus, the answer is abs(10 - 1) = 9.
+Example 3:
+Input: n = 7
+Output: 0
+Explanation:
+reverse(7) = 7.
+Thus, the answer is abs(7 - 7) = 0.
+Constraints:
+1 <= n <= 109
+solution:
+class Solution:
+    def mirrorDistance(self, n: int) -> int:
+        rev = int(str(n)[::-1])
+        mirror_dis = abs(n - rev)
+
+        return mirror_dis
+
+4. 3668. Restore Finishing Order
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Hint
+You are given an integer array order of length n and an integer array friends.
+order contains every integer from 1 to n exactly once, representing the IDs of the participants of a race in their finishing order.
+friends contains the IDs of your friends in the race sorted in strictly increasing order. Each ID in friends is guaranteed to appear in the order array.
+Return an array containing your friends' IDs in their finishing order.
+Example 1:
+Input: order = [3,1,2,5,4], friends = [1,3,4]
+Output: [3,1,4]
+Explanation:
+The finishing order is [3, 1, 2, 5, 4]. Therefore, the finishing order of your friends is [3, 1, 4].
+Example 2:
+Input: order = [1,4,5,3,2], friends = [2,5]
+Output: [5,2]
+Explanation:
+The finishing order is [1, 4, 5, 3, 2]. Therefore, the finishing order of your friends is [5, 2].
+Constraints:
+1 <= n == order.length <= 100
+order contains every integer from 1 to n exactly once
+1 <= friends.length <= min(8, n)
+1 <= friends[i] <= n
+friends is strictly increasing
+solution:
+class Solution:
+    def recoverOrder(self, order: List[int], friends: List[int]) -> List[int]:
+        out = []
+        for num in order:
+            if num in friends:
+                out.append(num)
+
+        return out
+
+5. 771. Jewels and Stones
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Hint
+You're given strings jewels representing the types of stones that are jewels, and stones representing the stones you have. Each character in stones is a type of stone you have. You want to know how many of the stones you have are also jewels.
+
+Letters are case sensitive, so "a" is considered a different type of stone from "A".
+
+ 
+
+Example 1:
+
+Input: jewels = "aA", stones = "aAAbbbb"
+Output: 3
+Example 2:
+
+Input: jewels = "z", stones = "ZZ"
+Output: 0
+ 
+
+Constraints:
+
+1 <= jewels.length, stones.length <= 50
+jewels and stones consist of only English letters.
+All the characters of jewels are unique.
+solution:
+class Solution:
+    def numJewelsInStones(self, jewels: str, stones: str) -> int:
+        total = 0
+        for stone in stones:
+            if stone in jewels:
+                total += 1
+
+        return total
+
+HackerRank:
+1.This function returns a list of tuples. The th tuple contains the th element from each of the argument sequences or iterables.
+
+If the argument sequences are of unequal lengths, then the returned list is truncated to the length of the shortest argument sequence.
+
+Sample Code
+
+>>> print zip([1,2,3,4,5,6],'Hacker')
+[(1, 'H'), (2, 'a'), (3, 'c'), (4, 'k'), (5, 'e'), (6, 'r')]
+>>> 
+>>> print zip([1,2,3,4,5,6],[0,9,8,7,6,5,4,3,2,1])
+[(1, 0), (2, 9), (3, 8), (4, 7), (5, 6), (6, 5)]
+>>> 
+>>> A = [1,2,3]
+>>> B = [6,5,4]
+>>> C = [7,8,9]
+>>> X = [A] + [B] + [C]
+>>> 
+>>> print zip(*X)
+[(1, 6, 7), (2, 5, 8), (3, 4, 9)]
+Task
+
+The National University conducts an examination of  students in  subjects.
+Your task is to compute the average scores of each student.
+
+The format for the general mark sheet is:
+
+Student ID → ___1_____2_____3_____4_____5__               
+Subject 1   |  89    90    78    93    80
+Subject 2   |  90    91    85    88    86  
+Subject 3   |  91    92    83    89    90.5
+            |______________________________
+Average        90    91    82    90    85.5 
+Input Format
+
+The first line contains  and  separated by a space.
+The next  lines contains the space separated marks obtained by students in a particular subject.
+
+Constraints
+
+
+
+Output Format
+
+Print the averages of all students on separate lines.
+
+The averages must be correct up to  decimal place.
+
+Sample Input
+
+5 3
+89 90 78 93 80
+90 91 85 88 86  
+91 92 83 89 90.5
+Sample Output
+
+90.0 
+91.0 
+82.0 
+90.0 
+85.5        
+Explanation
+
+Marks obtained by student 1: 
+Average marks of student 1:
+
+Marks obtained by student 2: 
+Average marks of student 2:
+
+Marks obtained by student 3: 
+Average marks of student 3:
+
+Marks obtained by student 4: 
+Average marks of student 4:
+
+Marks obtained by student 5: 
+Average marks of student 5:
+
+solution:
+N, X = map(int, input().split())
+marks = [list(map(float,input().split())) for _ in range(X)]
+
+for student in zip(*marks):
+    print(f"{sum(student) / X:.1f}")
+2. A deque is a double-ended queue. It can be used to add or remove elements from both ends.
+
+Deques support thread safe, memory efficient appends and pops from either side of the deque with approximately the same  performance in either direction.
+
+Click on the link to learn more about deque() methods.
+Click on the link to learn more about various approaches to working with deques: Deque Recipes.
+
+Example
+
+Code
+
+>>> from collections import deque
+>>> d = deque()
+>>> d.append(1)
+>>> print d
+deque([1])
+>>> d.appendleft(2)
+>>> print d
+deque([2, 1])
+>>> d.clear()
+>>> print d
+deque([])
+>>> d.extend('1')
+>>> print d
+deque(['1'])
+>>> d.extendleft('234')
+>>> print d
+deque(['4', '3', '2', '1'])
+>>> d.count('1')
+1
+>>> d.pop()
+'1'
+>>> print d
+deque(['4', '3', '2'])
+>>> d.popleft()
+'4'
+>>> print d
+deque(['3', '2'])
+>>> d.extend('7896')
+>>> print d
+deque(['3', '2', '7', '8', '9', '6'])
+>>> d.remove('2')
+>>> print d
+deque(['3', '7', '8', '9', '6'])
+>>> d.reverse()
+>>> print d
+deque(['6', '9', '8', '7', '3'])
+>>> d.rotate(3)
+>>> print d
+deque(['8', '7', '3', '6', '9'])
+Task
+
+Perform append, pop, popleft and appendleft methods on an empty deque .
+
+Input Format
+
+The first line contains an integer , the number of operations.
+The next  lines contains the space separated names of methods and their values.
+
+Constraints
+
+
+Output Format
+
+Print the space separated elements of deque .
+
+Sample Input
+
+6
+append 1
+append 2
+append 3
+appendleft 4
+pop
+popleft
+Sample Output
+
+1 2
+solution:
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+from collections import deque
+N = int(input())
+d = deque()
+for _ in range(N):
+    command = input().split(" ")
+    if command[0] == "append":
+        d.append(int(command[1]))
+    elif command[0] == "appendleft":
+        d.appendleft(int(command[1]))
+    elif command[0] == "pop":
+        d.pop()
+    elif command[0] == "popleft":
+        d.popleft()
+        
+print(*d)
+
+3. You are given a string .
+Your task is to verify that  is a floating point number.
+
+In this task, a valid float number must satisfy all of the following requirements:
+
+ Number can start with +, - or . symbol.
+For example:
+✔
++4.50
+✔
+-1.0
+✔
+.5
+✔
+-.7
+✔
++.4
+✖
+ -+4.5
+
+ Number must contain at least  decimal value.
+For example:
+✖
+ 12.
+✔
+12.0  
+
+ Number must have exactly one . symbol.
+ Number must not give any exceptions when converted using .
+
+Input Format
+
+The first line contains an integer , the number of test cases.
+The next  line(s) contains a string .
+
+Constraints
+
+Output Format
+
+Output True or False for each test case.
+
+Sample Input 0
+
+4
+4.0O0
+-1.00
++4.54
+SomeRandomStuff
+Sample Output 0
+
+False
+True
+True
+False
+Explanation 0
+
+: O is not a digit.
+: is valid.
+: is valid.
+SomeRandomStuff: is not a number.
+solutionn:
+T = int(input())
+
+for _ in range(T):
+    s = input().strip()
+    
+    try:
+        n = float(s)
+        if '.' in s:
+            print(True)
+        else:
+            print(False)
+    except ValueError:
+        print(False)
+
+4. ask
+
+You are given a polynomial  of a single indeterminate (or variable), .
+You are also given the values of  and . Your task is to verify if .
+
+Constraints
+All coefficients of polynomial  are integers.
+ and  are also integers.
+
+Input Format
+
+The first line contains the space separated values of  and .
+The second line contains the polynomial .
+
+Output Format
+
+Print True if . Otherwise, print False.
+
+Sample Input
+
+1 4
+x**3 + x**2 + x + 1
+Sample Output
+
+True
+Explanation
+
+
+Hence, the output is True.
+solution:
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+x,k = map(int, input().split())
+poly = input()
+
+print(eval(poly) == k)
+
+5. The eval() expression is a very powerful built-in function of Python. It helps in evaluating an expression. The expression can be a Python statement, or a code object.
+
+For example:
+
+>>> eval("9 + 5")
+14
+>>> x = 2
+>>> eval("x + 3")
+5
+Here, eval() can also be used to work with Python keywords or defined functions and variables. These would normally be stored as strings.
+
+For example:
+
+>>> type(eval("len"))
+<type 'builtin_function_or_method'>
+Without eval()
+
+>>> type("len")
+<type 'str'>
+Task
+You are given an expression in a line. Read that line as a string variable, such as var, and print the result using eval(var).
+
+NOTE: Python2 users, please import from __future__ import print_function.
+
+Constraint
+Input string is less than 100 characters.
+
+Sample Input
+
+print(2 + 3)
+Sample Output
+5
+solution:
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+inp = input()
+eval(inp)
