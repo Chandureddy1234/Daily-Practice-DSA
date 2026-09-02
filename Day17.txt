@@ -1,0 +1,613 @@
+Leetcode:
+1. 3498. Reverse Degree of a String
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Hint
+Given a string s, calculate its reverse degree.
+The reverse degree is calculated as follows:
+For each character, multiply its position in the reversed alphabet ('a' = 26, 'b' = 25, ..., 'z' = 1) with its position in the string (1-indexed).
+Sum these products for all characters in the string.
+Return the reverse degree of s.
+Example 1:
+Input: s = "abc"
+Output: 148
+Explanation:
+Letter	Index in Reversed Alphabet	Index in String	Product
+'a'	26	1	26
+'b'	25	2	50
+'c'	24	3	72
+The reversed degree is 26 + 50 + 72 = 148.
+Example 2:
+Input: s = "zaza"
+Output: 160
+Explanation:
+Letter	Index in Reversed Alphabet	Index in String	Product
+'z'	1	1	1
+'a'	26	2	52
+'z'	1	3	3
+'a'	26	4	104
+The reverse degree is 1 + 52 + 3 + 104 = 160.
+Constraints:
+1 <= s.length <= 1000
+s contains only lowercase English letters.
+solution:
+class Solution:
+    def reverseDegree(self, s: str) -> int:
+        reverse_map = {
+            'a': 26, 'b': 25, 'c': 24, 'd': 23, 'e': 22, 'f': 21, 'g': 20,
+            'h': 19, 'i': 18, 'j': 17, 'k': 16, 'l': 15, 'm': 14, 'n': 13,
+            'o': 12, 'p': 11, 'q': 10, 'r': 9, 's': 8, 't': 7, 'u': 6,
+            'v': 5, 'w': 4, 'x': 3, 'y': 2, 'z': 1
+        }
+        
+        total = 0
+        for i, char in enumerate(s):
+            total += reverse_map[char] * (i + 1)
+        return total
+
+2. 1672. Richest Customer Wealth
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Hint
+You are given an m x n integer grid accounts where accounts[i][j] is the amount of money the i​​​​​​​​​​​th​​​​ customer has in the j​​​​​​​​​​​th​​​​ bank. Return the wealth that the richest customer has.
+
+A customer's wealth is the amount of money they have in all their bank accounts. The richest customer is the customer that has the maximum wealth.
+
+ 
+
+Example 1:
+
+Input: accounts = [[1,2,3],[3,2,1]]
+Output: 6
+Explanation:
+1st customer has wealth = 1 + 2 + 3 = 6
+2nd customer has wealth = 3 + 2 + 1 = 6
+Both customers are considered the richest with a wealth of 6 each, so return 6.
+Example 2:
+
+Input: accounts = [[1,5],[7,3],[3,5]]
+Output: 10
+Explanation: 
+1st customer has wealth = 6
+2nd customer has wealth = 10 
+3rd customer has wealth = 8
+The 2nd customer is the richest with a wealth of 10.
+Example 3:
+
+Input: accounts = [[2,8,7],[7,1,3],[1,9,5]]
+Output: 17
+ 
+
+Constraints:
+
+m == accounts.length
+n == accounts[i].length
+1 <= m, n <= 50
+1 <= accounts[i][j] <= 100
+solution:
+class Solution:
+    def maximumWealth(self, accounts: List[List[int]]) -> int:
+        all_balance = []
+        for account in accounts:
+            all_balance.append(sum(account))
+
+        return max(all_balance)
+
+3. 3516. Find Closest Person
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Hint
+You are given three integers x, y, and z, representing the positions of three people on a number line:
+
+x is the position of Person 1.
+y is the position of Person 2.
+z is the position of Person 3, who does not move.
+Both Person 1 and Person 2 move toward Person 3 at the same speed.
+
+Determine which person reaches Person 3 first:
+
+Return 1 if Person 1 arrives first.
+Return 2 if Person 2 arrives first.
+Return 0 if both arrive at the same time.
+Return the result accordingly.
+
+ 
+
+Example 1:
+
+Input: x = 2, y = 7, z = 4
+
+Output: 1
+
+Explanation:
+
+Person 1 is at position 2 and can reach Person 3 (at position 4) in 2 steps.
+Person 2 is at position 7 and can reach Person 3 in 3 steps.
+Since Person 1 reaches Person 3 first, the output is 1.
+
+Example 2:
+
+Input: x = 2, y = 5, z = 6
+
+Output: 2
+
+Explanation:
+
+Person 1 is at position 2 and can reach Person 3 (at position 6) in 4 steps.
+Person 2 is at position 5 and can reach Person 3 in 1 step.
+Since Person 2 reaches Person 3 first, the output is 2.
+
+Example 3:
+
+Input: x = 1, y = 5, z = 3
+
+Output: 0
+
+Explanation:
+
+Person 1 is at position 1 and can reach Person 3 (at position 3) in 2 steps.
+Person 2 is at position 5 and can reach Person 3 in 2 steps.
+Since both Person 1 and Person 2 reach Person 3 at the same time, the output is 0.
+
+ 
+
+Constraints:
+
+1 <= x, y, z <= 100
+solution:
+class Solution:
+    def findClosest(self, x: int, y: int, z: int) -> int:
+        stepsx = abs(x - z)
+        stepsy = abs(y- z)
+        if stepsx<stepsy:
+            return 1
+        elif stepsy<stepsx:
+            return 2
+        else:
+            return 0
+
+
+4. 1470. Shuffle the Array
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Hint
+Given the array nums consisting of 2n elements in the form [x1,x2,...,xn,y1,y2,...,yn].
+
+Return the array in the form [x1,y1,x2,y2,...,xn,yn].
+
+ 
+
+Example 1:
+
+Input: nums = [2,5,1,3,4,7], n = 3
+Output: [2,3,5,4,1,7] 
+Explanation: Since x1=2, x2=5, x3=1, y1=3, y2=4, y3=7 then the answer is [2,3,5,4,1,7].
+Example 2:
+
+Input: nums = [1,2,3,4,4,3,2,1], n = 4
+Output: [1,4,2,3,3,2,4,1]
+Example 3:
+
+Input: nums = [1,1,2,2], n = 2
+Output: [1,2,1,2]
+ 
+
+Constraints:
+
+1 <= n <= 500
+nums.length == 2n
+1 <= nums[i] <= 10^3
+solution:
+class Solution:
+    def shuffle(self, nums: List[int], n: int) -> List[int]:
+        nums1 = nums[:n]
+        nums2 = nums[n:]
+        numss = []
+        for i in range(n):
+            numss.extend([nums1[i], nums2[i]])
+
+        return numss
+
+5. 3280. Convert Date to Binary
+Easy
+Topics
+premium lock icon
+Companies
+You are given a string date representing a Gregorian calendar date in the yyyy-mm-dd format.
+
+date can be written in its binary representation obtained by converting year, month, and day to their binary representations without any leading zeroes and writing them down in year-month-day format.
+
+Return the binary representation of date.
+
+ 
+
+Example 1:
+
+Input: date = "2080-02-29"
+
+Output: "100000100000-10-11101"
+
+Explanation:
+
+100000100000, 10, and 11101 are the binary representations of 2080, 02, and 29 respectively.
+
+Example 2:
+
+Input: date = "1900-01-01"
+
+Output: "11101101100-1-1"
+
+Explanation:
+
+11101101100, 1, and 1 are the binary representations of 1900, 1, and 1 respectively.
+
+ 
+
+Constraints:
+
+date.length == 10
+date[4] == date[7] == '-', and all other date[i]'s are digits.
+The input is generated such that date represents a valid Gregorian calendar date between Jan 1st, 1900 and Dec 31st, 2100 (both inclusive).
+solution:
+class Solution:
+    def convertDateToBinary(self, date: str) -> str:
+        year, month, day = date.split('-')
+        year_bin = bin(int(year))[2:]
+        month_bin = bin(int(month))[2:]
+        day_bin = bin(int(day))[2:]
+
+        return f"{year_bin}-{month_bin}-{day_bin}"
+
+HackerRank:
+1. The defaultdict tool is a container in the collections class of Python. It's similar to the usual dictionary (dict) container, but the only difference is that a defaultdict will have a default value if that key has not been set yet. If you didn't use a defaultdict you'd have to check to see if that key exists, and if it doesn't, set it to what you want.
+For example:
+
+from collections import defaultdict
+d = defaultdict(list)
+d['python'].append("awesome")
+d['something-else'].append("not relevant")
+d['python'].append("language")
+for i in d.items():
+    print i
+This prints:
+
+('python', ['awesome', 'language'])
+('something-else', ['not relevant'])
+In this challenge, you will be given  integers,  and . There are  words, which might repeat, in word group . There are  words belonging to word group . For each  words, check whether the word has appeared in group  or not. Print the indices of each occurrence of  in group . If it does not appear, print .
+
+Example
+
+Group A contains 'a', 'b', 'a' Group B contains 'a', 'c'
+
+For the first word in group B, 'a', it appears at positions  and  in group A. The second word, 'c', does not appear in group A, so print .
+
+Expected output:
+
+1 3
+-1
+Input Format
+
+The first line contains integers,  and  separated by a space.
+The next  lines contains the words belonging to group .
+The next  lines contains the words belonging to group .
+
+Constraints
+
+
+
+
+Output Format
+
+Output  lines.
+The  line should contain the -indexed positions of the occurrences of the  word separated by spaces.
+
+Sample Input
+
+STDIN   Function
+-----   --------
+5 2     group A size n = 5, group B size m = 2
+a       group A contains 'a', 'a', 'b', 'a', 'b'
+a
+b
+a
+b
+a       group B contains 'a', 'b'
+b
+Sample Output
+
+1 2 4
+3 5
+Explanation
+
+'a' appeared  times in positions ,  and .
+'b' appeared  times in positions  and .
+In the sample problem, if 'c' also appeared in word group , you would print .
+solution:
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+from collections import defaultdict
+
+n, m = map(int, input().split())
+d = defaultdict(list)
+
+for i in range(n):
+    d[input().strip()].append(i + 1)
+
+for _ in range(m):
+    word = input().strip()
+    print(*d[word]) if word in d else print(-1)
+
+2. When users post an update on social media,such as a URL, image, status update etc., other users in their network are able to view this new post on their news feed. Users can also see exactly when the post was published, i.e, how many hours, minutes or seconds ago.
+
+Since sometimes posts are published and viewed in different time zones, this can be confusing. You are given two timestamps of one such post that a user can see on his newsfeed in the following format:
+
+Day dd Mon yyyy hh:mm:ss +xxxx
+
+Here +xxxx represents the time zone. Your task is to print the absolute difference (in seconds) between them.
+
+Input Format
+
+The first line contains , the number of testcases.
+Each testcase contains  lines, representing time  and time .
+
+Constraints
+
+Input contains only valid timestamps
+.
+Output Format
+
+Print the absolute difference  in seconds.
+
+Sample Input 0
+
+2
+Sun 10 May 2015 13:54:36 -0700
+Sun 10 May 2015 13:54:36 -0000
+Sat 02 May 2015 19:54:36 +0530
+Fri 01 May 2015 13:54:36 -0000
+Sample Output 0
+
+25200
+88200
+Explanation 0
+
+In the first query, when we compare the time in UTC for both the time stamps, we see a difference of 7 hours. which is  seconds or  seconds.
+
+Similarly, in the second query, time difference is 5 hours and 30 minutes for time zone adjusting for that we have a difference of 1 day and 30 minutes. Or 
+solution:
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+from datetime import datetime
+
+# Complete the time_delta function below.
+
+def time_delta(t1, t2):
+    # Parse timestamps
+    format_str = "%a %d %b %Y %H:%M:%S %z"
+    time1 = datetime.strptime(t1, format_str)
+    time2 = datetime.strptime(t2, format_str)
+    
+    # Calculate absolute difference in seconds
+    difference = abs((time1 - time2).total_seconds())
+    
+    return str(int(difference))
+if __name__ == '__main__':
+    
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(input())
+
+    for t_itr in range(t):
+        t1 = input()
+
+        t2 = input()
+
+        delta = time_delta(t1, t2)
+
+        fptr.write(delta + '\n')
+
+    fptr.close()
+
+3. itertools.combinations(iterable, r)
+This tool returns the  length subsequences of elements from the input iterable.
+
+Combinations are emitted in lexicographic sorted order. So, if the input iterable is sorted, the combination tuples will be produced in sorted order.
+
+Sample Code
+
+>>> from itertools import combinations
+>>> 
+>>> print list(combinations('12345',2))
+[('1', '2'), ('1', '3'), ('1', '4'), ('1', '5'), ('2', '3'), ('2', '4'), ('2', '5'), ('3', '4'), ('3', '5'), ('4', '5')]
+>>> 
+>>> A = [1,1,3,3,3]
+>>> print list(combinations(A,4))
+[(1, 1, 3, 3), (1, 1, 3, 3), (1, 1, 3, 3), (1, 3, 3, 3), (1, 3, 3, 3)]
+Task
+
+You are given a string .
+Your task is to print all possible combinations, up to size , of the string in lexicographic sorted order.
+
+Input Format
+
+A single line containing the string  and integer value  separated by a space.
+
+Constraints
+
+
+The string contains only UPPERCASE characters.
+
+Output Format
+
+Print the different combinations of string  on separate lines.
+
+Sample Input
+
+HACK 2
+Sample Output
+
+A
+C
+H
+K
+AC
+AH
+AK
+CH
+CK
+HK
+solution:
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+from itertools import combinations
+
+s, k = input().split()
+s = sorted(s)
+
+for i in range(1, int(k) + 1):
+    for c in combinations(s, i):
+        print(''.join(c))
+
+4.itertools.combinations_with_replacement(iterable, r)
+This tool returns  length subsequences of elements from the input iterable allowing individual elements to be repeated more than once.
+
+Combinations are emitted in lexicographic sorted order. So, if the input iterable is sorted, the combination tuples will be produced in sorted order.
+
+Sample Code
+
+>>> from itertools import combinations_with_replacement
+>>> 
+>>> print list(combinations_with_replacement('12345',2))
+[('1', '1'), ('1', '2'), ('1', '3'), ('1', '4'), ('1', '5'), ('2', '2'), ('2', '3'), ('2', '4'), ('2', '5'), ('3', '3'), ('3', '4'), ('3', '5'), ('4', '4'), ('4', '5'), ('5', '5')]
+>>> 
+>>> A = [1,1,3,3,3]
+>>> print list(combinations(A,2))
+[(1, 1), (1, 3), (1, 3), (1, 3), (1, 3), (1, 3), (1, 3), (3, 3), (3, 3), (3, 3)]
+Task
+
+You are given a string .
+Your task is to print all possible size  replacement combinations of the string in lexicographic sorted order.
+
+Input Format
+
+A single line containing the string  and integer value  separated by a space.
+
+Constraints
+
+
+The string contains only UPPERCASE characters.
+
+Output Format
+
+Print the combinations with their replacements of string  on separate lines.
+
+Sample Input
+
+HACK 2
+Sample Output
+
+AA
+AC
+AH
+AK
+CC
+CH
+CK
+HH
+HK
+KK
+solution:
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+from itertools import combinations_with_replacement
+s, k = input().split()
+for c in combinations_with_replacement(sorted(s), int(k)):
+    print(''.join(c))
+
+5. There is a horizontal row of  cubes. The length of each cube is given. You need to create a new vertical pile of cubes. The new pile should follow these directions: if  is on top of  then .
+
+When stacking the cubes, you can only pick up either the leftmost or the rightmost cube each time. Print Yes if it is possible to stack the cubes. Otherwise, print No.
+
+Example
+
+Result: No
+
+After choosing the rightmost element, , choose the leftmost element, . After than, the choices are  and . These are both larger than the top block of size .
+
+
+Result: Yes
+
+Choose blocks from right to left in order to successfully stack the blocks.
+
+Input Format
+
+The first line contains a single integer , the number of test cases.
+For each test case, there are  lines.
+The first line of each test case contains , the number of cubes.
+The second line contains  space separated integers, denoting the sideLengths of each cube in that order.
+
+Constraints
+
+
+
+
+Output Format
+
+For each test case, output a single line containing either Yes or No.
+
+Sample Input
+
+STDIN        Function
+-----        --------
+2            T = 2
+6            blocks[] size n = 6
+4 3 2 1 3 4  blocks = [4, 3, 2, 1, 3, 4]
+3            blocks[] size n = 3
+1 3 2        blocks = [1, 3, 2]
+Sample Output
+
+Yes
+No
+Explanation
+
+In the first test case, pick in this order: left - , right - , left - , right - , left - , right - .
+In the second test case, no order gives an appropriate arrangement of vertical cubes.  will always come after either  or .
+solution:
+from collections import deque
+
+T = int(input())
+
+for _ in range(T):
+    n = int(input())
+    cubes = deque(map(int, input().split()))
+    
+    prev = float('inf')
+    possible = True
+    
+    while cubes:
+        if cubes[0] >= cubes[-1]:
+            chosen = cubes.popleft()
+        else:
+            chosen = cubes.pop()
+        
+        if chosen > prev:
+            possible = False
+            break
+        
+        prev = chosen
+    
+    print("Yes" if possible else "No")
