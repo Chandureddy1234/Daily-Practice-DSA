@@ -1,0 +1,530 @@
+Leetcode:
+1. 2413. Smallest Even Multiple
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Hint
+Given a positive integer n, return the smallest positive integer that is a multiple of both 2 and n.
+Example 1:
+Input: n = 5
+Output: 10
+Explanation: The smallest multiple of both 5 and 2 is 10.
+Example 2:
+Input: n = 6
+Output: 6
+Explanation: The smallest multiple of both 6 and 2 is 6. Note that a number is a multiple of itself.
+Constraints:
+1 <= n <= 150
+solution:
+class Solution:
+    def smallestEvenMultiple(self, n: int) -> int:
+        if n%2 == 0:
+            return n
+        else:
+            return n * 2
+
+2. 1684. Count the Number of Consistent Strings
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Hint
+You are given a string allowed consisting of distinct characters and an array of strings words. A string is consistent if all characters in the string appear in the string allowed.
+
+Return the number of consistent strings in the array words.
+
+ 
+
+Example 1:
+
+Input: allowed = "ab", words = ["ad","bd","aaab","baa","badab"]
+Output: 2
+Explanation: Strings "aaab" and "baa" are consistent since they only contain characters 'a' and 'b'.
+Example 2:
+
+Input: allowed = "abc", words = ["a","b","c","ab","ac","bc","abc"]
+Output: 7
+Explanation: All strings are consistent.
+Example 3:
+
+Input: allowed = "cad", words = ["cc","acd","b","ba","bac","bad","ac","d"]
+Output: 4
+Explanation: Strings "cc", "acd", "ac", and "d" are consistent.
+ 
+
+Constraints:
+
+1 <= words.length <= 104
+1 <= allowed.length <= 26
+1 <= words[i].length <= 10
+The characters in allowed are distinct.
+words[i] and allowed contain only lowercase English letters.
+solution:
+class Solution:
+    def countConsistentStrings(self, allowed: str, words: List[str]) -> int:
+        allowed_set = set(allowed)
+        return sum(1 for word in words if set(word).issubset(allowed_set))
+
+3. 3731. Find Missing Elements
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Hint
+You are given an integer array nums consisting of unique integers.
+
+Originally, nums contained every integer within a certain range. However, some integers might have gone missing from the array.
+
+The smallest and largest integers of the original range are still present in nums.
+
+Return a sorted list of all the missing integers in this range. If no integers are missing, return an empty list.
+
+ 
+
+Example 1:
+
+Input: nums = [1,4,2,5]
+
+Output: [3]
+
+Explanation:
+
+The smallest integer is 1 and the largest is 5, so the full range should be [1,2,3,4,5]. Among these, only 3 is missing.
+
+Example 2:
+
+Input: nums = [7,8,6,9]
+
+Output: []
+
+Explanation:
+
+The smallest integer is 6 and the largest is 9, so the full range is [6,7,8,9]. All integers are already present, so no integer is missing.
+
+Example 3:
+
+Input: nums = [5,1]
+
+Output: [2,3,4]
+
+Explanation:
+
+The smallest integer is 1 and the largest is 5, so the full range should be [1,2,3,4,5]. The missing integers are 2, 3, and 4.
+
+ 
+
+Constraints:
+
+2 <= nums.length <= 100
+1 <= nums[i] <= 100
+solution:
+class Solution:
+    def findMissingElements(self, nums: List[int]) -> List[int]:
+        nums_set = set(nums)
+        min_num = min(nums)
+        max_num = max(nums)
+        return [num for num in range(min_num, max_num + 1) if num not in nums_set]
+
+4. 2235. Add Two Integers
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Given two integers num1 and num2, return the sum of the two integers.
+ 
+
+Example 1:
+
+Input: num1 = 12, num2 = 5
+Output: 17
+Explanation: num1 is 12, num2 is 5, and their sum is 12 + 5 = 17, so 17 is returned.
+Example 2:
+
+Input: num1 = -10, num2 = 4
+Output: -6
+Explanation: num1 + num2 = -6, so -6 is returned.
+ 
+
+Constraints:
+
+-100 <= num1, num2 <= 100
+solution:
+class Solution:
+    def sum(self, num1: int, num2: int) -> int:
+        return num1 + num2
+5. 1431. Kids With the Greatest Number of Candies
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Hint
+There are n kids with candies. You are given an integer array candies, where each candies[i] represents the number of candies the ith kid has, and an integer extraCandies, denoting the number of extra candies that you have.
+
+Return a boolean array result of length n, where result[i] is true if, after giving the ith kid all the extraCandies, they will have the greatest number of candies among all the kids, or false otherwise.
+
+Note that multiple kids can have the greatest number of candies.
+
+ 
+
+Example 1:
+
+Input: candies = [2,3,5,1,3], extraCandies = 3
+Output: [true,true,true,false,true] 
+Explanation: If you give all extraCandies to:
+- Kid 1, they will have 2 + 3 = 5 candies, which is the greatest among the kids.
+- Kid 2, they will have 3 + 3 = 6 candies, which is the greatest among the kids.
+- Kid 3, they will have 5 + 3 = 8 candies, which is the greatest among the kids.
+- Kid 4, they will have 1 + 3 = 4 candies, which is not the greatest among the kids.
+- Kid 5, they will have 3 + 3 = 6 candies, which is the greatest among the kids.
+Example 2:
+
+Input: candies = [4,2,1,1,2], extraCandies = 1
+Output: [true,false,false,false,false] 
+Explanation: There is only 1 extra candy.
+Kid 1 will always have the greatest number of candies, even if a different kid is given the extra candy.
+Example 3:
+
+Input: candies = [12,1,12], extraCandies = 10
+Output: [true,false,true]
+ 
+
+Constraints:
+
+n == candies.length
+2 <= n <= 100
+1 <= candies[i] <= 100
+1 <= extraCandies <= 50
+solution:
+class Solution:
+    def kidsWithCandies(self, candies: List[int], extraCandies: int) -> List[bool]:
+        max_candy = max(candies)
+        new_list = []
+        for candy in candies:
+            new_candy = candy + extraCandies
+            new_bool = new_candy >= max_candy
+            new_list.append(new_bool)
+
+        return new_list
+
+HackerRank:
+1. You are given two sets,  and .
+Your job is to find whether set  is a subset of set .
+
+If set  is subset of set , print True.
+If set  is not a subset of set , print False.
+
+Input Format
+
+The first line will contain the number of test cases, .
+The first line of each test case contains the number of elements in set .
+The second line of each test case contains the space separated elements of set .
+The third line of each test case contains the number of elements in set .
+The fourth line of each test case contains the space separated elements of set .
+
+Constraints
+
+Output Format
+
+Output True or False for each test case on separate lines.
+
+Sample Input
+
+3
+5
+1 2 3 5 6
+9
+9 8 5 6 3 2 1 4 7
+1
+2
+5
+3 6 5 4 1
+7
+1 2 3 5 6 8 9
+3
+9 8 2
+Sample Output
+
+True 
+False
+False
+Explanation
+
+Test Case 01 Explanation
+
+Set  = {1 2 3 5 6}
+Set  = {9 8 5 6 3 2 1 4 7}
+All the elements of set  are elements of set .
+Hence, set  is a subset of set .
+solution:
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+T = int(input())
+for _ in range(T):
+    
+    nA = int(input())
+    seta = set(map(int, input().split()))
+    nb = int(input())
+    setb = set(map(int, input().split()))
+    print(seta.issubset(setb))
+
+2. You are given a set  and  other sets.
+Your job is to find whether set  is a strict superset of each of the  sets.
+
+Print True, if  is a strict superset of each of the  sets. Otherwise, print False.
+
+A strict superset has at least one element that does not exist in its subset.
+
+Example
+Set is a strict superset of set.
+Set is not a strict superset of set.
+Set is not a strict superset of set.
+
+Input Format
+
+The first line contains the space separated elements of set .
+The second line contains integer , the number of other sets.
+The next  lines contains the space separated elements of the other sets.
+
+Constraints
+
+Output Format
+
+Print True if set  is a strict superset of all other  sets. Otherwise, print False.
+
+Sample Input 0
+
+1 2 3 4 5 6 7 8 9 10 11 12 23 45 84 78
+2
+1 2 3 4 5
+100 11 12
+Sample Output 0
+
+False
+Explanation 0
+
+Set  is the strict superset of the set but not of the set because  is not in set .
+Hence, the output is False.
+solution:
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+seta = set(map(int, input().split()))
+n = int(input())
+setss = []
+for _ in range(n):
+    setss.append(set(map(int, input().split())))
+    
+if seta.issuperset(setss[0]) and seta.issuperset(setss[-1]):
+    print(True)
+else:
+    print(False)
+
+3. We have seen the applications of union, intersection, difference and symmetric difference operations, but these operations do not make any changes or mutations to the set.
+
+We can use the following operations to create mutations to a set:
+
+.update() or |=
+Update the set by adding elements from an iterable/another set.
+
+>>> H = set("Hacker")
+>>> R = set("Rank")
+>>> H.update(R)
+>>> print H
+set(['a', 'c', 'e', 'H', 'k', 'n', 'r', 'R'])
+.intersection_update() or &=
+Update the set by keeping only the elements found in it and an iterable/another set.
+
+>>> H = set("Hacker")
+>>> R = set("Rank")
+>>> H.intersection_update(R)
+>>> print H
+set(['a', 'k'])
+.difference_update() or -=
+Update the set by removing elements found in an iterable/another set.
+
+>>> H = set("Hacker")
+>>> R = set("Rank")
+>>> H.difference_update(R)
+>>> print H
+set(['c', 'e', 'H', 'r'])
+.symmetric_difference_update() or ^=
+Update the set by only keeping the elements found in either set, but not in both.
+
+>>> H = set("Hacker")
+>>> R = set("Rank")
+>>> H.symmetric_difference_update(R)
+>>> print H
+set(['c', 'e', 'H', 'n', 'r', 'R'])
+TASK
+You are given a set  and  number of other sets. These  number of sets have to perform some specific mutation operations on set .
+
+Your task is to execute those operations and print the sum of elements from set .
+
+Input Format
+
+The first line contains the number of elements in set .
+The second line contains the space separated list of elements in set .
+The third line contains integer , the number of other sets.
+The next  lines are divided into  parts containing two lines each.
+The first line of each part contains the space separated entries of the operation name and the length of the other set.
+The second line of each part contains space separated list of elements in the other set.
+
+ len(set(A)) 
+ len(otherSets) 
+
+Output Format
+
+Output the sum of elements in set .
+
+Sample Input
+
+ 16
+ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 24 52
+ 4
+ intersection_update 10
+ 2 3 5 6 8 9 1 4 7 11
+ update 2
+ 55 66
+ symmetric_difference_update 5
+ 22 7 35 62 58
+ difference_update 7
+ 11 22 35 55 58 62 66
+Sample Output
+
+38
+Explanation
+
+After the first operation, (intersection_update operation), we get:
+set 
+
+After the second operation, (update operation), we get:
+set 
+
+After the third operation, (symmetric_difference_update operation), we get:
+set 
+
+After the fourth operation, ( difference_update operation), we get:
+set 
+
+The sum of elements in set  after these operations is 38.
+
+solution:
+n = int(input())
+A = set(map(int, input().split()))
+N = int(input())
+
+for _ in range(N):
+    operation, length = input().split()
+    other_set = set(map(int, input().split()))
+    
+    if operation == "update":
+        A.update(other_set)
+    elif operation == "intersection_update":
+        A.intersection_update(other_set)
+    elif operation == "difference_update":
+        A.difference_update(other_set)
+    elif operation == "symmetric_difference_update":
+        A.symmetric_difference_update(other_set)
+
+print(sum(A))
+
+4. start() & end()
+These expressions return the indices of the start and end of the substring matched by the group.
+
+Code
+
+>>> import re
+>>> m = re.search(r'\d+','1234')
+>>> m.end()
+4
+>>> m.start()
+0
+Task
+You are given a string .
+Your task is to find the indices of the start and end of string  in .
+
+Input Format
+
+The first line contains the string .
+The second line contains the string .
+
+Constraints
+
+
+
+Output Format
+
+Print the tuple in this format: (start _index, end _index).
+If no match is found, print (-1, -1).
+
+Sample Input
+
+aaadaa
+aa
+Sample Output
+
+(0, 1)  
+(1, 2)
+(4, 5)
+solution:
+S = input()
+k = input()
+
+found = False
+for i in range(len(S) - len(k) + 1):
+    if S[i:i+len(k)] == k:
+        print(f"({i}, {i + len(k) - 1})")
+        found = True
+
+if not found:
+    print("(-1, -1)")
+
+5. Let's dive into the interesting topic of regular expressions! You are given some input, and you are required to check whether they are valid mobile numbers.
+
+A valid mobile number is a ten digit number starting with a  or .
+
+Concept
+
+A valid mobile number is a ten digit number starting with a  or .
+
+Regular expressions are a key concept in any programming language. A quick explanation with Python examples is available here. You could also go through the link below to read more about regular expressions in Python.
+
+https://developers.google.com/edu/python/regular-expressions
+
+Input Format
+
+The first line contains an integer , the number of inputs.
+ lines follow, each containing some string.
+
+Constraints
+
+
+
+Output Format
+
+For every string listed, print "YES" if it is a valid mobile number and "NO" if it is not on separate lines. Do not print the quotes.
+
+Sample Input
+
+2
+9587456281
+1252478965
+Sample Output
+
+YES
+NO
+solution:
+import re
+
+N = int(input())
+pattern = r'^[789]\d{9}$'
+
+for _ in range(N):
+    num = input()
+    if re.match(pattern, num):
+        print("YES")
+    else:
+        print("NO")
