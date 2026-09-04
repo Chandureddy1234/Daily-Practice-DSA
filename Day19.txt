@@ -1,0 +1,437 @@
+Leetcode:
+2220. Minimum Bit Flips to Convert Number
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Hint
+A bit flip of a number x is choosing a bit in the binary representation of x and flipping it from either 0 to 1 or 1 to 0.
+
+For example, for x = 7, the binary representation is 111 and we may choose any bit (including any leading zeros not shown) and flip it. We can flip the first bit from the right to get 110, flip the second bit from the right to get 101, flip the fifth bit from the right (a leading zero) to get 10111, etc.
+Given two integers start and goal, return the minimum number of bit flips to convert start to goal.
+
+ 
+
+Example 1:
+
+Input: start = 10, goal = 7
+Output: 3
+Explanation: The binary representation of 10 and 7 are 1010 and 0111 respectively. We can convert 10 to 7 in 3 steps:
+- Flip the first bit from the right: 1010 -> 1011.
+- Flip the third bit from the right: 1011 -> 1111.
+- Flip the fourth bit from the right: 1111 -> 0111.
+It can be shown we cannot convert 10 to 7 in less than 3 steps. Hence, we return 3.
+Example 2:
+
+Input: start = 3, goal = 4
+Output: 3
+Explanation: The binary representation of 3 and 4 are 011 and 100 respectively. We can convert 3 to 4 in 3 steps:
+- Flip the first bit from the right: 011 -> 010.
+- Flip the second bit from the right: 010 -> 000.
+- Flip the third bit from the right: 000 -> 100.
+It can be shown we cannot convert 3 to 4 in less than 3 steps. Hence, we return 3.
+ 
+
+Constraints:
+
+0 <= start, goal <= 109
+solution:
+class Solution:
+    def minBitFlips(self, start: int, goal: int) -> int:
+        return (start ^ goal).bit_count()
+
+2. 1486. XOR Operation in an Array
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Hint
+You are given an integer n and an integer start.
+
+Define an array nums where nums[i] = start + 2 * i (0-indexed) and n == nums.length.
+
+Return the bitwise XOR of all elements of nums.
+
+ 
+
+Example 1:
+
+Input: n = 5, start = 0
+Output: 8
+Explanation: Array nums is equal to [0, 2, 4, 6, 8] where (0 ^ 2 ^ 4 ^ 6 ^ 8) = 8.
+Where "^" corresponds to bitwise XOR operator.
+Example 2:
+
+Input: n = 4, start = 3
+Output: 8
+Explanation: Array nums is equal to [3, 5, 7, 9] where (3 ^ 5 ^ 7 ^ 9) = 8.
+ 
+
+Constraints:
+
+1 <= n <= 1000
+0 <= start <= 1000
+n == nums.length
+ 
+solution:
+class Solution:
+    def xorOperation(self, n: int, start: int) -> int:
+        result = 0
+        for i in range(n):
+            result ^= start + 2 * i
+        
+        return result
+
+3. 2798. Number of Employees Who Met the Target
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Hint
+There are n employees in a company, numbered from 0 to n - 1. Each employee i has worked for hours[i] hours in the company.
+
+The company requires each employee to work for at least target hours.
+
+You are given a 0-indexed array of non-negative integers hours of length n and a non-negative integer target.
+
+Return the integer denoting the number of employees who worked at least target hours.
+
+ 
+
+Example 1:
+
+Input: hours = [0,1,2,3,4], target = 2
+Output: 3
+Explanation: The company wants each employee to work for at least 2 hours.
+- Employee 0 worked for 0 hours and didn't meet the target.
+- Employee 1 worked for 1 hours and didn't meet the target.
+- Employee 2 worked for 2 hours and met the target.
+- Employee 3 worked for 3 hours and met the target.
+- Employee 4 worked for 4 hours and met the target.
+There are 3 employees who met the target.
+Example 2:
+
+Input: hours = [5,1,4,2,2], target = 6
+Output: 0
+Explanation: The company wants each employee to work for at least 6 hours.
+There are 0 employees who met the target.
+ 
+
+Constraints:
+
+1 <= n == hours.length <= 50
+0 <= hours[i], target <= 105
+solution:
+class Solution:
+    def numberOfEmployeesWhoMetTarget(self, hours: List[int], target: int) -> int:
+        result = 0
+        for hour in hours:
+            if hour >= target:
+                result += 1
+            
+        return result
+
+4. 1221. Split a String in Balanced Strings
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Hint
+Balanced strings are those that have an equal quantity of 'L' and 'R' characters.
+
+Given a balanced string s, split it into some number of substrings such that:
+
+Each substring is balanced.
+Return the maximum number of balanced strings you can obtain.
+
+ 
+
+Example 1:
+
+Input: s = "RLRRLLRLRL"
+Output: 4
+Explanation: s can be split into "RL", "RRLL", "RL", "RL", each substring contains same number of 'L' and 'R'.
+Example 2:
+
+Input: s = "RLRRRLLRLL"
+Output: 2
+Explanation: s can be split into "RL", "RRRLLRLL", each substring contains same number of 'L' and 'R'.
+Note that s cannot be split into "RL", "RR", "RL", "LR", "LL", because the 2nd and 5th substrings are not balanced.
+Example 3:
+
+Input: s = "LLLLRRRR"
+Output: 1
+Explanation: s can be split into "LLLLRRRR".
+ 
+
+Constraints:
+
+2 <= s.length <= 1000
+s[i] is either 'L' or 'R'.
+s is a balanced string.
+
+solution:
+class Solution:
+    def balancedStringSplit(self, s: str) -> int:
+        balance = count = 0
+        for c in s:
+            balance += 1 if c == 'L' else -1
+            if balance == 0:
+                count += 1
+        return count
+
+5. 2114. Maximum Number of Words Found in Sentences
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Hint
+A sentence is a list of words that are separated by a single space with no leading or trailing spaces.
+
+You are given an array of strings sentences, where each sentences[i] represents a single sentence.
+
+Return the maximum number of words that appear in a single sentence.
+
+ 
+
+Example 1:
+
+Input: sentences = ["alice and bob love leetcode", "i think so too", "this is great thanks very much"]
+Output: 6
+Explanation: 
+- The first sentence, "alice and bob love leetcode", has 5 words in total.
+- The second sentence, "i think so too", has 4 words in total.
+- The third sentence, "this is great thanks very much", has 6 words in total.
+Thus, the maximum number of words in a single sentence comes from the third sentence, which has 6 words.
+Example 2:
+
+Input: sentences = ["please wait", "continue to fight", "continue to win"]
+Output: 3
+Explanation: It is possible that multiple sentences contain the same number of words. 
+In this example, the second and third sentences (underlined) have the same number of words.
+ 
+
+Constraints:
+
+1 <= sentences.length <= 100
+1 <= sentences[i].length <= 100
+sentences[i] consists only of lowercase English letters and ' ' only.
+sentences[i] does not have leading or trailing spaces.
+All the words in sentences[i] are separated by a single space.
+solution:
+class Solution:
+    def mostWordsFound(self, sentences: List[str]) -> int:
+        maxi = []
+        for sentence in sentences:
+            length = len(sentence.split(" "))
+            maxi.append(length)
+
+        return max(maxi)
+
+HackerRank:
+1. A valid email address meets the following criteria:
+
+It's composed of a username, domain name, and extension assembled in this format: username@domain.extension
+The username starts with an English alphabetical character, and any subsequent characters consist of one or more of the following: alphanumeric characters, -,., and _.
+The domain and extension contain only English alphabetical characters.
+The extension is , , or  characters in length.
+Given  pairs of names and email addresses as input, print each name and email address pair having a valid email address on a new line.
+
+Hint: Try using Email.utils() to complete this challenge. For example, this code:
+
+import email.utils
+print email.utils.parseaddr('DOSHI <DOSHI@hackerrank.com>')
+print email.utils.formataddr(('DOSHI', 'DOSHI@hackerrank.com'))
+produces this output:
+
+('DOSHI', 'DOSHI@hackerrank.com')
+DOSHI <DOSHI@hackerrank.com>
+Input Format
+
+The first line contains a single integer, , denoting the number of email address.
+Each line  of the  subsequent lines contains a name and an email address as two space-separated values following this format:
+
+name <user@email.com>
+Constraints
+
+Output Format
+
+Print the space-separated name and email address pairs containing valid email addresses only. Each pair must be printed on a new line in the following format:
+
+name <user@email.com>
+You must print each valid email address in the same order as it was received as input.
+
+Sample Input
+
+2  
+DEXTER <dexter@hotmail.com>
+VIRUS <virus!@variable.:p>
+Sample Output
+
+DEXTER <dexter@hotmail.com>
+Explanation
+
+dexter@hotmail.com is a valid email address, so we print the name and email address pair received as input on a new line.
+virus!@variable.:p is not a valid email address because the username contains an exclamation point (!) and the extension contains a colon (:). As this email is not valid, we print nothing.
+solution:
+import re
+import email.utils
+
+N = int(input())
+pattern = r'^[a-zA-Z][a-zA-Z0-9\-._]*@[a-zA-Z]+\.[a-zA-Z]{1,3}$'
+
+for _ in range(N):
+    line = input()
+    parsed = email.utils.parseaddr(line)
+    if re.match(pattern, parsed[1]):
+        print(line)
+
+2. You are given a string, and you have to validate whether it's a valid Roman numeral. If it is valid, print True. Otherwise, print False. Try to create a regular expression for a valid Roman numeral.
+
+Input Format
+
+A single line of input containing a string of Roman characters.
+
+Output Format
+
+Output a single line containing True or False according to the instructions above.
+
+Constraints
+
+The number will be between  and  (both included).
+
+Sample Input
+
+CDXXI
+Sample Output
+
+True
+References
+
+Regular expressions are a key concept in any programming language. A quick explanation with Python examples is available here. You could also go through the link below to read more about regular expressions in Python.
+
+https://developers.google.com/edu/python/regular-expressions
+solution:
+regex_pattern = r"^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$"	# Do not delete 'r'.
+
+import re
+print(str(bool(re.match(regex_pattern, input()))))
+
+3. The NumPy (Numeric Python) package helps us manipulate large arrays and matrices of numeric data.
+
+To use the NumPy module, we need to import it using:
+
+import numpy
+Arrays
+
+A NumPy array is a grid of values. They are similar to lists, except that every element of an array must be the same type.
+
+import numpy
+
+a = numpy.array([1,2,3,4,5])
+print a[1]          #2
+
+b = numpy.array([1,2,3,4,5],float)
+print b[1]          #2.0
+In the above example, numpy.array() is used to convert a list into a NumPy array. The second argument (float) can be used to set the type of array elements.
+
+Task
+
+You are given a space separated list of numbers.
+Your task is to print a reversed NumPy array with the element type float.
+
+Input Format
+
+A single line of input containing space separated numbers.
+
+Output Format
+
+Print the reverse NumPy array with type float.
+
+Sample Input
+
+1 2 3 4 -8 -10
+Sample Output
+
+[-10.  -8.   4.   3.   2.   1.]
+solution:
+import numpy
+
+def arrays(arr):
+    # complete this function
+    # use numpy.array
+    num_arr = numpy.array(arr,float)
+    return num_arr[::-1]
+    
+arr = input().strip().split(' ')
+result = arrays(arr)
+print(result)
+
+4. shape
+
+The shape tool gives a tuple of array dimensions and can be used to change the dimensions of an array.
+
+(a). Using shape to get array dimensions
+
+import numpy
+
+my__1D_array = numpy.array([1, 2, 3, 4, 5])
+print my_1D_array.shape     #(5,) -> 1 row and 5 columns
+
+my__2D_array = numpy.array([[1, 2],[3, 4],[6,5]])
+print my_2D_array.shape     #(3, 2) -> 3 rows and 2 columns 
+(b). Using shape to change array dimensions
+
+import numpy
+
+change_array = numpy.array([1,2,3,4,5,6])
+change_array.shape = (3, 2)
+print change_array      
+
+#Output
+[[1 2]
+[3 4]
+[5 6]]
+reshape
+
+The reshape tool gives a new shape to an array without changing its data. It creates a new array and does not modify the original array itself.
+
+import numpy
+
+my_array = numpy.array([1,2,3,4,5,6])
+print numpy.reshape(my_array,(3,2))
+
+#Output
+[[1 2]
+[3 4]
+[5 6]]
+Task
+
+You are given a space separated list of nine integers. Your task is to convert this list into a X NumPy array.
+
+Input Format
+
+A single line of input containing  space separated integers.
+
+Output Format
+
+Print the X NumPy array.
+
+Sample Input
+
+1 2 3 4 5 6 7 8 9
+Sample Output
+
+[[1 2 3]
+ [4 5 6]
+ [7 8 9]]
+
+solution:
+import numpy as np
+nums = np.array(list(map(int, input().split())))
+print(nums.reshape(3, 3))
