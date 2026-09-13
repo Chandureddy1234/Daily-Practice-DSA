@@ -1,0 +1,867 @@
+Leetcode:
+1. 3683. Earliest Time to Finish One Task
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Hint
+You are given a 2D integer array tasks where tasks[i] = [si, ti].
+
+Each [si, ti] in tasks represents a task with start time si that takes ti units of time to finish.
+
+Return the earliest time at which at least one task is finished.
+Example 1:
+
+Input: tasks = [[1,6],[2,3]]
+
+Output: 5
+
+Explanation:
+
+The first task starts at time t = 1 and finishes at time 1 + 6 = 7. The second task finishes at time 2 + 3 = 5. You can finish one task at time 5.
+
+Example 2:
+
+Input: tasks = [[100,100],[100,100],[100,100]]
+
+Output: 200
+
+Explanation:
+
+All three tasks finish at time 100 + 100 = 200.
+Constraints:
+
+1 <= tasks.length <= 100
+tasks[i] = [si, ti]
+1 <= si, ti <= 100
+solution:
+class Solution:
+    def earliestTime(self, tasks: List[List[int]]) -> int:
+        sum_nums = []
+        for i in range(len(tasks)):
+            sum_nums.append(tasks[i][0] + tasks[i][1])
+
+        return min(sum_nums) 
+
+2. 1588. Sum of All Odd Length Subarrays
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Hint
+Given an array of positive integers arr, return the sum of all possible odd-length subarrays of arr.
+
+A subarray is a contiguous subsequence of the array.
+
+ 
+
+Example 1:
+
+Input: arr = [1,4,2,5,3]
+Output: 58
+Explanation: The odd-length subarrays of arr and their sums are:
+[1] = 1
+[4] = 4
+[2] = 2
+[5] = 5
+[3] = 3
+[1,4,2] = 7
+[4,2,5] = 11
+[2,5,3] = 10
+[1,4,2,5,3] = 15
+If we add all these together we get 1 + 4 + 2 + 5 + 3 + 7 + 11 + 10 + 15 = 58
+Example 2:
+
+Input: arr = [1,2]
+Output: 3
+Explanation: There are only 2 subarrays of odd length, [1] and [2]. Their sum is 3.
+Example 3:
+
+Input: arr = [10,11,12]
+Output: 66
+ 
+
+Constraints:
+
+1 <= arr.length <= 100
+1 <= arr[i] <= 1000
+solution:
+class Solution:
+    def sumOddLengthSubarrays(self, arr: List[int]) -> int:
+        n = len(arr)
+        total = 0
+        
+        for i in range(n):
+            # Total subarrays containing arr[i]
+            left_choices = i + 1
+            right_choices = n - i
+            total_subarrays = left_choices * right_choices
+            
+            # Odd-length subarrays containing arr[i]
+            odd_count = (total_subarrays + 1) // 2
+            
+            total += arr[i] * odd_count
+        
+        return total
+
+3. 557. Reverse Words in a String III
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Given a string s, reverse the order of characters in each word within a sentence while still preserving whitespace and initial word order.
+
+ 
+
+Example 1:
+
+Input: s = "Let's take LeetCode contest"
+Output: "s'teL ekat edoCteeL tsetnoc"
+Example 2:
+
+Input: s = "Mr Ding"
+Output: "rM gniD"
+ 
+
+Constraints:
+
+1 <= s.length <= 5 * 104
+s contains printable ASCII characters.
+s does not contain any leading or trailing spaces.
+There is at least one word in s.
+All the words in s are separated by a single space.
+solution:
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        rev_str = []
+        words = list(s.split(" "))
+        for word in words:
+            rev_str.append(word[::-1])
+            
+
+        return " ".join(rev_str)
+
+4. 2108. Find First Palindromic String in the Array
+Solved
+Easy
+Topics
+premium lock icon
+Companies
+Hint
+Given an array of strings words, return the first palindromic string in the array. If there is no such string, return an empty string "".
+
+A string is palindromic if it reads the same forward and backward.
+
+ 
+
+Example 1:
+
+Input: words = ["abc","car","ada","racecar","cool"]
+Output: "ada"
+Explanation: The first string that is palindromic is "ada".
+Note that "racecar" is also palindromic, but it is not the first.
+Example 2:
+
+Input: words = ["notapalindrome","racecar"]
+Output: "racecar"
+Explanation: The first and only string that is palindromic is "racecar".
+Example 3:
+
+Input: words = ["def","ghi"]
+Output: ""
+Explanation: There are no palindromic strings, so the empty string is returned.
+ 
+
+Constraints:
+
+1 <= words.length <= 100
+1 <= words[i].length <= 100
+words[i] consists only of lowercase English letters.
+solution:
+class Solution:
+    def firstPalindrome(self, words: List[str]) -> str:
+        pali = ""
+        for word in words:
+            if word == word[::-1]:
+                pali = word
+                break
+                
+        return pali
+
+5. 4020. Elevator Requests I
+Attempted
+Easy
+Topics
+premium lock icon
+Companies
+Hint
+You are given an integer n denoting the number of floors in a building, where the floors are numbered from 0 to n - 1.
+
+You are also given an integer array requests, where requests represents the sequence of floor requests.
+
+An elevator starts at floor 0 and follows these rules:
+
+The elevator moves one floor per second.
+The elevator serves requests in the given order.
+If the elevator is already on the requested floor, no movement is needed.
+After serving a request, the elevator immediately starts moving toward the next request.
+Return the total time in seconds required to serve all requests.
+
+ 
+
+Example 1:
+
+Input: n = 5, requests = [2,1,4,3]
+
+Output: 7
+
+Explanation:
+
+requests[0] = 2: Moving from floor 0 to floor 2 takes 2 seconds.
+requests[1] = 1: Moving from floor 2 to floor 1 takes 1 second.
+requests[2] = 4: Moving from floor 1 to floor 4 takes 3 seconds.
+requests[3] = 3: Moving from floor 4 to floor 3 takes 1 second.
+The total time required is 2 + 1 + 3 + 1 = 7 seconds.
+
+Example 2:
+
+Input: n = 3, requests = [2,0,0]
+
+Output: 4
+
+Explanation:
+
+requests[0] = 2: Moving from floor 0 to floor 2 takes 2 seconds.
+requests[1] = 0: Moving from floor 2 to floor 0 takes 2 seconds.
+requests[2] = 0: No movement is needed.
+The total time required is 2 + 2 + 0 = 4 seconds.
+
+ 
+
+Constraints:
+
+1 <= n <= 100
+1 <= requests.length <= 100
+0 <= requests[i] <= n - 1
+solution:
+class Solution:
+    def elevatorRequests(self, n: int, requests: list[int]) -> int:
+        total = 0
+        current = 0
+        for r in requests:
+            total += abs(current - r)
+            current = r
+
+        return total
+
+CodeChef:
+1. Problems in your to-do list
+CodeChef recently revamped its practice page to make it easier for users to identify the next problems they should solve by introducing some new features:
+
+Recent Contest Problems - contains only problems from the last 2 contests
+Separate Un-Attempted, Attempted, and All tabs
+Problem Difficulty Rating - the Recommended dropdown menu has various difficulty ranges so that you can attempt the problems most suited to your experience
+Popular Topics and Tags
+Like most users, Chef didn’t know that he could add problems to a personal to-do list by clicking on the magic '+' symbol on the top-right of each problem page. But once he found out about it, he went crazy and added loads of problems to his to-do list without looking at their difficulty rating.
+
+Chef is a beginner and should ideally try and solve only problems with difficulty rating strictly less than 
+1000
+1000. Given a list of difficulty ratings for problems in the Chef’s to-do list, please help him identify how many of those problems Chef should remove from his to-do list, so that he is only left with problems of difficulty rating less than 
+1000
+1000.
+
+Input Format
+The first line of input will contain a single integer 
+T
+T, the number of test cases. Then the testcases follow.
+Each testcase consists of 2 lines of input.
+The first line of input of each test case contains a single integer, 
+N
+N, which is the total number of problems that the Chef has added to his to-do list.
+The second line of input of each test case contains 
+N
+N space-separated integers 
+D
+1
+,
+D
+2
+,
+…
+,
+D
+N
+D 
+1
+​
+ ,D 
+2
+​
+ ,…,D 
+N
+​
+ , which are the difficulty ratings for each problem in the to-do list.
+Output Format
+For each test case, output in a single line the number of problems that Chef will have to remove so that all remaining problems have a difficulty rating strictly less than 
+1000
+1000.
+
+Constraints
+1
+≤
+T
+≤
+1000
+1≤T≤1000
+1
+≤
+N
+≤
+1000
+1≤N≤1000
+1
+≤
+D
+i
+≤
+5000
+1≤D 
+i
+​
+ ≤5000
+Subtasks
+Subtask 1 (100 points):
+Original constraints
+Sample 1:
+Input
+Output
+5
+3
+800 1200 900
+4
+999 1000 1001 1002
+5
+1 2 2 2 5000
+5
+1000 1000 1000 1000 1000
+3
+900 700 800
+1
+3
+1
+5
+0
+Explanation:
+Test case 
+1
+1: Among the three difficulty ratings, Chef only needs to remove the problem with difficulty rating 
+1200
+1200, since it is 
+≥
+1000
+≥1000. So, the answer is 
+1
+1.
+
+Test case 
+2
+2: Among the four difficulty ratings, Chef needs to remove the problems with difficulty ratings of 
+1000
+1000, 
+1001
+1001, and 
+1002
+1002, since they are 
+≥
+1000
+≥1000. So, the answer is 
+3
+3.
+
+Test case 
+3
+3: Among the five difficulty ratings, Chef needs to remove the problem with a difficulty rating of 
+5000
+5000, since it is 
+≥
+1000
+≥1000. So, the answer is 
+1
+1.
+
+Test case 
+4
+4: Chef needs to remove all the five problems, since they are all rated 
+≥
+1000
+≥1000. So, the answer is 
+5
+5.
+
+Test case 
+5
+5: Chef does not need to remove any problem, since they are all rated 
+<
+1000
+<1000. So, the answer is 
+0
+0.
+solution:
+# cook your dish here
+T = int(input())
+for _ in range(T):
+    N = int(input())
+    problems = list(map(int, input().split()))
+    count = 0
+    for problem in problems:
+        if problem >= 1000:
+            count += 1 
+    print(count)
+
+2. Air Conditioner Temperature
+There are three people sitting in a room - Alice, Bob, and Charlie. They need to decide on the temperature to set on the air conditioner. Everyone has a demand each:
+
+Alice wants the temperature to be at least 
+A
+A degrees.
+Bob wants the temperature to be at most 
+B
+B degrees.
+Charlie wants the temperature to be at least 
+C
+C degrees.
+Can they all agree on some temperature, or not?
+
+Input Format
+The first line of input will contain a single integer 
+T
+T, denoting the number of test cases.
+Each test case consists of a single line which contains three integers - 
+A
+,
+B
+,
+C
+A,B,C.
+Output Format
+For each test case, output on a new line, "Yes" or "No". "Yes", if they can decide on some temperature which fits all their demands. Or "No", if no temperature fits all their demands.
+
+You may print each character of the string in either uppercase or lowercase (for example, the strings NO, nO, No, and no will all be treated as identical).
+
+Constraints
+1
+≤
+T
+≤
+100
+1≤T≤100
+1
+≤
+A
+,
+B
+,
+C
+≤
+100
+1≤A,B,C≤100
+Sample 1:
+Input
+Output
+4
+30 35 25
+30 35 40
+30 35 35
+30 25 35
+Yes
+No
+Yes
+No
+Explanation:
+Test Case 1: Alice wants the temperature to be 
+≥
+30
+≥30, Bob wants it to be 
+≤
+35
+≤35, and Charlie wants it to be 
+≥
+25
+≥25. The temperatures 
+30
+,
+31
+,
+32
+,
+33
+,
+34
+,
+35
+30,31,32,33,34,35 all satisfy all their demands. So they can choose any of these 6 temperatures, and so the answer is "Yes".
+
+Test Case 2: Alice wants the temperature to be 
+≥
+30
+≥30, Bob wants it to be 
+≤
+35
+≤35, and Charlie wants it to be 
+≥
+40
+≥40. A number can't be both 
+≥
+40
+≥40, and 
+≤
+35
+≤35. So there is no temperature that satisfies all their demands. So the answer is "No".
+
+Test Case 3: Alice wants the temperature to be 
+≥
+30
+≥30, Bob wants it to be 
+≤
+35
+≤35, and Charlie wants it to be 
+≥
+35
+≥35. The temperature 
+35
+35 satisfies all their demands. So the answer is "Yes".
+
+Test Case 4: Alice wants the temperature to be 
+≥
+30
+≥30, Bob wants it to be 
+≤
+25
+≤25, and Charlie wants it to be 
+≥
+35
+≥35. A number can't be both 
+≥
+30
+≥30, and 
+≤
+25
+≤25. So there is no temperature that satisfies all their demands. So the answer is "No".
+solution:
+# cook your dish here
+T = int(input())
+for _ in range(T):
+    a, b, c = map(int, input().split())
+    min_tem = max(a,c)
+    max_tem = b 
+    if min_tem <= max_tem:
+        print("YES")
+    else:
+        print("NO")
+
+3. Nearest Exit
+There are two exits in a bus with 
+100
+100 seats:
+
+First exit is located beside seat number 
+1
+1.
+Second exit is located beside seat number 
+100
+100.
+Seats are arranged in a straight line from 
+1
+1 to 
+100
+100 with equal spacing between any 
+2
+2 adjacent seats.
+
+A passenger prefers to choose the nearest exit while leaving the bus.
+
+Determine the exit taken by passenger sitting on seat 
+X
+X.
+
+Input Format
+The first line of input will contain a single integer 
+T
+T, denoting the number of test cases.
+Each test case consists a single integer 
+X
+X, denoting the seat number.
+Output Format
+For each test case, output LEFT if the passenger chooses the exit beside seat 
+1
+1, RIGHT otherwise.
+
+You may print each character of the string in uppercase or lowercase (for example, the strings LEFT, lEft, left, and lEFT will all be treated as identical).
+
+Constraints
+1
+≤
+T
+≤
+100
+1≤T≤100
+1
+≤
+X
+≤
+100
+1≤X≤100
+Sample 1:
+Input
+Output
+6
+1
+50
+100
+30
+51
+73
+LEFT
+LEFT
+RIGHT
+LEFT
+RIGHT
+RIGHT
+Explanation:
+Test case 
+1
+1: The exit is located beside seat 
+1
+1. Hence, the passenger can take this exit without moving to any other seat.
+
+Test case 
+2
+2: To take exit at seat 
+1
+1, the passenger needs to move 
+49
+49 seats. However, to take the exit at seat 
+100
+100, the passenger needs to move 
+50
+50 seats. Thus, exit at seat 
+1
+1 is closer.
+
+Test case 
+3
+3: The exit is located beside seat 
+100
+100. Hence, the passenger can take this exit without moving to any other seat.
+
+Test case 
+4
+4: To take exit at seat 
+1
+1, the passenger needs to move 
+29
+29 seats. However, to take the exit at seat 
+100
+100, the passenger needs to move 
+70
+70 seats. Thus, exit at seat 
+1
+1 is closer.
+solution:
+# cook your dish here
+T = int(input())
+for _ in range(T):
+    x = int(input())
+    if x <= 50:
+        print("LEFT")
+    else:
+        print("RIGHT")
+
+4. Reverse The Number
+Given an Integer N, write a program to reverse it.
+
+Input
+The first line contains an integer T, total number of testcases. Then follow T lines, each line contains an integer N.
+
+Output
+For each test case, display the reverse of the given number N, in a new line.
+
+Constraints
+1 ≤ T ≤ 1000
+1 ≤ N ≤ 1000000
+Sample 1:
+Input
+Output
+4
+12345
+31203
+2123
+2300
+54321
+30213
+3212
+32
+solution:
+# cook your dish here
+T = int(input())
+for _ in range(T):
+    n = input()
+    new_num = int(n[::-1])
+    print(new_num)
+
+5. Sasta Shark Tank
+Devendra just had a million-dollar idea and he needs funds to startup. He was recently invited to Sasta Shark Tank (A TV show where entrepreneurs pitch their ideas to investors hoping to get investment in return).
+
+He was offered deals from two investors. The first investor offers 
+A
+A dollars for 
+10
+10% of his company and the second investor offers 
+B
+B dollars for 
+20
+20% of his company. Devendra will accept the offer from the investor whose valuation of the company is more. Determine which offer will Devendra accept or if both the offers are equally good.
+
+For example, if the first investor offers 
+300
+300 dollars for 
+10
+10% of the company, then the first investor's valuation of the company is 
+3000
+3000 dollars since 
+10
+10% of 
+3000
+=
+300
+3000=300. If the second investor offers 
+500
+500 dollars for 
+20
+20% of the company, then the second investor's valuation of the company is 
+2500
+2500 dollars since 
+20
+20% of 
+2500
+=
+500
+2500=500.
+
+Input Format
+The first line contains a single integer 
+T
+T - the number of test cases. Then the test cases follow.
+The first and only line of each test case contains two integers 
+A
+A and 
+B
+B - the amount offered by first investor for 
+10
+10% of Devendra's company and the amount offered by second investor for 
+20
+20% of Devendra's company respectively.
+Output Format
+For each test case, Output FIRST if Devendra should accept the first investor's deal, output SECOND if he should accept the second investor's deal, otherwise output ANY if both deals are equally good.
+
+You may print each character of the strings in uppercase or lowercase (for example, the strings "FiRst", "First", "FIRST", and "FIrst" will all be treated as identical).
+
+Constraints
+1
+≤
+T
+≤
+100
+1≤T≤100
+100
+≤
+A
+,
+B
+≤
+10000
+100≤A,B≤10000
+A
+A and 
+B
+B are multiples of 
+100
+100
+Sample 1:
+Input
+Output
+3
+100 200
+200 100
+200 500
+ANY
+FIRST
+SECOND
+Explanation:
+Test case 1: First investor's valuation of Devendra's company was 
+1000
+1000 since 
+10
+10% of 
+1000
+=
+100
+1000=100 which is the amount he offered for 
+10
+10% of the company.
+
+Second investor's valuation of Devendra's company was also 
+1000
+1000 since 
+20
+20% of 
+1000
+=
+200
+1000=200 which is the amount he offered for 
+20
+20% of the company.
+
+Therefore he can accept any of the deal.
+
+Test case 2: First investor offered a better deal as he valued Devendra's company at 
+2000
+2000 dollars (since 
+10
+10% of 
+2000
+=
+200
+2000=200) compared to the second investor who valued Devendra's company at 
+500
+500 dollars (since 
+20
+20% of 
+500
+=
+100
+500=100).
+
+Test case 3: Second investor offered a better deal as he valued Devendra's company at 
+2500
+2500 dollars compared to the first investor who valued Devendra's company 
+2000
+2000 dollars
+solution:
+# cook your dish here
+T = int(input())
+for _ in range(T):
+    a, b = map(int, input().split())
+    first_valuation = a * 10
+    second_valuation = b * 5
+    if first_valuation == second_valuation:
+        print("ANY")
+    elif first_valuation > second_valuation:
+        print("FIRST")
+    else:
+        print("SECOND")
+
+l = 5, c = 5
